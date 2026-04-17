@@ -1,247 +1,277 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz: Descubra Seu Perfil de Pele | BumbumCream</title>
-  <link rel="stylesheet" href="/css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skin Assessment &mdash; Unlock Your Personalized Result | BumbumCream</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body style="background: var(--bg);">
 
-  <!-- Timer bar -->
-  <div class="timer-bar">
-    Oferta especial expira em: <span class="timer" id="timer">14:59</span>
-  </div>
+<!-- Timer bar -->
+<div class="timer-bar">
+ Exclusive offer expires in: <span class="timer" id="timer">14:59</span>
+</div>
 
-  <div class="quiz-wrapper">
+<div class="quiz-wrapper">
 
-    <!-- Quiz Card -->
-    <div class="quiz-card">
+ <!-- Quiz Card -->
+ <div class="quiz-card">
 
-      <!-- Progress Bar -->
-      <div class="quiz-progress" id="progressBars"></div>
+ <!-- Progress Bar -->
+ <div class="quiz-progress" id="progressBars"></div>
 
-      <!-- STEP 0: Intro -->
-      <div class="quiz-step active" data-step="0">
-        <div class="quiz-intro-icon">&#128300;</div>
-        <h2 style="text-align:center;">Analise Personalizada de Pele</h2>
-        <p style="text-align:center; color:var(--text-light); margin:12px 0 28px;">Responda 8 perguntas rapidas para descobrir o melhor tratamento para o seu tipo de pele e grau de celulite.</p>
-        <div style="display:flex; gap:12px; justify-content:center; margin-bottom:28px;">
-          <div style="text-align:center;">
-            <div style="font-size:24px;">&#9201;</div>
-            <div style="font-size:12px; color:var(--text-muted);">2 minutos</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:24px;">&#128272;</div>
-            <div style="font-size:12px; color:var(--text-muted);">100% privado</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:24px;">&#127873;</div>
-            <div style="font-size:12px; color:var(--text-muted);">Oferta exclusiva</div>
-          </div>
-        </div>
-        <button class="cta-btn" onclick="startQuiz()" style="max-width:100%;">COMECAR ANALISE &rarr;</button>
-      </div>
+ <!-- STEP 0: Intro -->
+ <div class="quiz-step active" data-step="0">
+ <div class="quiz-intro-icon">&#128300;</div>
+ <h2 style="text-align:center;">Free Personalized Skin Assessment</h2>
+ <p style="text-align:center; color:var(--text-light); margin:12px 0 28px;">Answer 8 quick questions to uncover the best treatment plan for your skin type and cellulite grade.</p>
 
-      <!-- STEP 1 -->
-      <div class="quiz-step" data-step="1">
-        <div class="question-number">Pergunta 1 de 8</div>
-        <h2>Qual e a sua faixa etaria?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(1, this)">18 - 25 anos</button>
-          <button class="quiz-option" onclick="answer(1, this)">26 - 35 anos</button>
-          <button class="quiz-option" onclick="answer(1, this)">36 - 45 anos</button>
-          <button class="quiz-option" onclick="answer(1, this)">46 - 55 anos</button>
-          <button class="quiz-option" onclick="answer(1, this)">55+ anos</button>
-        </div>
-      </div>
+ <div style="display:flex; gap:12px; justify-content:center; margin-bottom:28px;">
+ <div style="text-align:center;">
+ <div style="font-size:24px;">&#9201;</div>
+ <div style="font-size:12px; color:var(--text-muted);">2 minutes</div>
+ </div>
+ <div style="text-align:center;">
+ <div style="font-size:24px;">&#128272;</div>
+ <div style="font-size:12px; color:var(--text-muted);">100% private</div>
+ </div>
+ <div style="text-align:center;">
+ <div style="font-size:24px;">&#127873;</div>
+ <div style="font-size:12px; color:var(--text-muted);">Exclusive offer</div>
+ </div>
+ </div>
 
-      <!-- STEP 2 -->
-      <div class="quiz-step" data-step="2">
-        <div class="question-number">Pergunta 2 de 8</div>
-        <h2>Qual e a sua maior preocupacao com a pele do corpo?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(2, this)">&#128308; Celulite visivelmente marcada</button>
-          <button class="quiz-option" onclick="answer(2, this)">&#128993; Flacidez e perda de firmeza</button>
-          <button class="quiz-option" onclick="answer(2, this)">&#128310; Estrias recentes ou antigas</button>
-          <button class="quiz-option" onclick="answer(2, this)">&#128309; Pele ressecada e sem brilho</button>
-          <button class="quiz-option" onclick="answer(2, this)">&#128312; Todas as acima</button>
-        </div>
-      </div>
+ <button class="cta-btn" onclick="playClick(); startQuiz();" style="max-width:100%;">START MY ASSESSMENT &rarr;</button>
+ </div>
 
-      <!-- STEP 3 -->
-      <div class="quiz-step" data-step="3">
-        <div class="question-number">Pergunta 3 de 8</div>
-        <h2>Ha quanto tempo voce lida com celulite?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(3, this)">Comecou recentemente (menos de 1 ano)</button>
-          <button class="quiz-option" onclick="answer(3, this)">1 a 3 anos</button>
-          <button class="quiz-option" onclick="answer(3, this)">3 a 5 anos</button>
-          <button class="quiz-option" onclick="answer(3, this)">Mais de 5 anos</button>
-          <button class="quiz-option" onclick="answer(3, this)">Desde a adolescencia</button>
-        </div>
-      </div>
+ <!-- STEP 1 -->
+ <div class="quiz-step" data-step="1">
+ <div class="question-number">Question 1 of 8</div>
+ <h2>What's your age group?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(1, this)">18 &ndash; 25 years old</button>
+ <button class="quiz-option" onclick="answer(1, this)">26 &ndash; 35 years old</button>
+ <button class="quiz-option" onclick="answer(1, this)">36 &ndash; 45 years old</button>
+ <button class="quiz-option" onclick="answer(1, this)">46 &ndash; 55 years old</button>
+ <button class="quiz-option" onclick="answer(1, this)">55+ years old</button>
+ </div>
+ </div>
 
-      <!-- STEP 4 -->
-      <div class="quiz-step" data-step="4">
-        <div class="question-number">Pergunta 4 de 8</div>
-        <h2>Quais areas do corpo mais te incomodam?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(4, this)">Coxas e gluteos</button>
-          <button class="quiz-option" onclick="answer(4, this)">Barriga e cintura</button>
-          <button class="quiz-option" onclick="answer(4, this)">Bracos</button>
-          <button class="quiz-option" onclick="answer(4, this)">Pernas inteiras</button>
-          <button class="quiz-option" onclick="answer(4, this)">Corpo inteiro</button>
-        </div>
-      </div>
+ <!-- STEP 2 -->
+ <div class="quiz-step" data-step="2">
+ <div class="question-number">Question 2 of 8</div>
+ <h2>What's your #1 skin concern right now?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(2, this)">&#128308; Visible cellulite &amp; dimpling</button>
+ <button class="quiz-option" onclick="answer(2, this)">&#128993; Loose skin &amp; loss of firmness</button>
+ <button class="quiz-option" onclick="answer(2, this)">&#128310; Stretch marks (old or new)</button>
+ <button class="quiz-option" onclick="answer(2, this)">&#128309; Dry, dull, tired-looking skin</button>
+ <button class="quiz-option" onclick="answer(2, this)">&#128312; All of the above</button>
+ </div>
+ </div>
 
-      <!-- STEP 5 -->
-      <div class="quiz-step" data-step="5">
-        <div class="question-number">Pergunta 5 de 8</div>
-        <h2>Voce ja tentou outros tratamentos para celulite?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(5, this)">Nunca tentei nada especifico</button>
-          <button class="quiz-option" onclick="answer(5, this)">Cremes de farmacia (sem resultado)</button>
-          <button class="quiz-option" onclick="answer(5, this)">Massagens e drenagem linfatica</button>
-          <button class="quiz-option" onclick="answer(5, this)">Tratamentos esteticos caros</button>
-          <button class="quiz-option" onclick="answer(5, this)">Ja tentei de tudo</button>
-        </div>
-      </div>
+ <!-- STEP 3 -->
+ <div class="quiz-step" data-step="3">
+ <div class="question-number">Question 3 of 8</div>
+ <h2>How long have you been dealing with cellulite?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(3, this)">Just recently (less than 1 year)</button>
+ <button class="quiz-option" onclick="answer(3, this)">1 to 3 years</button>
+ <button class="quiz-option" onclick="answer(3, this)">3 to 5 years</button>
+ <button class="quiz-option" onclick="answer(3, this)">More than 5 years</button>
+ <button class="quiz-option" onclick="answer(3, this)">Since my teens</button>
+ </div>
+ </div>
 
-      <!-- STEP 6 -->
-      <div class="quiz-step" data-step="6">
-        <div class="question-number">Pergunta 6 de 8</div>
-        <h2>Com que frequencia voce hidrata a pele do corpo?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(6, this)">Todos os dias</button>
-          <button class="quiz-option" onclick="answer(6, this)">Algumas vezes por semana</button>
-          <button class="quiz-option" onclick="answer(6, this)">Raramente</button>
-          <button class="quiz-option" onclick="answer(6, this)">Quase nunca</button>
-        </div>
-      </div>
+ <!-- STEP 4 -->
+ <div class="quiz-step" data-step="4">
+ <div class="question-number">Question 4 of 8</div>
+ <h2>Which areas bother you the most?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(4, this)">Thighs &amp; butt</button>
+ <button class="quiz-option" onclick="answer(4, this)">Belly &amp; waist</button>
+ <button class="quiz-option" onclick="answer(4, this)">Arms</button>
+ <button class="quiz-option" onclick="answer(4, this)">Whole legs</button>
+ <button class="quiz-option" onclick="answer(4, this)">Full body</button>
+ </div>
+ </div>
 
-      <!-- STEP 7 -->
-      <div class="quiz-step" data-step="7">
-        <div class="question-number">Pergunta 7 de 8</div>
-        <h2>Quanto voce estaria disposta a investir em um tratamento que realmente funcione?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(7, this)">Ate $30 por mes</button>
-          <button class="quiz-option" onclick="answer(7, this)">$30 - $60 por mes</button>
-          <button class="quiz-option" onclick="answer(7, this)">$60 - $100 por mes</button>
-          <button class="quiz-option" onclick="answer(7, this)">Mais de $100 por mes</button>
-        </div>
-      </div>
+ <!-- STEP 5 -->
+ <div class="quiz-step" data-step="5">
+ <div class="question-number">Question 5 of 8</div>
+ <h2>Have you tried other cellulite treatments before?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(5, this)">Never tried anything specific</button>
+ <button class="quiz-option" onclick="answer(5, this)">Drugstore creams (didn't work)</button>
+ <button class="quiz-option" onclick="answer(5, this)">Massages &amp; lymphatic drainage</button>
+ <button class="quiz-option" onclick="answer(5, this)">Expensive clinical treatments</button>
+ <button class="quiz-option" onclick="answer(5, this)">I've tried literally everything</button>
+ </div>
+ </div>
 
-      <!-- STEP 8 -->
-      <div class="quiz-step" data-step="8">
-        <div class="question-number">Pergunta 8 de 8</div>
-        <h2>Se existisse um creme comprovado que melhorasse sua pele em 21 dias, voce estaria pronta para comecar hoje?</h2>
-        <div class="quiz-options">
-          <button class="quiz-option" onclick="answer(8, this)">Sim, quero comecar imediatamente!</button>
-          <button class="quiz-option" onclick="answer(8, this)">Sim, mas preciso saber mais</button>
-          <button class="quiz-option" onclick="answer(8, this)">Talvez, depende do preco</button>
-        </div>
-      </div>
+ <!-- STEP 6 -->
+ <div class="quiz-step" data-step="6">
+ <div class="question-number">Question 6 of 8</div>
+ <h2>How often do you moisturize your body skin?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(6, this)">Every single day</button>
+ <button class="quiz-option" onclick="answer(6, this)">A few times a week</button>
+ <button class="quiz-option" onclick="answer(6, this)">Rarely</button>
+ <button class="quiz-option" onclick="answer(6, this)">Almost never</button>
+ </div>
+ </div>
 
-      <!-- ANALYZING SCREEN -->
-      <div class="quiz-step" data-step="9">
-        <div class="analyzing-screen">
-          <div class="spinner"></div>
-          <h2>Analisando suas respostas...</h2>
-          <p>Preparando sua recomendacao personalizada</p>
-          <div class="analyzing-items" id="analyzeItems">
-            <div class="item" style="animation-delay: 0.5s;"><span class="check">&#10003;</span> Perfil de pele identificado</div>
-            <div class="item" style="animation-delay: 1.5s;"><span class="check">&#10003;</span> Grau de celulite analisado</div>
-            <div class="item" style="animation-delay: 2.5s;"><span class="check">&#10003;</span> Historico de tratamentos avaliado</div>
-            <div class="item" style="animation-delay: 3.5s;"><span class="check">&#10003;</span> Recomendacao personalizada pronta</div>
-          </div>
-        </div>
-      </div>
+ <!-- STEP 7 -->
+ <div class="quiz-step" data-step="7">
+ <div class="question-number">Question 7 of 8</div>
+ <h2>How much would you invest in a treatment that actually works?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(7, this)">Up to $30 per month</button>
+ <button class="quiz-option" onclick="answer(7, this)">$30 &ndash; $60 per month</button>
+ <button class="quiz-option" onclick="answer(7, this)">$60 &ndash; $100 per month</button>
+ <button class="quiz-option" onclick="answer(7, this)">More than $100 per month</button>
+ </div>
+ </div>
 
-    </div><!-- /quiz-card -->
+ <!-- STEP 8 -->
+ <div class="quiz-step" data-step="8">
+ <div class="question-number">Question 8 of 8</div>
+ <h2>If there was a clinically-proven cream that visibly firmed your skin in 15 days, would you be ready to start today?</h2>
+ <div class="quiz-options">
+ <button class="quiz-option" onclick="answer(8, this)">Yes &mdash; I want to start right now!</button>
+ <button class="quiz-option" onclick="answer(8, this)">Yes, but I'd like to know more</button>
+ <button class="quiz-option" onclick="answer(8, this)">Maybe &mdash; depends on the price</button>
+ </div>
+ </div>
 
-    <p style="font-size:12px; color:var(--text-muted); margin-top:20px; text-align:center;">
-      Suas respostas sao 100% confidenciais e nao serao compartilhadas.
-    </p>
+ <!-- ANALYZING SCREEN -->
+ <div class="quiz-step" data-step="9">
+ <div class="analyzing-screen">
+ <div class="spinner"></div>
+ <h2>Analyzing your answers&hellip;</h2>
+ <p>Preparing your personalized recommendation</p>
+ <div class="analyzing-items" id="analyzeItems">
+ <div class="item" style="animation-delay: 0.5s;"><span class="check">&#10003;</span> Skin profile identified</div>
+ <div class="item" style="animation-delay: 1.5s;"><span class="check">&#10003;</span> Cellulite grade analyzed</div>
+ <div class="item" style="animation-delay: 2.5s;"><span class="check">&#10003;</span> Treatment history reviewed</div>
+ <div class="item" style="animation-delay: 3.5s;"><span class="check">&#10003;</span> Personalized plan is ready</div>
+ </div>
+ </div>
+ </div>
 
-  </div>
+ </div><!-- /quiz-card -->
 
-  <script>
-    const TOTAL_QUESTIONS = 8;
-    let currentStep = 0;
-    const answers = {};
+ <p style="font-size:12px; color:var(--text-muted); margin-top:20px; text-align:center;">
+ Your answers are 100% confidential and will never be shared.
+ </p>
 
-    // Build progress bars
-    function buildProgress() {
-      const container = document.getElementById('progressBars');
-      container.innerHTML = '';
-      for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
-        const bar = document.createElement('div');
-        bar.className = 'bar';
-        bar.id = `bar-${i}`;
-        container.appendChild(bar);
-      }
-    }
-    buildProgress();
+</div>
 
-    function updateProgress() {
-      for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
-        const bar = document.getElementById(`bar-${i}`);
-        if (i < currentStep) bar.className = 'bar done';
-        else if (i === currentStep) bar.className = 'bar active';
-        else bar.className = 'bar';
-      }
-    }
+<script>
+ const TOTAL_QUESTIONS = 8;
+ let currentStep = 0;
+ const answers = {};
 
-    function showStep(step) {
-      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
-      const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
-      if (target) {
-        target.classList.add('active');
-        target.style.animation = 'none';
-        target.offsetHeight;
-        target.style.animation = null;
-      }
-    }
+ /* ---------- Click Sound (Web Audio API, no assets needed) ---------- */
+ let audioCtx = null;
+ function playClick() {
+ try {
+ if (!audioCtx) {
+ audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+ }
+ // Short, soft "pop" click — pleasant, not annoying
+ const o = audioCtx.createOscillator();
+ const g = audioCtx.createGain();
+ o.type = 'sine';
+ o.frequency.setValueAtTime(880, audioCtx.currentTime);
+ o.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.08);
+ g.gain.setValueAtTime(0.18, audioCtx.currentTime);
+ g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.12);
+ o.connect(g);
+ g.connect(audioCtx.destination);
+ o.start();
+ o.stop(audioCtx.currentTime + 0.13);
+ } catch (e) { /* ignore audio errors on unsupported browsers */ }
+ }
 
-    function startQuiz() {
-      currentStep = 1;
-      showStep(1);
-      updateProgress();
-    }
+ // Build progress bars
+ function buildProgress() {
+ const container = document.getElementById('progressBars');
+ container.innerHTML = '';
+ for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+ const bar = document.createElement('div');
+ bar.className = 'bar';
+ bar.id = `bar-${i}`;
+ container.appendChild(bar);
+ }
+ }
+ buildProgress();
 
-    function answer(step, btn) {
-      btn.classList.add('selected');
-      answers[step] = btn.textContent.trim();
+ function updateProgress() {
+ for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+ const bar = document.getElementById(`bar-${i}`);
+ if (i < currentStep) bar.className = 'bar done';
+ else if (i === currentStep) bar.className = 'bar active';
+ else bar.className = 'bar';
+ }
+ }
 
-      setTimeout(() => {
-        if (step < TOTAL_QUESTIONS) {
-          currentStep = step + 1;
-          showStep(currentStep);
-          updateProgress();
-        } else {
-          showStep(9);
-          setTimeout(() => {
-            window.location.href = '/resultado';
-          }, 5000);
-        }
-      }, 400);
-    }
+ function showStep(step) {
+ document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+ const target = document.querySelector(`.quiz-step[data-step="${step}"]`);
+ if (target) {
+ target.classList.add('active');
+ target.style.animation = 'none';
+ target.offsetHeight;
+ target.style.animation = null;
+ }
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
 
-    // Timer countdown
-    let timeLeft = 15 * 60;
-    function updateTimer() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById('timer').textContent =
-        `${minutes}:${seconds.toString().padStart(2, '0')}`;
-      if (timeLeft > 0) {
-        timeLeft--;
-        setTimeout(updateTimer, 1000);
-      }
-    }
-    updateTimer();
-  </script>
+ function startQuiz() {
+ currentStep = 1;
+ showStep(1);
+ updateProgress();
+ }
+
+ function answer(step, btn) {
+ playClick();
+ btn.classList.add('selected');
+ answers[step] = btn.textContent.trim();
+ setTimeout(() => {
+ if (step < TOTAL_QUESTIONS) {
+ currentStep = step + 1;
+ showStep(currentStep);
+ updateProgress();
+ } else {
+ showStep(9);
+ setTimeout(() => { window.location.href = 'resultado.html'; }, 5000);
+ }
+ }, 400);
+ }
+
+ // Also play a click on the intro CTA (unlocks AudioContext on first user gesture)
+ document.addEventListener('click', function unlockAudio() {
+ try {
+ if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+ if (audioCtx.state === 'suspended') audioCtx.resume();
+ } catch (e) {}
+ }, { once: true });
+
+ // Timer countdown
+ let timeLeft = 15 * 60;
+ function updateTimer() {
+ const minutes = Math.floor(timeLeft / 60);
+ const seconds = timeLeft % 60;
+ document.getElementById('timer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+ if (timeLeft > 0) {
+ timeLeft--;
+ setTimeout(updateTimer, 1000);
+ }
+ }
+ updateTimer();
+</script>
 
 </body>
 </html>
