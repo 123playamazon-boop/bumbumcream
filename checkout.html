@@ -1,484 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secure Checkout &mdash; Last Step Before Your Transformation | Its Brazilian Bum Bum Cream</title>
-<link rel="stylesheet" href="css/styles.css">
-<style>
- .quantity-selector { display: flex; gap: 12px; margin: 16px 0; }
- .qty-option { flex: 1; padding: 16px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: white; cursor: pointer; text-align: center; transition: all 0.2s; position:relative; }
- .qty-option:hover { border-color: var(--primary); }
- .qty-option.selected { border-color: var(--primary); background: var(--bg-warm); box-shadow: 0 0 0 3px rgba(200,149,108,0.15); }
- .qty-option .qty-units { font-size: 20px; font-weight: 800; color: var(--dark); }
- .qty-option .qty-price { font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-top: 4px; }
- .qty-option .qty-save { font-size: 11px; color: var(--accent); font-weight: 700; margin-top: 4px; }
- .qty-option .qty-per { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
- .qty-option .qty-badge { display: inline-block; background: var(--accent); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; margin-bottom: 8px; }
- .qty-option .qty-strike { font-size:12px; color: var(--text-muted); text-decoration: line-through; margin-top:2px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Checkout &mdash; Last Step Before Your Transformation | Its Brazilian Bum Bum Cream</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .quantity-selector { display: flex; gap: 12px; margin: 16px 0; }
+    .qty-option { flex: 1; padding: 16px 12px; border: 2px solid var(--border); border-radius: var(--radius); background: white; cursor: pointer; text-align: center; transition: all 0.2s; position:relative; }
+    .qty-option:hover { border-color: var(--primary); }
+    .qty-option.selected { border-color: var(--primary); background: var(--bg-warm); box-shadow: 0 0 0 3px rgba(200,149,108,0.15); }
+    .qty-option .qty-units { font-size: 20px; font-weight: 800; color: var(--dark); }
+    .qty-option .qty-price { font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-top: 4px; }
+    .qty-option .qty-save { font-size: 11px; color: var(--accent); font-weight: 700; margin-top: 4px; }
+    .qty-option .qty-per { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .qty-option .qty-badge { display: inline-block; background: var(--accent); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; margin-bottom: 8px; }
+    .qty-option .qty-strike { font-size:12px; color: var(--text-muted); text-decoration: line-through; margin-top:2px; }
 
- .order-bump { border: 2px dashed var(--primary); border-radius: var(--radius); padding: 16px; margin: 16px 0; background: var(--bg-warm); }
- .order-bump label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14px; }
- .order-bump input[type="checkbox"] { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; accent-color: var(--primary); }
+    .order-bump { border: 2px dashed var(--primary); border-radius: var(--radius); padding: 16px; margin: 16px 0; background: var(--bg-warm); }
+    .order-bump label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14px; }
+    .order-bump input[type="checkbox"] { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; accent-color: var(--primary); }
 
- .pay-btn {
- display: block; width: 100%;
- padding: 22px 32px;
- background: linear-gradient(135deg, #28A745, #1E7E34);
- color: white !important;
- font-family: 'Inter', sans-serif;
- font-size: 19px; font-weight: 800;
- text-align: center; border: none;
- border-radius: 60px; cursor: pointer;
- transition: all 0.3s ease;
- box-shadow: 0 6px 24px rgba(40, 167, 69, 0.45);
- letter-spacing: 0.5px;
- margin-top: 24px;
- text-transform: uppercase;
- text-decoration: none;
- animation: payPulse 2.2s ease-in-out infinite;
- }
- .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 34px rgba(40, 167, 69, 0.55); }
- @keyframes payPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+    .pay-btn { display: block; width: 100%; padding: 22px 32px; background: linear-gradient(135deg, #28A745, #1E7E34); color: white !important; font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 800; text-align: center; border: none; border-radius: 60px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 24px rgba(40, 167, 69, 0.45); letter-spacing: 0.5px; margin-top: 24px; text-transform: uppercase; text-decoration: none; animation: payPulse 2.2s ease-in-out infinite; }
+    .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 34px rgba(40, 167, 69, 0.55); }
+    @keyframes payPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
 
- .secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+    .secure-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-top: 12px; }
 
- /* Before/After */
- .ba-wrap { background: #0F0F0F; border-radius: var(--radius-lg); padding: 14px; margin: 20px 0; text-align:center; }
+    /* Before/After */
+    .ba-wrap { background: #0F0F0F; border-radius: var(--radius-lg); padding: 14px; margin: 20px 0; text-align:center; }
+    .ba-caption-quote { color:#FFD700; font-size:14px; font-weight:700; padding:14px 12px 4px; font-style:italic; line-height:1.4; }
+    .ba-caption-meta { color:#CCC; font-size:12px; padding:0 12px 2px; }
+    .ba-caption-meta strong { color:#fff; }
+    .ba-caption-stamp { color:#888; font-size:10.5px; padding:6px 12px 4px; letter-spacing:0.3px; }
 
- /* Bonus stack */
- .bonus-stack {
- background: linear-gradient(135deg, #FFF8EF, #FFEEDB);
- border: 2px solid var(--primary);
- border-radius: var(--radius-lg);
- padding: 24px; margin: 24px 0; position:relative;
- }
- .bonus-stack::before {
- content: "FREE BONUSES"; position: absolute; top:-14px; left: 50%; transform: translateX(-50%);
- background: var(--accent); color:white; font-size:11px; font-weight:800; letter-spacing:2px;
- padding: 6px 16px; border-radius:20px;
- }
- .bonus-row { display:flex; align-items:flex-start; gap:14px; padding: 14px 0; border-bottom: 1px dashed #D4B79A; }
- .bonus-row:last-child { border-bottom: none; }
- .bonus-row .bx { width:48px; height:48px; flex-shrink:0; background: var(--primary); color:white; border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:24px; }
- .bonus-row .bt { flex:1; }
- .bonus-row .bt .n { font-weight: 700; color: var(--dark); font-size:15px; }
- .bonus-row .bt .d { font-size:13px; color: var(--text-light); margin-top:2px; }
- .bonus-row .bv { font-weight:700; color: var(--accent); font-size:14px; text-align:right; flex-shrink:0; }
- .bonus-row .bv .strike { display:block; color: var(--text-muted); font-size:12px; text-decoration: line-through; font-weight:500; }
+    /* Bonus stack */
+    .bonus-stack { background: linear-gradient(135deg, #FFF8EF, #FFEEDB); border: 2px solid var(--primary); border-radius: var(--radius-lg); padding: 24px; margin: 24px 0; position:relative; }
+    .bonus-stack::before { content: "FREE BONUSES"; position: absolute; top:-14px; left: 50%; transform: translateX(-50%); background: var(--accent); color:white; font-size:11px; font-weight:800; letter-spacing:2px; padding: 6px 16px; border-radius:20px; }
+    .bonus-row { display:flex; align-items:flex-start; gap:14px; padding: 14px 0; border-bottom: 1px dashed #D4B79A; }
+    .bonus-row:last-child { border-bottom: none; }
+    .bonus-row .bx { width:48px; height:48px; flex-shrink:0; background: var(--primary); color:white; border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+    .bonus-row .bt { flex:1; }
+    .bonus-row .bt .n { font-weight: 700; color: var(--dark); font-size:15px; }
+    .bonus-row .bt .d { font-size:13px; color: var(--text-light); margin-top:2px; }
+    .bonus-row .bv { font-weight:700; color: var(--accent); font-size:14px; text-align:right; flex-shrink:0; }
+    .bonus-row .bv .strike { display:block; color: var(--text-muted); font-size:12px; text-decoration: line-through; font-weight:500; }
 
- /* Mega guarantee */
- .mega-guarantee {
- background: linear-gradient(135deg, #0E4F1E, #176B2B); color: white; border-radius: var(--radius-lg);
- padding: 36px 28px 32px; margin: 24px 0;
- display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px;
- }
- .mega-guarantee .seal {
- width:110px; height:110px; border-radius:50%; background: #FFD700; color:#0E4F1E;
- display:flex; align-items:center; justify-content:center; flex-direction:column;
- font-family:'Playfair Display', serif; line-height:1;
- box-shadow: 0 0 0 8px rgba(255,215,0,0.25), 0 10px 30px rgba(0,0,0,0.25);
- }
- .mega-guarantee .seal .big { font-size:38px; font-weight:900; }
- .mega-guarantee .seal .sm { font-size:10px; font-weight:800; letter-spacing:1.5px; margin-top:4px; }
- .mega-guarantee h3 { color:white; font-size:24px; margin-bottom:6px; max-width:560px; }
- .mega-guarantee p { font-size:14px; color:#D9F2E0; line-height:1.55; max-width:560px; margin: 0 auto; }
+    /* Mega guarantee */
+    .mega-guarantee { background: linear-gradient(135deg, #0E4F1E, #176B2B); color: white; border-radius: var(--radius-lg); padding: 36px 28px 32px; margin: 24px 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; }
+    .mega-guarantee .seal { width:110px; height:110px; border-radius:50%; background: #FFD700; color:#0E4F1E; display:flex; align-items:center; justify-content:center; flex-direction:column; font-family:'Playfair Display', serif; line-height:1; box-shadow: 0 0 0 8px rgba(255,215,0,0.25), 0 10px 30px rgba(0,0,0,0.25); }
+    .mega-guarantee .seal .big { font-size:38px; font-weight:900; }
+    .mega-guarantee .seal .sm { font-size:10px; font-weight:800; letter-spacing:1.5px; margin-top:4px; }
+    .mega-guarantee h3 { color:white; font-size:24px; margin-bottom:6px; max-width:560px; }
+    .mega-guarantee p { font-size:14px; color:#D9F2E0; line-height:1.55; max-width:560px; margin: 0 auto; }
 
- .risk-banner {
- background: #1A1A1A; color:white;
- padding: 14px 20px; border-radius: var(--radius);
- display:flex; gap:12px; align-items:center;
- margin: 16px 0; font-size: 14px;
- }
- .risk-banner .ic { font-size:22px; }
+    .risk-banner { background: #1A1A1A; color:white; padding: 14px 20px; border-radius: var(--radius); display:flex; gap:12px; align-items:center; margin: 16px 0; font-size: 14px; }
+    .risk-banner .ic { font-size:22px; }
 
- @keyframes pulseDotCK {
- 0%, 100% { transform: scale(1); opacity: 1; }
- 50% { transform: scale(1.4); opacity: 0.7; }
- }
- @keyframes alertPulse {
- 0%, 100% { filter: brightness(1); }
- 50% { filter: brightness(1.2); }
- }
- .recent-toast {
- background: #fff; border-radius: 12px;
- padding: 12px 14px 12px 12px;
- box-shadow: 0 10px 30px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.05);
- display:flex; gap:10px; align-items:center; max-width: 320px;
- font-size: 13px; color: #1A1A1A;
- transform: translateX(-120%);
- animation: slideIn 0.45s cubic-bezier(.2,.9,.3,1.2) forwards, slideOut 0.35s ease 5.8s forwards;
- pointer-events: auto;
- }
- .recent-toast .tavatar { width: 36px; height: 36px; flex-shrink:0; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); color:white; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:14px; }
- .recent-toast .tbody strong { color: var(--primary-dark); }
- .recent-toast .ttime { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
- @keyframes slideIn { to { transform: translateX(0); } }
- @keyframes slideOut { to { transform: translateX(-120%); opacity: 0; } }
+    @keyframes pulseDotCK { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.7; } }
+    @keyframes alertPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
 
- @media (max-width: 600px) {
- .before-after { grid-template-columns: 1fr 1fr; padding: 14px; gap: 8px; }
- .mega-guarantee { grid-template-columns: 1fr; text-align:center; }
- .mega-guarantee .seal { margin: 0 auto; }
- .bonus-row .bv { text-align: left; }
- #urgencyStrip { font-size: 12px; gap: 10px; }
- .recent-toast { max-width: calc(100vw - 32px); }
- }
-</style>
+    .recent-toast { background: #fff; border-radius: 12px; padding: 12px 14px 12px 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.05); display:flex; gap:10px; align-items:center; max-width: 320px; font-size: 13px; color: #1A1A1A; transform: translateX(-120%); animation: slideIn 0.45s cubic-bezier(.2,.9,.3,1.2) forwards, slideOut 0.35s ease 5.8s forwards; pointer-events: auto; }
+    .recent-toast .tavatar { width: 36px; height: 36px; flex-shrink:0; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); color:white; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:14px; }
+    .recent-toast .tbody strong { color: var(--primary-dark); }
+    .recent-toast .ttime { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    @keyframes slideIn { to { transform: translateX(0); } }
+    @keyframes slideOut { to { transform: translateX(-120%); opacity: 0; } }
+
+    @media (max-width: 600px) {
+      .before-after { grid-template-columns: 1fr 1fr; padding: 14px; gap: 8px; }
+      .mega-guarantee { grid-template-columns: 1fr; text-align:center; }
+      .mega-guarantee .seal { margin: 0 auto; }
+      .bonus-row .bv { text-align: left; }
+      #urgencyStrip { font-size: 12px; gap: 10px; }
+      .recent-toast { max-width: calc(100vw - 32px); }
+    }
+  </style>
 </head>
 <body class="checkout-page">
 
-<header class="checkout-header">
- <div class="logo-text">Its Brazilian</div>
- <div class="checkout-secure">&#128274; Secure Checkout &bull; SSL Encryption &bull; Powered by Stripe</div>
-</header>
+  <header class="checkout-header">
+    <div class="logo-text">Its Brazilian</div>
+    <div class="checkout-secure">&#128274; Secure Checkout &bull; SSL Encryption &bull; Powered by Stripe</div>
+  </header>
+  <div class="timer-bar" id="timerBar">
+    Your <strong>EXCLUSIVE QUIZ OFFER</strong> expires in:
+    <span class="timer" id="timer">14:59</span>
+  </div>
 
-<div class="timer-bar" id="timerBar">
- Your <strong>EXCLUSIVE QUIZ OFFER</strong> expires in: <span class="timer" id="timer">14:59</span>
-</div>
+  <!-- FREE SHIPPING scarcity banner -->
+  <div id="shippingBanner" style="background:linear-gradient(90deg, #28A745 0%, #1E7E34 100%); color:#fff; padding:12px 16px; text-align:center; font-size:14px; font-weight:700; letter-spacing:0.3px; display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;">
+    <span style="font-size:20px; animation: truckRun 2.2s ease-in-out infinite;">&#128666; </span>
+    <span>FREE U.S. SHIPPING &mdash; <strong style="color:#FFD700;">TODAY ONLY</strong></span>
+    <span style="color:#CFF3D3;">|</span>
+    <span>Ends in <strong id="shipEnds" style="color:#FFD700; font-variant-numeric: tabular-nums;">14:59</strong></span>
+  </div>
+  <style>
+    @keyframes truckRun { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  </style>
 
-<!-- FREE SHIPPING scarcity banner -->
-<div id="shippingBanner" style="background:linear-gradient(90deg, #28A745 0%, #1E7E34 100%); color:#fff; padding:12px 16px; text-align:center; font-size:14px; font-weight:700; letter-spacing:0.3px; display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;">
- <span style="font-size:20px; animation: truckRun 2.2s ease-in-out infinite;">&#128666;</span>
- <span>FREE U.S. SHIPPING &mdash; <strong style="color:#FFD700;">TODAY ONLY</strong></span>
- <span style="color:#CFF3D3;">|</span>
- <span>Ends in <strong id="shipEnds" style="color:#FFD700; font-variant-numeric: tabular-nums;">14:59</strong></span>
-</div>
-<style>
- @keyframes truckRun {
- 0%, 100% { transform: translateX(0); }
- 50% { transform: translateX(6px); }
- }
-</style>
+  <!-- Urgency strip: stock + live buyers + sold last hour -->
+  <div id="urgencyStrip" style="background:#1A0A0A; color:#fff; padding:10px 16px; display:flex; gap:18px; justify-content:center; align-items:center; font-size:13px; font-weight:600; flex-wrap:wrap; border-bottom:2px solid #D4534A;">
+    <span style="display:flex; align-items:center; gap:8px;">
+      <span style="display:inline-block; width:8px; height:8px; background:#FF3B30; border-radius:50%; animation: pulseDotCK 1s ease-in-out infinite;"></span>
+      ONLY <strong id="stockLeft" style="color:#FFD700;">10</strong> LEFT IN STOCK
+    </span>
+    <span style="color:#666;">|</span>
+    <span>&#128100; <strong id="liveBuyers" style="color:#FFD700;">14</strong> people buying right now</span>
+    <span style="color:#666;">|</span>
+    <span>&#128293; <strong id="soldLastHour" style="color:#FFD700;">27</strong> sold in the last hour</span>
+  </div>
 
-<!-- Urgency strip: stock + live buyers + sold last hour -->
-<div id="urgencyStrip" style="background:#1A0A0A; color:#fff; padding:10px 16px; display:flex; gap:18px; justify-content:center; align-items:center; font-size:13px; font-weight:600; flex-wrap:wrap; border-bottom:2px solid #D4534A;">
- <span style="display:flex; align-items:center; gap:8px;">
- <span style="display:inline-block; width:8px; height:8px; background:#FF3B30; border-radius:50%; animation: pulseDotCK 1s ease-in-out infinite;"></span>
- ONLY <strong id="stockLeft" style="color:#FFD700;">10</strong> LEFT IN STOCK
- </span>
- <span style="color:#666;">|</span>
- <span>&#128100; <strong id="liveBuyers" style="color:#FFD700;">14</strong> people buying right now</span>
- <span style="color:#666;">|</span>
- <span>&#128293; <strong id="soldLastHour" style="color:#FFD700;">27</strong> sold in the last hour</span>
-</div>
+  <!-- Time-running-out alert -->
+  <div id="timeAlert" style="display:none; background:linear-gradient(90deg, #D4534A, #B83E36); color:#fff; padding:14px 16px; text-align:center; font-size:14px; font-weight:700; letter-spacing:0.5px; animation: alertPulse 0.9s ease-in-out infinite;">
+    &#9888;&#65039; HURRY! Your offer is about to expire &mdash; less than <span id="alertMins">5</span> min left. Your cart will be released to the next customer in line.
+  </div>
 
-<!-- Time-running-out alert -->
-<div id="timeAlert" style="display:none; background:linear-gradient(90deg, #D4534A, #B83E36); color:#fff; padding:14px 16px; text-align:center; font-size:14px; font-weight:700; letter-spacing:0.5px; animation: alertPulse 0.9s ease-in-out infinite;">
- &#9888;&#65039; HURRY! Your offer is about to expire &mdash; less than <span id="alertMins">5</span> min left. Your cart will be released to the next customer in line.
-</div>
+  <!-- Toast container -->
+  <div id="toastHost" style="position:fixed; left:16px; bottom:16px; z-index:9999; display:flex; flex-direction:column; gap:10px; pointer-events:none;"></div>
 
-<!-- Toast container -->
-<div id="toastHost" style="position:fixed; left:16px; bottom:16px; z-index:9999; display:flex; flex-direction:column; gap:10px; pointer-events:none;"></div>
+  <div class="checkout-layout">
 
-<div class="checkout-layout">
+    <div>
 
- <div>
+      <!-- Before/After hero -->
+      <div class="checkout-form-card" style="margin-bottom:20px; background: #FFFBF7; border: 2px solid var(--primary-light);">
+        <div style="text-align:center; margin-bottom: 8px;">
+          <span style="display:inline-block; background: var(--accent); color:white; font-size:11px; font-weight:800; letter-spacing:1.5px; padding:5px 12px; border-radius:20px; text-transform:uppercase;">3 Verified Customer Results</span>
+        </div>
+        <h2 style="text-align:center; border-bottom:none; padding-bottom:0;">Real Women. Real Before &amp; Afters.</h2>
+        <p style="text-align:center; font-size:14px; color:var(--text-light); margin-top:-10px; margin-bottom:4px;">Same angle. Same lighting. Zero filters.</p>
+        <p style="text-align:center; font-size:12px; color:var(--text-muted); margin-top:4px; margin-bottom:16px;">Over <strong>2,400 before &amp; after photos</strong> submitted in the last 90 days. 3 of the most recent.</p>
 
- <!-- Before/After hero -->
- <div class="checkout-form-card" style="margin-bottom:20px; background: #FFFBF7; border: 2px solid var(--primary-light);">
- <div style="text-align:center; margin-bottom: 8px;">
- <span style="display:inline-block; background: var(--accent); color:white; font-size:11px; font-weight:800; letter-spacing:1.5px; padding:5px 12px; border-radius:20px; text-transform:uppercase;">REAL CUSTOMER RESULT</span>
- </div>
- <h2 style="text-align:center; border-bottom:none; padding-bottom:0;">Amanda's Booty &mdash; After 15 Days</h2>
- <p style="text-align:center; font-size:14px; color:var(--text-light); margin-top:-10px; margin-bottom:4px;">Same angle. Same lighting. Zero filters.</p>
+        <!-- Photo 1: Amanda (belly, 15 days) -->
+        <div class="ba-wrap">
+          <img src="img/AMAZON_IMG_BEFORE.jpeg" alt="Amanda &mdash; 15 days using Its Brazilian Bum Bum Cream" style="width:100%; max-width:640px; height:auto; border-radius:var(--radius); display:block; margin:0 auto;" onerror="this.style.display='none';">
+          <div class="ba-caption-quote">&ldquo;My stretch marks faded in 15 days. I almost didn't believe the mirror.&rdquo;</div>
+          <div class="ba-caption-meta">&mdash; Amanda R., 34 &bull; Tampa, FL &bull; <strong>15 days</strong> using the cream</div>
+          <div class="ba-caption-stamp">&#9989; SAME ANGLE &bull; SAME LIGHTING &bull; ZERO FILTERS OR EDITS</div>
+        </div>
 
- <div class="ba-wrap">
- <img src="img/AMAZON_IMG_BEFORE.jpeg" alt="Before vs. After &mdash; 15 days using Its Brazilian Bum Bum Cream" style="width:100%; max-width:640px; height:auto; border-radius:var(--radius); display:block; margin:0 auto;" onerror="this.style.display='none';">
- <div style="color:white; font-size:13px; font-weight:600; padding:12px 0 6px;">Real Customer Result &mdash; Day 0 vs. Day 15</div>
- <div style="color:#CCC; font-size:11px; padding-bottom:4px;">Same angle &bull; Same lighting &bull; Zero filters</div>
- </div>
+        <!-- Photo 2: Rachel (booty transformation, 30 days) -->
+        <div class="ba-wrap">
+          <img src="img/real_before_after_booty_transformation.jpeg" alt="Rachel &mdash; 30 days using Its Brazilian Bum Bum Cream" style="width:100%; max-width:640px; height:auto; border-radius:var(--radius); display:block; margin:0 auto;" onerror="this.style.display='none';">
+          <div class="ba-caption-quote">&ldquo;I stopped hiding my legs at the gym. My husband noticed after 3 weeks.&rdquo;</div>
+          <div class="ba-caption-meta">&mdash; Rachel M., 34 &bull; Dallas, TX &bull; <strong>30 days</strong> using the cream</div>
+          <div class="ba-caption-stamp">&#9989; SAME ANGLE &bull; SAME LIGHTING &bull; ZERO FILTERS OR EDITS</div>
+        </div>
 
- <div class="risk-banner">
- <span class="ic">&#9888;&#65039;</span>
- <span>This page is the ONLY place the quiz discount + free bonuses are unlocked. Once the timer hits zero, price goes back to retail and bonuses are removed.</span>
- </div>
- </div>
+        <!-- Photo 3: Jessica (stretch marks beach, 8 weeks) -->
+        <div class="ba-wrap">
+          <img src="img/real_before_after_beach_stretch_marks.jpeg" alt="Jessica &mdash; 8 weeks using Its Brazilian Bum Bum Cream" style="width:100%; max-width:640px; height:auto; border-radius:var(--radius); display:block; margin:0 auto;" onerror="this.style.display='none';">
+          <div class="ba-caption-quote">&ldquo;Two kids and my stretch marks finally faded. I wore a bikini for the first time in 6 years.&rdquo;</div>
+          <div class="ba-caption-meta">&mdash; Jessica P., 31 &bull; Orlando, FL &bull; <strong>8 weeks</strong> using the cream</div>
+          <div class="ba-caption-stamp">&#9989; SAME ANGLE &bull; SAME LIGHTING &bull; ZERO FILTERS OR EDITS</div>
+        </div>
 
- <!-- Package selector -->
- <div class="checkout-form-card" style="margin-bottom:20px;">
- <h2>&#128722; Pick Your Package</h2>
- <p style="font-size:13px; color:var(--text-muted); margin-top:-16px; margin-bottom:20px;">The 3-pack is the most popular. The 6-pack has the best value per jar &mdash; enough for your full transformation.</p>
+        <!-- Trust ribbon -->
+        <div style="text-align:center; margin-top:18px; padding:12px 14px; background:#FFEEDB; border-radius:var(--radius); font-size:13px; color:var(--dark);">
+          <strong>&#9733;&#9733;&#9733;&#9733;&#9733; 4.9/5</strong> &middot; Based on <strong>2,412 verified reviews</strong> &middot; <span style="color:var(--accent); font-weight:700;">96% would recommend</span>
+        </div>
 
- <div class="quantity-selector">
- <!-- 2-PACK -->
- <div class="qty-option" data-qty="2" data-price="99.00" data-link="https://buy.stripe.com/28E28reGj56B0aX7kpfMA0n" onclick="selectPkg(this)">
- <div class="qty-units">2 Jars</div>
- <div class="qty-strike">$139.98</div>
- <div class="qty-price">$99.00</div>
- <div class="qty-save">Save $40.98</div>
- <div class="qty-per">$49.50/jar</div>
- </div>
- <!-- 3-PACK (POPULAR) -->
- <div class="qty-option selected" data-qty="3" data-price="129.00" data-link="https://buy.stripe.com/fZubJ1bu72Yte1N205fMA0o" onclick="selectPkg(this)">
- <span class="qty-badge">Most Popular</span>
- <div class="qty-units">3 Jars</div>
- <div class="qty-strike">$209.97</div>
- <div class="qty-price">$129.00</div>
- <div class="qty-save">Save $80.97</div>
- <div class="qty-per">$43.00/jar</div>
- </div>
- <!-- 6-PACK (BEST VALUE) -->
- <div class="qty-option" data-qty="6" data-price="199.00" data-link="https://buy.stripe.com/28E14naq3fLf3n9awBfMA0p" onclick="selectPkg(this)">
- <span class="qty-badge" style="background:#28A745;">Best Value</span>
- <div class="qty-units">6 Jars</div>
- <div class="qty-strike">$419.94</div>
- <div class="qty-price">$199.00</div>
- <div class="qty-save">Save $220.94</div>
- <div class="qty-per">$33.17/jar</div>
- </div>
- </div>
+        <div class="risk-banner">
+          <span class="ic">&#9888;&#65039;</span>
+          <span>This page is the ONLY place the quiz discount + free bonuses are unlocked. Once the timer hits zero, price goes back to retail and bonuses are removed.</span>
+        </div>
+      </div>
 
- <!-- ORDER BUMP: Leave In Spray -->
- <div class="order-bump">
- <label>
- <input type="checkbox" id="orderBump" onchange="updateTotals()">
- <div>
- <strong style="color:var(--primary-dark);">&#11088; ONE-TIME OFFER: Add the Leave-In Spray 2-Pack for only +$69.99</strong><br>
- <span style="font-size:13px; color:var(--text-light);">Spray-and-go formula that locks in the cream's firming effect all day. Normally $99.98 &mdash; exclusive to this order only, opens at checkout.</span>
- </div>
- </label>
- </div>
+      <!-- Package selector -->
+      <div class="checkout-form-card" style="margin-bottom:20px;">
+        <h2>&#128722; Pick Your Package</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-16px; margin-bottom:20px;">The 3-pack is the most popular. The 6-pack has the best value per jar &mdash; enough for your full transformation.</p>
 
- <!-- Mega Guarantee -->
- <div class="mega-guarantee">
- <div class="seal">
- <div class="big">60</div>
- <div class="sm">DAY GUARANTEE</div>
- </div>
- <div>
- <h3>Either Your Skin Transforms&hellip; Or You Pay Nothing.</h3>
- <p>Use the cream every day for 60 full days. If you don't see visibly firmer, smoother, tighter skin &mdash; send us back the <em>empty</em> jar and we refund 100% of your money. No forms. No questions. No hard feelings.</p>
- </div>
- </div>
+        <div class="quantity-selector">
+          <!-- 2-PACK -->
+          <div class="qty-option" data-qty="2" data-price="99.00" data-link="https://buy.stripe.com/28E28reGj56B0aX7kpfMA0n" onclick="selectPkg(this)">
+            <div class="qty-units">2 Jars</div>
+            <div class="qty-strike">$139.98</div>
+            <div class="qty-price">$99.00</div>
+            <div class="qty-save">Save $40.98</div>
+            <div class="qty-per">$49.50/jar</div>
+          </div>
 
- <!-- MAIN CTA (redirects to Stripe) -->
- <a id="payBtn" class="pay-btn" href="#" onclick="goToCheckout(event)">
- &#128274; COMPLETE MY ORDER &mdash; <span id="btnTotal">$129.00</span> &rarr;
- </a>
- <div class="secure-note">&#128274; Protected by 256-bit SSL encryption &bull; Secure checkout by Stripe</div>
+          <!-- 3-PACK (POPULAR) -->
+          <div class="qty-option selected" data-qty="3" data-price="129.00" data-link="https://buy.stripe.com/fZubJ1bu72Yte1N205fMA0o" onclick="selectPkg(this)">
+            <span class="qty-badge">Most Popular</span>
+            <div class="qty-units">3 Jars</div>
+            <div class="qty-strike">$209.97</div>
+            <div class="qty-price">$129.00</div>
+            <div class="qty-save">Save $80.97</div>
+            <div class="qty-per">$43.00/jar</div>
+          </div>
 
- <div class="trust-badges" style="margin-top:24px;">
- <div class="badge-item"><span class="badge-icon">&#128274;</span><span>SSL Secure</span></div>
- <div class="badge-item"><span class="badge-icon">&#128179;</span><span>Stripe</span></div>
- <div class="badge-item"><span class="badge-icon">&#128737;</span><span>60-Day Refund</span></div>
- <div class="badge-item"><span class="badge-icon">&#128666;</span><span>Free Shipping</span></div>
- </div>
- </div>
+          <!-- 6-PACK (BEST VALUE) -->
+          <div class="qty-option" data-qty="6" data-price="199.00" data-link="https://buy.stripe.com/28E14naq3fLf3n9awBfMA0p" onclick="selectPkg(this)">
+            <span class="qty-badge" style="background:#28A745;">Best Value</span>
+            <div class="qty-units">6 Jars</div>
+            <div class="qty-strike">$419.94</div>
+            <div class="qty-price">$199.00</div>
+            <div class="qty-save">Save $220.94</div>
+            <div class="qty-per">$33.17/jar</div>
+          </div>
+        </div>
 
- </div>
+        <!-- ORDER BUMP: Leave In Spray -->
+        <div class="order-bump">
+          <label>
+            <input type="checkbox" id="orderBump" onchange="updateTotals()">
+            <div>
+              <strong style="color:var(--primary-dark);">&#11088; ONE-TIME OFFER: Add the Leave-In Spray 2-Pack for only +$69.99</strong><br>
+              <span style="font-size:13px; color:var(--text-light);">Spray-and-go formula that locks in the cream's firming effect all day. Normally $99.98 &mdash; exclusive to this order only, opens at checkout.</span>
+            </div>
+          </label>
+        </div>
 
- <!-- Order summary -->
- <div>
+        <!-- Mega Guarantee -->
+        <div class="mega-guarantee">
+          <div class="seal">
+            <div class="big">60</div>
+            <div class="sm">DAY GUARANTEE</div>
+          </div>
+          <div>
+            <h3>Either Your Skin Transforms&hellip; Or You Pay Nothing.</h3>
+            <p>Use the cream every day for 60 full days. If you don't see visibly firmer, smoother, tighter skin &mdash; send us back the <em>empty</em> jar and we refund 100% of your money. No forms. No questions. No hard feelings.</p>
+          </div>
+        </div>
 
- <div class="order-summary">
- <h3>&#128722; Your Order</h3>
+        <!-- MAIN CTA (redirects to Stripe) -->
+        <a id="payBtn" class="pay-btn" href="#" onclick="goToCheckout(event)">
+          &#128274; COMPLETE MY ORDER &mdash; <span id="btnTotal">$129.00</span> &rarr;
+        </a>
+        <div class="secure-note">&#128274; Protected by 256-bit SSL encryption &bull; Secure checkout by Stripe</div>
 
- <div class="order-item">
- <div class="thumb" style="padding:0;overflow:hidden;"><img src="img/AMAZON_IMG_2.jpeg" alt="Cream" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='&#x1F330;';this.parentElement.style.fontSize='28px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';"></div>
- <div class="item-details">
- <div class="name">Its Brazilian Bum Bum Cream</div>
- <div class="variant">8 oz Jar &bull; <span id="qtyDisplay">3 Jars</span></div>
- </div>
- <div class="item-price" id="itemPrice">$129.00</div>
- </div>
+        <div class="trust-badges" style="margin-top:24px;">
+          <div class="badge-item"><span class="badge-icon">&#128274;</span><span>SSL Secure</span></div>
+          <div class="badge-item"><span class="badge-icon">&#128179;</span><span>Stripe</span></div>
+          <div class="badge-item"><span class="badge-icon">&#128737;</span><span>60-Day Refund</span></div>
+          <div class="badge-item"><span class="badge-icon">&#128666;</span><span>Free Shipping</span></div>
+        </div>
 
- <div class="order-item" id="bumpItem" style="display:none;">
- <div class="thumb" style="font-size:20px;">&#127800;</div>
- <div class="item-details">
- <div class="name">Leave-In Spray 2-Pack</div>
- <div class="variant">Exclusive add-on</div>
- </div>
- <div class="item-price">$69.99</div>
- </div>
+      </div>
 
- <!-- FREE BONUSES STACK -->
- <div class="bonus-stack">
- <div class="bonus-row">
- <div class="bx">&#128218;</div>
- <div class="bt">
- <div class="n">#1 &mdash; Brazilian Beach Body Blueprint (eBook)</div>
- <div class="d">The exact 15-day routine Brazilian models use for smooth, tight skin.</div>
- </div>
- <div class="bv">FREE<span class="strike">$37</span></div>
- </div>
- <div class="bonus-row">
- <div class="bx">&#127869;&#65039;</div>
- <div class="bt">
- <div class="n">#2 &mdash; Cellulite-Killer Food Guide</div>
- <div class="d">12 everyday foods that fight cellulite from the inside out.</div>
- </div>
- <div class="bv">FREE<span class="strike">$27</span></div>
- </div>
- <div class="bonus-row">
- <div class="bx">&#127947;&#65039;&#8205;&#9792;&#65039;</div>
- <div class="bt">
- <div class="n">#3 &mdash; 5-Minute Booty Lift Workouts</div>
- <div class="d">No-equipment video routines you can do at home, in 5 minutes.</div>
- </div>
- <div class="bv">FREE<span class="strike">$47</span></div>
- </div>
- </div>
+    </div>
 
- <div class="order-totals">
- <div class="row"><span>Subtotal</span><span id="subtotal">$129.00</span></div>
- <div class="row"><span>Shipping</span><span style="color:var(--success); font-weight:600;">FREE</span></div>
- <div class="row"><span>Bonuses Value</span><span style="color:var(--success); font-weight:600;">+$111 FREE</span></div>
- <div class="row"><span>Quiz Discount</span><span class="discount" id="discount">-$80.97</span></div>
- <div class="row total"><span>Total Today</span><span id="totalPrice">$129.00</span></div>
- </div>
+    <!-- Order summary -->
+    <div>
+      <div class="order-summary">
+        <h3>&#128722; Your Order</h3>
+        <div class="order-item">
+          <div class="thumb" style="padding:0;overflow:hidden;"><img src="img/AMAZON_IMG_2.jpeg" alt="Cream" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='&#x1F330;';this.parentElement.style.fontSize='28px';this.parentElement.style.display='flex';this.parentElement.style.alignItems='center';this.parentElement.style.justifyContent='center';"></div>
+          <div class="item-details">
+            <div class="name">Its Brazilian Bum Bum Cream</div>
+            <div class="variant">8 oz Jar &bull; <span id="qtyDisplay">3 Jars</span></div>
+          </div>
+          <div class="item-price" id="itemPrice">$129.00</div>
+        </div>
 
- <div class="guarantee-badge" style="margin-top:16px;">
- <span style="font-size:24px;">&#128737;</span>
- <div style="text-align:left; font-size:13px;">
- <strong>60-Day Money-Back Guarantee</strong><br>Not happy? Full refund. Keep the bonuses.
- </div>
- </div>
+        <div class="order-item" id="bumpItem" style="display:none;">
+          <div class="thumb" style="font-size:20px;">&#127800;</div>
+          <div class="item-details">
+            <div class="name">Leave-In Spray 2-Pack</div>
+            <div class="variant">Exclusive add-on</div>
+          </div>
+          <div class="item-price">$69.99</div>
+        </div>
 
- <div style="text-align:center; padding:16px 0 0; font-size:13px; color:var(--text-muted);">
- <div>&#128293; <strong style="color:var(--accent);">47 women</strong> bought today</div>
- <div style="margin-top:4px;">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 (2,412 reviews)</div>
- </div>
- </div>
+        <!-- FREE BONUSES STACK -->
+        <div class="bonus-stack">
+          <div class="bonus-row">
+            <div class="bx">&#128218;</div>
+            <div class="bt">
+              <div class="n">#1 &mdash; Brazilian Beach Body Blueprint (eBook)</div>
+              <div class="d">The exact 15-day routine Brazilian models use for smooth, tight skin.</div>
+            </div>
+            <div class="bv">FREE<span class="strike">$37</span></div>
+          </div>
+          <div class="bonus-row">
+            <div class="bx">&#127869;&#65039;</div>
+            <div class="bt">
+              <div class="n">#2 &mdash; Cellulite-Killer Food Guide</div>
+              <div class="d">12 everyday foods that fight cellulite from the inside out.</div>
+            </div>
+            <div class="bv">FREE<span class="strike">$27</span></div>
+          </div>
+          <div class="bonus-row">
+            <div class="bx">&#127947;&#65039;&#8205;&#9792;&#65039;</div>
+            <div class="bt">
+              <div class="n">#3 &mdash; 5-Minute Booty Lift Workouts</div>
+              <div class="d">No-equipment video routines you can do at home, in 5 minutes.</div>
+            </div>
+            <div class="bv">FREE<span class="strike">$47</span></div>
+          </div>
+        </div>
+        <div class="order-totals">
+          <div class="row"><span>Subtotal</span><span id="subtotal">$129.00</span></div>
+          <div class="row"><span>Shipping</span><span style="color:var(--success); font-weight:600;">FREE</span></div>
+          <div class="row"><span>Bonuses Value</span><span style="color:var(--success); font-weight:600;">+$111 FREE</span></div>
+          <div class="row"><span>Quiz Discount</span><span class="discount" id="discount">-$80.97</span></div>
+          <div class="row total"><span>Total Today</span><span id="totalPrice">$129.00</span></div>
+        </div>
 
- </div>
+        <div class="guarantee-badge" style="margin-top:16px;">
+          <span style="font-size:24px;">&#128737;</span>
+          <div style="text-align:left; font-size:13px;">
+            <strong>60-Day Money-Back Guarantee</strong><br>Not happy? Full refund. Keep the bonuses.
+          </div>
+        </div>
 
-</div>
+        <div style="text-align:center; padding:16px 0 0; font-size:13px; color:var(--text-muted);">
+          <div>&#128293; <strong style="color:var(--accent);">47 women</strong> bought today</div>
+          <div style="margin-top:4px;">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 (2,412 reviews)</div>
+        </div>
+      </div>
+    </div>
 
-<footer style="text-align:center; padding:32px 20px; font-size:12px; color:#999; border-top:1px solid #E8DDD3; margin-top:40px;">
- <p>&copy; 2026 Its Brazilian. All rights reserved.</p>
- <p style="margin-top:8px;">
- <a href="#" style="color:#999; text-decoration:underline;">Privacy Policy</a> &bull;
- <a href="#" style="color:#999; text-decoration:underline;">Terms of Use</a> &bull;
- <a href="#" style="color:#999; text-decoration:underline;">Refund Policy</a>
- </p>
-</footer>
+  </div>
 
-<script>
- /* ---------- Stripe Payment Links ---------- */
- var BUMP_LINK = 'https://buy.stripe.com/6oU00jdCf1Up9Lx7kpfMA0m'; /* Leave-In Spray 2-Pack $69.99 */
+  <footer style="text-align:center; padding:32px 20px; font-size:12px; color:#999; border-top:1px solid #E8DD33² margin-top:40px;">
+    <p>&copy; 2026 Its Brazilian. All rights reserved.</p>
+    <p style="margin-top:8px;">
+      <a href="#" style="color:#999; text-decoration:underline;">Privacy Policy</a> &bull;
+      <a href="#" style="color:#999; text-decoration:underline;">Terms of Use</a> &bull;
+      <a href="#" style="color:#999; text-decoration:underline;">Refund Policy</a>
+    </p>
+  </footer>
 
- var RETAIL_PER_JAR = 69.99;
- var selectedQty = 3;
- var selectedPrice = 129.00;
- var selectedLink = 'https://buy.stripe.com/fZubJ1bu72Yte1N205fMA0o';
- var BUMP_PRICE = 69.99;
- var hasBump = false;
+  <script>
+    /* ---------- Stripe Payment Links ---------- */
+    var BUMP_LINK = 'https://buy.stripe.com/6oU00jdCf1Up9Lx7kpfMA0m'; /* Leave-In Spray 2-Pack $69.99 */
+    var RETAIL_PER_JAR = 69.99;
+    var selectedQty   = 3;
+    var selectedPrice = 129.00;
+    var selectedLink  = 'https://buy.stripe.com/fZubJ1bu72Yte1N205fMA0o';
+    var BUMP_PRICE    = 69.99;
+    var hasBump = false;
 
- function selectPkg(el){
- document.querySelectorAll('.qty-option').forEach(function(o){ o.classList.remove('selected'); });
- el.classList.add('selected');
- selectedQty = parseInt(el.getAttribute('data-qty'), 10);
- selectedPrice = parseFloat(el.getAttribute('data-price'));
- selectedLink = el.getAttribute('data-link');
- updateTotals();
- }
+    function selectPkg(el){
+      document.querySelectorAll('.qty-option').forEach(function(o){ o.classList.remove('selected'); });
+      el.classList.add('selected');
+      selectedQty   = parseInt(el.getAttribute('data-qty'), 10);
+      selectedPrice = parseFloat(el.getAttribute('data-price'));
+      selectedLink  = el.getAttribute('data-link');
+      updateTotals();
+    }
 
- function updateTotals(){
- hasBump = document.getElementById('orderBump').checked;
- document.getElementById('bumpItem').style.display = hasBump ? 'flex' : 'none';
+    function updateTotals(){
+      hasBump = document.getElementById('orderBump').checked;
+      document.getElementById('bumpItem').style.display = hasBump ? 'flex' : 'none';
+      var subtotal = selectedPrice + (hasBump ? BUMP_PRICE : 0);
+      var retail   = RETAIL_PER_JAR * selectedQty;
+      var discount = Math.max(0, retail - selectedPrice);
 
- var subtotal = selectedPrice + (hasBump ? BUMP_PRICE : 0);
- var retail = RETAIL_PER_JAR * selectedQty;
- var discount = Math.max(0, retail - selectedPrice);
+      document.getElementById('qtyDisplay').textContent  = selectedQty + ' Jar' + (selectedQty > 1 ? 's' : '');
+      document.getElementById('itemPrice').textContent   = '$' + selectedPrice.toFixed(2);
+      document.getElementById('subtotal').textContent    = '$' + subtotal.toFixed(2);
+      document.getElementById('discount').textContent    = '-$' + discount.toFixed(2);
+      document.getElementById('totalPrice').textContent  = '$' + subtotal.toFixed(2);
+      document.getElementById('btnTotal').textContent    = '$' + subtotal.toFixed(2);
+    }
 
- document.getElementById('qtyDisplay').textContent = selectedQty + ' Jar' + (selectedQty > 1 ? 's' : '');
- document.getElementById('itemPrice').textContent = '$' + selectedPrice.toFixed(2);
- document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
- document.getElementById('discount').textContent = '-$' + discount.toFixed(2);
- document.getElementById('totalPrice').textContent = '$' + subtotal.toFixed(2);
- document.getElementById('btnTotal').textContent = '$' + subtotal.toFixed(2);
- }
+    function goToCheckout(e){
+      if (e) e.preventDefault();
+      var btn = document.getElementById('payBtn');
+      btn.innerHTML = '&#9203; Redirecting to secure checkout&hellip;';
+      btn.style.pointerEvents = 'none';
+      /* If bump is checked, open it in a new tab first, then redirect main tab */
+      if (hasBump) {
+        try { window.open(BUMP_LINK, '_blank', 'noopener'); } catch(err) {}
+      }
+      setTimeout(function(){ window.location.href = selectedLink; }, 400);
+    }
 
- function goToCheckout(e){
- if (e) e.preventDefault();
- var btn = document.getElementById('payBtn');
- btn.innerHTML = '&#9203; Redirecting to secure checkout&hellip;';
- btn.style.pointerEvents = 'none';
- /* If bump is checked, open it in a new tab first, then redirect main tab */
- if (hasBump) {
- try { window.open(BUMP_LINK, '_blank', 'noopener'); } catch(err) {}
- }
- setTimeout(function(){ window.location.href = selectedLink; }, 400);
- }
+    /* ---------- Urgency counters ---------- */
+    (function(){
+      var stock   = 10;
+      var buyers  = 12 + Math.floor(Math.random()*6);
+      var soldH   = 25 + Math.floor(Math.random()*8);
+      var sEl = document.getElementById('stockLeft');
+      var bEl = document.getElementById('liveBuyers');
+      var hEl = document.getElementById('soldLastHour');
+      function tickStock(){
+        if (stock > 3 && Math.random() < 0.18) {
+          stock--;
+          sEl.textContent = stock;
+          sEl.style.transition = 'color .25s';
+          sEl.style.color = '#FF3B30';
+          setTimeout(function(){ sEl.style.color = '#FFD700'; }, 400);
+          soldH++;
+          hEl.textContent = soldH;
+        }
+        setTimeout(tickStock, 18000 + Math.random()*22000);
+      }
+      function tickBuyers(){
+        var delta = Math.floor(Math.random()*5) - 2;
+        buyers = Math.max(7, Math.min(28, buyers + delta));
+        bEl.textContent = buyers;
+        setTimeout(tickBuyers, 3000 + Math.random()*3000);
+      }
+      tickStock();
+      tickBuyers();
+    })();
 
- /* ---------- Urgency counters ---------- */
- (function(){
- var stock = 10; var buyers = 12 + Math.floor(Math.random()*6); var soldH = 25 + Math.floor(Math.random()*8);
- var sEl = document.getElementById('stockLeft');
- var bEl = document.getElementById('liveBuyers');
- var hEl = document.getElementById('soldLastHour');
- function tickStock(){
- if (stock > 3 && Math.random() < 0.18) {
- stock--; sEl.textContent = stock;
- sEl.style.transition = 'color .25s'; sEl.style.color = '#FF3B30';
- setTimeout(function(){ sEl.style.color = '#FFD700'; }, 400);
- soldH++; hEl.textContent = soldH;
- }
- setTimeout(tickStock, 18000 + Math.random()*22000);
- }
- function tickBuyers(){
- var delta = Math.floor(Math.random()*5) - 2;
- buyers = Math.max(7, Math.min(28, buyers + delta));
- bEl.textContent = buyers;
- setTimeout(tickBuyers, 3000 + Math.random()*3000);
- }
- tickStock(); tickBuyers();
- })();
+    /* ---------- Time alert ---------- */
+    (function(){
+      var alertEl = document.getElementById('timeAlert');
+      var alertMins = document.getElementById('alertMins');
+      setInterval(function(){
+        var t = document.getElementById('timer');
+        if (!t) return;
+        var parts = t.textContent.split(':');
+        var mins = parseInt(parts[0], 10);
+        if (mins < 5) {
+          alertEl.style.display = 'block';
+          alertMins.textContent = mins + 1;
+        } else {
+          alertEl.style.display = 'none';
+        }
+      }, 1000);
+    })();
+    /* ---------- Recent purchase toasts ---------- */
+    (function(){
+      var host = document.getElementById('toastHost');
+      var names = [
+        ['Sarah', 'Miami, FL'],
+        ['Jessica', 'Austin, TX'],
+        ['Amanda', 'Chicago, IL'],
+        ['Emma', 'Los Angeles, CA'],
+        ['Olivia', 'Seattle, WA'],
+        ['Ava', 'Denver, CO'],
+        ['Mia', 'Atlanta, GA'],
+        ['Isabella', 'Boston, MA'],
+        ['Sophia', 'Phoenix, AZ'],
+        ['Charlotte', 'San Diego, CA'],
+        ['Harper', 'Portland, OR'],
+        ['Evelyn', 'Nashville, TN'],
+        ['Abigail', 'Orlando, FL'],
+        ['Ella', 'Dallas, TX'],
+        ['Madison', 'Brooklyn, NY'],
+        ['Scarlett', 'Houston, TX'],
+        ['Grace', 'Las Vegas, NV'],
+        ['Chloe', 'Tampa, FL']
+      ];
+      var times = ['just now','1 min ago','2 min ago','3 min ago','5 min ago','7 min ago','just now','just now'];
+      var qtys  = ['2-pack', '3-pack (Most Popular)', '6-pack (Best Value)', '2-pack', '3-pack (Most Popular)', '6-pack (Best Value)'];
+      function showToast(){
+        var p = names[Math.floor(Math.random()*names.length)];
+        var t = times[Math.floor(Math.random()*times.length)];
+        var q = qtys[Math.floor(Math.random()*qtys.length)];
+        var el = document.createElement('div');
+        el.className = 'recent-toast';
+        el.innerHTML =
+          '<div class="tavatar">' + p[0][0] + '</div>' +
+          '<div class="tbody"><strong>' + p[0] + '</strong> from ' + p[1] + ' just ordered<div class="ttime">' + q + ' &bull; ' + t + '</div></div>';
+        host.appendChild(el);
+        setTimeout(function(){ el.remove(); }, 6500);
+        setTimeout(showToast, 7000 + Math.random()*10000);
+      }
+      setTimeout(showToast, 4000);
+    })();
 
- /* ---------- Time alert ---------- */
- (function(){
- var alertEl = document.getElementById('timeAlert');
- var alertMins = document.getElementById('alertMins');
- setInterval(function(){
- var t = document.getElementById('timer'); if (!t) return;
- var parts = t.textContent.split(':');
- var mins = parseInt(parts[0], 10);
- if (mins < 5) { alertEl.style.display = 'block'; alertMins.textContent = mins + 1; }
- else { alertEl.style.display = 'none'; }
- }, 1000);
- })();
-
- /* ---------- Recent purchase toasts ---------- */
- (function(){
- var host = document.getElementById('toastHost');
- var names = [
- ['Sarah', 'Miami, FL'], ['Jessica', 'Austin, TX'], ['Amanda', 'Chicago, IL'],
- ['Emma', 'Los Angeles, CA'], ['Olivia', 'Seattle, WA'], ['Ava', 'Denver, CO'],
- ['Mia', 'Atlanta, GA'], ['Isabella', 'Boston, MA'], ['Sophia', 'Phoenix, AZ'],
- ['Charlotte', 'San Diego, CA'], ['Harper', 'Portland, OR'], ['Evelyn', 'Nashville, TN'],
- ['Abigail', 'Orlando, FL'], ['Ella', 'Dallas, TX'], ['Madison', 'Brooklyn, NY'],
- ['Scarlett', 'Houston, TX'], ['Grace', 'Las Vegas, NV'], ['Chloe', 'Tampa, FL']
- ];
- var times = ['just now','1 min ago','2 min ago','3 min ago','5 min ago','7 min ago','just now','just now'];
- var qtys = ['2-pack', '3-pack (Most Popular)', '6-pack (Best Value)', '2-pack', '3-pack (Most Popular)', '6-pack (Best Value)'];
- function showToast(){
- var p = names[Math.floor(Math.random()*names.length)];
- var t = times[Math.floor(Math.random()*times.length)];
- var q = qtys[Math.floor(Math.random()*qtys.length)];
- var el = document.createElement('div'); el.className = 'recent-toast';
- el.innerHTML = '<div class="tavatar">' + p[0][0] + '</div>' +
- '<div class="tbody"><strong>' + p[0] + '</strong> from ' + p[1] + ' just ordered<div class="ttime">' + q + ' &bull; ' + t + '</div></div>';
- host.appendChild(el);
- setTimeout(function(){ el.remove(); }, 6500);
- setTimeout(showToast, 7000 + Math.random()*10000);
- }
- setTimeout(showToast, 4000);
- })();
-
- /* ---------- Timer (main + free shipping mirror) ---------- */
- let timeLeft = 15 * 60;
- function updateTimer() {
- const minutes = Math.floor(timeLeft / 60);
- const seconds = timeLeft % 60;
- const formatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
- document.getElementById('timer').textContent = formatted;
- const ship = document.getElementById('shipEnds');
- if (ship) ship.textContent = formatted;
- if (timeLeft > 0) { timeLeft--; setTimeout(updateTimer, 1000); }
- }
- updateTimer();
-</script>
-
+    /* ---------- Timer (main + free shipping mirror) ---------- */
+    let timeLeft = 15 * 60;
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      const formatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      document.getElementById('timer').textContent = formatted;
+      const ship = document.getElementById('shipEnds');
+      if (ship) ship.textContent = formatted;
+      if (timeLeft > 0) {
+        timeLeft--;
+        setTimeout(updateTimer, 1000);
+      }
+    }
+    updateTimer();
+  </script>
 </body>
 </html>
