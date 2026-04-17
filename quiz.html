@@ -25,12 +25,12 @@
  <div class="quiz-step active" data-step="0">
  <div class="quiz-intro-icon">&#128300;</div>
  <h2 style="text-align:center;">Free Personalized Skin Assessment</h2>
- <p style="text-align:center; color:var(--text-light); margin:12px 0 28px;">Answer 8 quick questions to uncover the best treatment plan for your skin type and cellulite grade.</p>
+ <p style="text-align:center; color:var(--text-light); margin:12px 0 28px;">Takes under 30 seconds. 8 quick questions to uncover the best treatment plan for your skin type and cellulite grade.</p>
 
  <div style="display:flex; gap:12px; justify-content:center; margin-bottom:28px;">
  <div style="text-align:center;">
  <div style="font-size:24px;">&#9201;</div>
- <div style="font-size:12px; color:var(--text-muted);">2 minutes</div>
+ <div style="font-size:12px; color:var(--text-muted);">30 seconds</div>
  </div>
  <div style="text-align:center;">
  <div style="font-size:24px;">&#128272;</div>
@@ -63,11 +63,11 @@
  <div class="question-number">Question 2 of 8</div>
  <h2>What's your #1 skin concern right now?</h2>
  <div class="quiz-options">
- <button class="quiz-option" onclick="answer(2, this)">&#128308; Visible cellulite &amp; dimpling</button>
+ <button class="quiz-option" onclick="answer(this)">&#128308; Visible cellulite &amp; dimpling</button>
  <button class="quiz-option" onclick="answer(2, this)">&#128993; Loose skin &amp; loss of firmness</button>
  <button class="quiz-option" onclick="answer(2, this)">&#128310; Stretch marks (old or new)</button>
  <button class="quiz-option" onclick="answer(2, this)">&#128309; Dry, dull, tired-looking skin</button>
- <button class="quiz-option" onclick="answer(2, this)">&#128312; All of the above</button>
+ <button class="quiz-option" onclick="answer(this)">&#128312; All of the above</button>
  </div>
  </div>
 
@@ -139,13 +139,13 @@
  <div class="question-number">Question 8 of 8</div>
  <h2>If there was a clinically-proven cream that visibly firmed your skin in 15 days, would you be ready to start today?</h2>
  <div class="quiz-options">
- <button class="quiz-option" onclick="answer(8, this)">Yes &mdash; I want to start right now!</button>
+ <button class="quiz-option" onclick="answer(8, this)">Yes &ondash; I want to start right now!</button>
  <button class="quiz-option" onclick="answer(8, this)">Yes, but I'd like to know more</button>
- <button class="quiz-option" onclick="answer(8, this)">Maybe &mdash; depends on the price</button>
+ <button class="quiz-option" onclick="answer(8, this)">Maybe &ondash; depends on the price</button>
  </div>
  </div>
 
- <!-- ANALYZING SCREEN -->
+ <!-- ANALYZINGQ SCREEN -->
  <div class="quiz-step" data-step="9">
  <div class="analyzing-screen">
  <div class="spinner"></div>
@@ -269,9 +269,9 @@
  timeLeft--;
  setTimeout(updateTimer, 1000);
  }
- }
+  }
  updateTimer();
-</script>
+ </script>
 
 </body>
 </html>
