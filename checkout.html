@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Seguro | BumbumCream</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    .StripeElement {
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      transition: border-color 0.2s;
+    }
+    .StripeElement--focus { border-color: var(--primary); }
+    .StripeElement--invalid { border-color: var(--accent); }
+    .quantity-selector { display: flex; gap: 12px; margin: 16px 0; }
+    .qty-option {
+      flex: 1; padding: 16px 12px; border: 2px solid var(--border);
+      border-radius: var(--radius); background: white; cursor: pointer;
+      text-align: center; transition: all 0.2s;
+    }
+    .qty-option:hover { border-color: var(--primary); }
+    .qty-option.selected { border-color: var(--primary); background: var(--bg-warm); }
+    .qty-option .qty-units { font-size: 20px; font-weight: 800; color: var(--dark); }
+    .qty-option .qty-price { font-size: 16px; font-weight: 700; color: var(--primary-dark); margin-top: 4px; }
+    .qty-option .qty-save { font-size: 11px; color: var(--accent); font-weight: 700; margin-top: 4px; }
+    .qty-option .qty-per { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .qty-option .qty-badge {
+      display: inline-block; background: var(--accent); color: white;
+      font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .order-bump {
+      border: 2px dashed var(--primary); border-radius: var(--radius);
+      padding: 16px; margin: 16px 0; background: var(--bg-warm);
+    }
+    .order-bump label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; font-size: 14px; }
+    .order-bump input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; flex-shrink: 0; accent-color: var(--primary); }
+    .pay-btn {
+      display: block; width: 100%; padding: 18px 32px;
+      background: linear-gradient(135deg, #28A745, #1E7E34); color: white;
+      font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700;
+      text-align: center; border: none; border-radius: 60px; cursor: pointer;
+      transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(40, 167, 69, 0.35);
+      letter-spacing: 0.5px; margin-top: 24px;
+    }
+    .pay-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(40, 167, 69, 0.45); }
+    .pay-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .secure-note {
+      display: flex; align-items: center; justify-content: center;
+      gap: 6px; font-size: 12px; color: var(--text-muted); margin-top: 12px;
+    }
+  </style>
+</head>
+<body class="checkout-page">
+
+  <header class="checkout-header">
+    <div class="logo-text">BumbumCream</div>
+    <div class="checkout-secure">&#128274; Checkout Seguro &bull; SSL Criptografado</div>
+  </header>
+
+  <div class="timer-bar">
+    Sua oferta de <strong>42% OFF</strong> expira em: <span class="timer" id="timer">14:59</span>
+  </div>
+
+  <div class="checkout-layout">
+    <div>
+      <div style="display:flex; gap:8px; margin-bottom:24px;">
+        <div style="flex:1; height:4px; border-radius:2px; background:var(--primary);"></div>
+        <div style="flex:1; height:4px; border-radius:2px; background:var(--primary);"></div>
+        <div style="flex:1; height:4px; border-radius:2px; background:var(--primary);"></div>
+      </div>
+
+      <div class="checkout-form-card" style="margin-bottom:20px;">
+        <h2>&#128100; Informacoes de Contato</h2>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Nome *</label>
+            <input type="text" id="firstName" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Sobrenome *</label>
+            <input type="text" id="lastName" placeholder="Seu sobrenome" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefone</label>
+          <input type="tel" id="phone" placeholder="(00) 00000-0000">
+        </div>
+      </div>
+
+      <div class="checkout-form-card" style="margin-bottom:20px;">
+        <h2>&#128666; Endereco de Entrega</h2>
+        <div class="form-group">
+          <label for="address">Endereco *</label>
+          <input type="text" id="address" placeholder="Rua, numero, complemento" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">Cidade *</label>
+            <input type="text" id="city" placeholder="Sua cidade" required>
+          </div>
+          <div class="form-group">
+            <label for="state">Estado *</label>
+            <select id="state" required>
+              <option value="">Selecione...</option>
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IL">Illinois</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="NV">Nevada</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="OH">Ohio</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="TX">Texas</option>
+              <option value="WA">Washington</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="zip">ZIP Code *</label>
+            <input type="text" id="zip" placeholder="00000" required>
+          </div>
+          <div class="form-group">
+            <label for="country">Pais</label>
+            <input type="text" id="country" value="United States" readonly style="background:#F7F7F7;">
+          </div>
+        </div>
+      </div>
+
+      <div class="checkout-form-card">
+        <h2>&#128179; Pagamento</h2>
+        <p style="font-size:13px; color:var(--text-muted); margin-top:-16px; margin-bottom:20px;">Transacao segura via Stripe. Seus dados nunca sao armazenados.</p>
+        <div class="form-group">
+          <label>Numero do Cartao *</label>
+          <div id="card-number" class="StripeElement" style="min-height:44px;"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Validade *</label>
+            <div id="card-expiry" class="StripeElement" style="min-height:44px;"></div>
+          </div>
+          <div class="form-group">
+            <label>CVC *</label>
+            <div id="card-cvc" class="StripeElement" style="min-height:44px;"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cardName">Nome no Cartao *</label>
+          <input type="text" id="cardName" placeholder="Como aparece no cartao" required>
+        </div>
+        <div id="card-errors" style="color:var(--accent); font-size:13px; margin-top:8px; display:none;"></div>
+
+        <div class="order-bump">
+          <label>
+            <input type="checkbox" id="orderBump" onchange="updateTotals()">
+            <div>
+              <strong style="color:var(--primary-dark);">ADICIONAR: Kit Esfoliante Corporal (+$12.00)</strong><br>
+              <span style="font-size:13px; color:var(--text-light);">Potencialize os resultados do creme com esfoliacao semanal. Normalmente $24.99 &mdash; exclusivo para este pedido.</span>
+            </div>
+          </label>
+        </div>
+
+        <button type="button" class="pay-btn" id="payBtn" onclick="processPayment()">
+          &#128274; FINALIZAR COMPRA &mdash; <span id="btnTotal">$29.00</span>
+        </button>
+        <div class="secure-note">&#128274; Protegido por criptografia SSL de 256 bits</div>
+
+        <div class="trust-badges" style="margin-top:24px;">
+          <div class="badge-item"><span class="badge-icon">&#128274;</span><span>SSL Seguro</span></div>
+          <div class="badge-item"><span class="badge-icon">&#128179;</span><span>Stripe</span></div>
+          <div class="badge-item"><span class="badge-icon">&#128737;</span><span>Garantia 30d</span></div>
+          <div class="badge-item"><span class="badge-icon">&#128666;</span><span>Frete Gratis</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="order-summary">
+        <h3>&#128722; Resumo do Pedido</h3>
+        <div class="quantity-selector">
+          <div class="qty-option selected" onclick="selectQty(1, 29.00, this)">
+            <div class="qty-units">1x</div>
+            <div class="qty-price">$29.00</div>
+            <div class="qty-per">$29.00/un</div>
+          </div>
+          <div class="qty-option" onclick="selectQty(2, 49.00, this)">
+            <span class="qty-badge">Popular</span>
+            <div class="qty-units">2x</div>
+            <div class="qty-price">$49.00</div>
+            <div class="qty-save">Economize $9</div>
+            <div class="qty-per">$24.50/un</div>
+          </div>
+          <div class="qty-option" onclick="selectQty(3, 69.00, this)">
+            <span class="qty-badge">Melhor Valor</span>
+            <div class="qty-units">3x</div>
+            <div class="qty-price">$69.00</div>
+            <div class="qty-save">Economize $18</div>
+            <div class="qty-per">$23.00/un</div>
+          </div>
+        </div>
+
+        <div class="order-item">
+          <div class="thumb">&#x1F330;</div>
+          <div class="item-details">
+            <div class="name">Brazilian Body Firming Cream</div>
+            <div class="variant">8 oz Jar &bull; <span id="qtyDisplay">1 unidade</span></div>
+          </div>
+          <div class="item-price" id="itemPrice">$29.00</div>
+        </div>
+
+        <div class="order-item" id="bumpItem" style="display:none;">
+          <div class="thumb" style="font-size:20px;">&#129524;</div>
+          <div class="item-details">
+            <div class="name">Kit Esfoliante Corporal</div>
+            <div class="variant">Add-on exclusivo</div>
+          </div>
+          <div class="item-price">$12.00</div>
+        </div>
+
+        <div class="order-totals">
+          <div class="row"><span>Subtotal</span><span id="subtotal">$29.00</span></div>
+          <div class="row"><span>Frete</span><span style="color:var(--success); font-weight:600;">GRATIS</span></div>
+          <div class="row"><span>Desconto do Quiz</span><span class="discount" id="discount">-$20.99</span></div>
+          <div class="row total"><span>Total</span><span id="totalPrice">$29.00</span></div>
+        </div>
+
+        <div class="guarantee-badge" style="margin-top:16px;">
+          <span style="font-size:24px;">&#128737;</span>
+          <div style="text-align:left; font-size:13px;">
+            <strong>Garantia de 30 Dias</strong><br>Nao gostou? Dinheiro de volta.
+          </div>
+        </div>
+
+        <div style="text-align:center; padding:16px 0 0; font-size:13px; color:var(--text-muted);">
+          <div>&#128293; <strong style="color:var(--accent);">47 pessoas</strong> compraram hoje</div>
+          <div style="margin-top:4px;">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0 (2 avaliacoes)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="text-align:center; padding:32px 20px; font-size:12px; color:#999; border-top:1px solid #E8DDD3; margin-top:40px;">
+    <p>&copy; 2026 BumbumCream. Todos os direitos reservados.</p>
+    <p style="margin-top:8px;">
+      <a href="#" style="color:#999; text-decoration:underline;">Politica de Privacidade</a> &bull;
+      <a href="#" style="color:#999; text-decoration:underline;">Termos de Uso</a> &bull;
+      <a href="#" style="color:#999; text-decoration:underline;">Politica de Reembolso</a>
+    </p>
+  </footer>
+
+  <script>
+    let selectedQty = 1;
+    let basePrice = 29.00;
+    let bumpPrice = 12.00;
+    let hasBump = false;
+
+    function selectQty(qty, price, el) {
+      selectedQty = qty;
+      basePrice = price;
+      document.querySelectorAll('.qty-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('qtyDisplay').textContent = `${qty} unidade${qty > 1 ? 's' : ''}`;
+      document.getElementById('itemPrice').textContent = `$${price.toFixed(2)}`;
+      updateTotals();
+    }
+
+    function updateTotals() {
+      hasBump = document.getElementById('orderBump').checked;
+      document.getElementById('bumpItem').style.display = hasBump ? 'flex' : 'none';
+      const subtotal = basePrice + (hasBump ? bumpPrice : 0);
+      const originalPrice = 49.99 * selectedQty;
+      const discount = originalPrice - basePrice;
+      document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('discount').textContent = `-$${discount.toFixed(2)}`;
+      document.getElementById('totalPrice').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('btnTotal').textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    const STRIPE_PUBLISHABLE_KEY = 'pk_test_REPLACE_WITH_YOUR_KEY';
+    let stripe, cardNumber, cardExpiry, cardCvc;
+
+    function initStripe() {
+      try {
+        stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+        const elements = stripe.elements({
+          fonts: [{ cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap' }]
+        });
+        const style = {
+          base: { fontFamily: 'Inter, sans-serif', fontSize: '15px', color: '#333', '::placeholder': { color: '#999' } },
+          invalid: { color: '#D4534A' }
+        };
+        cardNumber = elements.create('cardNumber', { style });
+        cardNumber.mount('#card-number');
+        cardExpiry = elements.create('cardExpiry', { style });
+        cardExpiry.mount('#card-expiry');
+        cardCvc = elements.create('cardCvc', { style });
+        cardCvc.mount('#card-cvc');
+        [cardNumber, cardExpiry, cardCvc].forEach(el => {
+          el.on('change', (event) => {
+            const errEl = document.getElementById('card-errors');
+            if (event.error) { errEl.textContent = event.error.message; errEl.style.display = 'block'; }
+            else { errEl.style.display = 'none'; }
+          });
+        });
+      } catch(e) { console.log('Stripe not initialized'); }
+    }
+
+    async function processPayment() {
+      const btn = document.getElementById('payBtn');
+      btn.disabled = true;
+      btn.textContent = 'Processando...';
+      const email = document.getElementById('email').value;
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      if (!email || !firstName || !lastName) {
+        alert('Por favor, preencha todos os campos obrigatorios.');
+        btn.disabled = false;
+        btn.innerHTML = '&#128274; FINALIZAR COMPRA &mdash; <span id="btnTotal">$' + (basePrice + (hasBump ? bumpPrice : 0)).toFixed(2) + '</span>';
+        return;
+      }
+      if (!stripe || !cardNumber) {
+        alert('MODO DEMO: Configure sua chave Stripe em checkout.html para processar pagamentos reais.');
+        btn.disabled = false;
+        btn.innerHTML = '&#128274; FINALIZAR COMPRA &mdash; <span id="btnTotal">$' + (basePrice + (hasBump ? bumpPrice : 0)).toFixed(2) + '</span>';
+        return;
+      }
+      try {
+        const { paymentMethod, error } = await stripe.createPaymentMethod({
+          type: 'card', card: cardNumber,
+          billing_details: {
+            name: `${firstName} ${lastName}`, email: email,
+            phone: document.getElementById('phone').value,
+            address: {
+              line1: document.getElementById('address').value,
+              city: document.getElementById('city').value,
+              state: document.getElementById('state').value,
+              postal_code: document.getElementById('zip').value,
+              country: 'US'
+            }
+          }
+        });
+        if (error) {
+          document.getElementById('card-errors').textContent = error.message;
+          document.getElementById('card-errors').style.display = 'block';
+          btn.disabled = false;
+          btn.innerHTML = '&#128274; FINALIZAR COMPRA &mdash; <span id="btnTotal">$' + (basePrice + (hasBump ? bumpPrice : 0)).toFixed(2) + '</span>';
+          return;
+        }
+        alert('Pagamento processado com sucesso! ID: ' + paymentMethod.id);
+      } catch (err) {
+        alert('Erro ao processar pagamento.');
+        btn.disabled = false;
+        btn.innerHTML = '&#128274; FINALIZAR COMPRA &mdash; <span id="btnTotal">$' + (basePrice + (hasBump ? bumpPrice : 0)).toFixed(2) + '</span>';
+      }
+    }
+
+    let timeLeft = 15 * 60;
+    function updateTimer() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('timer').textContent =
+        `${minutes}:${seconds.toString().padStart(2, '0')}`;
+      if (timeLeft > 0) { timeLeft--; setTimeout(updateTimer, 1000); }
+    }
+    updateTimer();
+
+    if (STRIPE_PUBLISHABLE_KEY !== 'pk_test_REPLACE_WITH_YOUR_KEY') { initStripe(); }
+  </script>
+
+</body>
+</html>
