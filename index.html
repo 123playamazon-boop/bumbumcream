@@ -1,147 +1,287 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novo Estudo Revela: Creme Brasileiro Reduz Celulite em 21 Dias</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <meta name="description" content="Dermatologistas ficam surpresos com resultado de novo creme corporal brasileiro que promete reduzir celulite e estrias visivelmente.">
+<html lang="en">
+<a�d>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Lifted, Enhanced &amp; Shaped My Booty in Just 15 Days Using This Brazilian Secret</title>
+<link rel="stylesheet" href="css/styles.css">
+<meta name="description" content="How a 3-ingredient Amazonian ritual — passed down by Brazilian grandmothers — is reshaping women's bodies in 15 days, without surgery, injections or $5,000 laser treatments.">
 </head>
 <body>
 
-  <!-- Breaking News Bar -->
-  <div class="breaking-bar">
-    ATUALIZADO: Abril 2026 &mdash; Resultados Confirmados
-  </div>
+<!-- Breaking News Bar -->
+<div class="breaking-bar">
+ BREAKING &mdash; APRIL 2026 &bull; U.S. DERMATOLOGISTS DEMAND INVESTIGATION
+</div>
 
-  <!-- Header estilo editorial -->
-  <header class="adv-header">
-    <div class="source">Wellness Report</div>
-    <div class="logo-text">Health &amp; Beauty Daily</div>
-  </header>
+<!-- Live Reader Counter -->
+<div id="liveReaders" style="position:sticky; top:0; z-index:90; background:#111; color:#fff; padding:10px 16px; display:flex; align-items:center; justify-content:center; gap:10px; font-size:13px; font-weight:600; box-shadow:0 2px 12px rgba(0,0,0,0.25);">
+ <span style="display:inline-block; width:10px; height:10px; background:#FF3B30; border-radius:50%; animation: pulseDot 1.2s ease-in-out infinite; box-shadow:0 0 0 0 rgba(255,59,48,0.7);"></span>
+ <span>LIVE &mdash; <strong id="readersCount" style="color:#FFD700;">1,247</strong> women reading this article right now</span>
+</div>
+<style>
+ @keyframes pulseDot {
+ 0%, 100% { box-shadow: 0 0 0 0 rgba(255,59,48,0.7); transform: scale(1); }
+ 50% { box-shadow: 0 0 0 8px rgba(255,59,48,0); transform: scale(1.1); }
+ }
+</style>
+<script>
+ (function(){
+ // Baseline reader count with organic fluctuation
+ var el = document.getElementById('readersCount');
+ var n = 1200 + Math.floor(Math.random()*120);
+ function tick() {
+ // random walk: -3 to +6 readers (skews slightly positive for a growing feel)
+ var delta = Math.floor(Math.random()*10) - 3;
+ n = Math.max(980, Math.min(1680, n + delta));
+ el.textContent = n.toLocaleString('en-US');
+ setTimeout(tick, 2000 + Math.random()*2500);
+ }
+ el.textContent = n.toLocaleString('en-US');
+ tick();
+ })();
+</script>
 
-  <!-- Meta do artigo -->
-  <div class="container">
-    <div class="adv-meta">
-      <span>Por <span class="author">Dra. Camila Vasconcelos</span></span>
-      <span>16 de Abril, 2026</span>
-      <span>5 min de leitura</span>
-    </div>
-  </div>
+<!-- Editorial Header -->
+<header class="adv-header">
+ <div class="source">Wellness Report</div>
+ <div class="logo-text">Health &amp; Beauty Daily</div>
+</header>
 
-  <!-- Corpo do Artigo -->
-  <article class="container article-body">
+<!-- Article meta -->
+<div class="container">
+ <div class="adv-meta">
+ <span>By <span class="author">Dr. Camila Vasconcelos, M.D.</span></span>
+ <span>April 16, 2026</span>
+ <span>5 min read</span>
+ </div>
+</div>
 
-    <h1>Novo Creme Corporal Brasileiro Surpreende Dermatologistas ao Reduzir Celulite Vis&iacute;vel em Apenas 21 Dias</h1>
+<!-- Article body -->
+<article class="container article-body">
 
-    <p class="lead">Uma f&oacute;rmula avan&ccedil;ada desenvolvida com ingredientes brasileiros est&aacute; mudando a forma como mulheres ao redor do mundo tratam celulite, estrias e flacidez &mdash; sem procedimentos invasivos e por uma fra&ccedil;&atilde;o do custo.</p>
+ <h1>"I Lifted, Enhanced &amp; Shaped My Booty in Just 15 Days Using This Brazilian Secret" &mdash; The Amazonian Ritual Hollywood Doesn't Want You To Know About</h1>
 
-    <!-- Placeholder para imagem hero -->
-    <div style="width:100%; height:400px; background: linear-gradient(135deg, #E8C5A8, #C8956C); border-radius: 20px; display:flex; align-items:center; justify-content:center; margin:24px 0; box-shadow: var(--shadow-md);">
-      <span style="font-size:60px;">&#x1F330;</span>
-    </div>
-    <p style="text-align:center; font-size:13px; color:#999; margin-top:-16px; margin-bottom:32px;">F&oacute;rmula com ingredientes naturais brasileiros &mdash; Foto: Divulga&ccedil;&atilde;o</p>
+ <p class="lead">A 3-ingredient Amazonian formula &mdash; harvested from the same rainforest fruits Brazilian women have used for generations &mdash; is now erasing cellulite, stretch marks and loose skin on American women in just 15 days. And the $17 billion U.S. beauty industry is panicking.</p>
 
-    <p>Se voc&ecirc; j&aacute; tentou de tudo para eliminar aquela celulite teimosa &mdash; cremes de farm&aacute;cia, massagens caras, tratamentos est&eacute;ticos &mdash; e nada funcionou de verdade, voc&ecirc; n&atilde;o est&aacute; sozinha.</p>
+ <!-- Hero image (swap img/AMAZON_IMG_HERO.jpeg with Its Brazilian hero image) -->
+ <div style="width:100%; border-radius: 20px; overflow:hidden; margin:24px 0; box-shadow: var(--shadow-md); position:relative; background: linear-gradient(135deg, #FFD27A, #FFB347);">
+ <img id="amz-hero" src="img/AMAZON_IMG_HERO.jpeg" alt="Its Brazilian Bum Bum Cream — Brazilian woman lifted and shaped in 15 days" style="width:100%; height:auto; display:block;" onerror="this.style.display='none'; this.parentElement.style.minHeight='400px'; this.parentElement.innerHTML += '<div style=\'display:flex;align-items:center;justify-content:center;min-height:400px;font-size:80px;\'>&#x1F330;</div>';">
+ <div style="position:absolute; top:16px; right:16px; background:#D4534A; color:#fff; font-size:11px; font-weight:800; padding:6px 12px; border-radius:20px; letter-spacing:1px; z-index:2;">EXCLUSIVE</div>
+ </div>
+ <p style="text-align:center; font-size:13px; color:#999; margin-top:-16px; margin-bottom:24px;">Its Brazilian &mdash; the formula celebrities are quietly using to reshape their body in 15 days.</p>
 
-    <p>Uma pesquisa recente mostrou que <strong>89% das mulheres acima de 25 anos</strong> t&ecirc;m algum grau de celulite, e a grande maioria nunca encontrou um tratamento que realmente funcionasse a longo prazo.</p>
+ <!-- TOP CTA (duplicated for above-the-fold conversion) -->
+ <a href="quiz.html" class="cta-btn" style="margin:8px auto 10px;">
+ FREE TEST IN LESS THAN 30 SECONDS &rarr;
+ </a>
+ <p class="cta-sub" style="margin-bottom:24px;">100% free &bull; Instant result &bull; No credit card required</p>
 
-    <p>Mas um novo creme corporal, desenvolvido com uma f&oacute;rmula exclusiva inspirada em rituais de beleza brasileiros, est&aacute; mudando essa realidade.</p>
+ <p>If you've tried every body cream on the pharmacy shelf and still see cellulite in the mirror &mdash; this is for you.</p>
 
-    <h2>A Descoberta que Est&aacute; Surpreendendo Especialistas</h2>
+ <p>You've probably spent hundreds of dollars on "firming gels", lymphatic massages, body wraps, and sculpting treatments. Maybe even booked a laser consultation at $2,000+ a session. And still&hellip; nothing really changed.</p>
 
-    <p>O <strong>Brazilian Body Firming Cream</strong> combina uma tecnologia de firmeza avan&ccedil;ada com ingredientes naturais brasileiros como ch&aacute; verde, cafe&iacute;na concentrada e manteiga de cupua&ccedil;u, criando o que especialistas est&atilde;o chamando de "o tratamento mais eficaz dispon&iacute;vel sem receita m&eacute;dica".</p>
+ <p>It's not your fault. It was never your fault.</p>
 
-    <blockquote>
-      "O que impressiona nesta f&oacute;rmula &eacute; a combina&ccedil;&atilde;o de ativos que trabalham em m&uacute;ltiplas camadas da pele simultaneamente. N&atilde;o &eacute; apenas hidrata&ccedil;&atilde;o superficial &mdash; h&aacute; uma a&ccedil;&atilde;o real de firmeza e redu&ccedil;&atilde;o de irregularidades."
-      <cite>&mdash; Dra. Patricia Mendes, Dermatologista</cite>
-    </blockquote>
+ <blockquote>
+ "American women were sold the wrong product, by the wrong industry, for 20 years straight. The ingredients that actually reshape the body have been sitting in the Amazon rainforest this entire time."
+ <cite>&mdash; Dr. Patricia Mendes, Board-Certified Dermatologist</cite>
+ </blockquote>
 
-    <p>Diferente dos cremes comuns que apenas hidratam a camada superficial, esta f&oacute;rmula foi projetada para:</p>
+ <p>While American women were being talked into $5,000 laser sessions and $300 jars of white goo&hellip;</p>
 
-    <div class="stats-row">
-      <div class="stat-card">
-        <span class="number">93%</span>
-        <span class="label">Mais firmeza</span>
-      </div>
-      <div class="stat-card">
-        <span class="number">87%</span>
-        <span class="label">Menos celulite</span>
-      </div>
-      <div class="stat-card">
-        <span class="number">21</span>
-        <span class="label">Dias p/ resultado</span>
-      </div>
-    </div>
+ <p>&hellip; a small group of Brazilian women &mdash; the same women responsible for the world's most famous curves on the beaches of Copacabana and Ipanema &mdash; were quietly reshaping their bodies using three specific rainforest fruits. Every single morning. For less than the price of a tank of gas.</p>
 
-    <h2>Como Funciona?</h2>
+ <h2>What American Women Were Never Told About Cellulite</h2>
 
-    <p>A f&oacute;rmula age em tr&ecirc;s frentes simult&acirc;neas:</p>
+ <p>Here's the uncomfortable truth the beauty industry hopes you never find out:</p>
 
-    <p><strong>1. Firmeza Profunda:</strong> A combina&ccedil;&atilde;o de cafe&iacute;na e ch&aacute; verde penetra nas camadas mais profundas, estimulando a produ&ccedil;&atilde;o natural de col&aacute;geno e elastina.</p>
+ <p>Cellulite isn't a "fat problem." It isn't a "hydration problem." And it definitely isn't something you can "burn off" at the gym.</p>
 
-    <p><strong>2. Redu&ccedil;&atilde;o de Celulite:</strong> Ingredientes ativos trabalham para suavizar a apar&ecirc;ncia de "casca de laranja", melhorando a textura vis&iacute;vel da pele.</p>
+ <p>Cellulite is a <strong>microcirculation problem</strong> &mdash; a breakdown of the fibroblast cells that hold your skin's\support structure together. When those cells weaken (and they start weakening as early as age 22), fat pushes through loose connective tissue and creates that frustrating "cottage cheese" look on thighs, butt and belly.</p>
 
-    <p><strong>3. Hidrata&ccedil;&atilde;o Intensa:</strong> A manteiga de cupua&ccedil;u, nativa da Amaz&ocirc;nia, fornece uma hidrata&ccedil;&atilde;o que dura 48 horas, mantendo a pele macia e nutrida.</p>
+ <p>Regular creams? They never reach the fibroblasts. They sit on the surface of your skin, smell nice for 30 minutes, and evaporate.</p>
 
-    <div class="highlight-box">
-      <h3>O que as usu&aacute;rias est&atilde;o dizendo?</h3>
-      <p>Mais de 50 pessoas compraram este m&ecirc;s. Confira os depoimentos reais abaixo.</p>
-    </div>
+ <p>That's why nothing worked.<br>That's why you gave up.<br>That's why you thought something was wrong with <em>you</em>.</p>
 
-    <div class="testimonial">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="text">"Estou usando h&aacute; 3 semanas e a diferen&ccedil;a &eacute; vis&iacute;vel. Minhas coxas est&atilde;o muito mais lisas e firmes. Melhor investimento que fiz pra minha pele."</p>
-      <p class="author">Amanda R. &mdash; Miami, FL</p>
-      <p class="verified">&#10003; Compra verificada</p>
-    </div>
+ <div class="stats-row">
+ <div class="stat-card">
+ <span class="number">93%</span>
+ <span class="label">Firmer skin</span>
+ </div>
+ <div class="stat-card">
+ <span class="number">87%</span>
+ <span class="label">Less cellulite</span>
+ </div>
+ <div class="stat-card">
+ <span class="number">15</span>
+ <span class="label">Days to see it</span>
+ </div>
+ </div>
 
-    <div class="testimonial">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="text">"J&aacute; testei dezenas de cremes anti-celulite e este &eacute; o primeiro que realmente entrega resultado. A textura da minha pele melhorou muito, especialmente nos bra&ccedil;os e barriga."</p>
-      <p class="author">Carolina M. &mdash; New York, NY</p>
-      <p class="verified">&#10003; Compra verificada</p>
-    </div>
+ <h2>Enter: The Brazilian "Bum Bum" Ritual</h2>
 
-    <h2>Mas Ser&aacute; que Funciona para Voc&ecirc;?</h2>
+ <p>Deep in the Amazon rainforest, women have been using a ritual built around <strong>six native fruits</strong> to reshape their bodies for generations: <em>cupua&ccedil;u</em>, <em>a&ccedil;a&iacute;</em>, <em>Brazil nut</em>, <em>buriti</em>, <em>Amazonian coffee</em>, and <em>guaran&aacute;</em>.</p>
 
-    <p>Cada pele &eacute; diferente, e os resultados podem variar dependendo do seu tipo de pele, grau de celulite e h&aacute;bitos di&aacute;rios.</p>
+ <p>A small American lab spent 3 years figuring out how to concentrate these six ingredients into a single cream &mdash; at the exact scientifically-proven dose &mdash; without losing any potency.</p>
 
-    <p>&Eacute; por isso que a equipe por tr&aacute;s do Brazilian Body Firming Cream desenvolveu um <strong>quiz r&aacute;pido e gratuito</strong> que analisa seu perfil &uacute;nico e revela se este creme &eacute; ideal para o seu caso espec&iacute;fico.</p>
+ <p>The result is a product called <strong>Its Brazilian Bum Bum Cream</strong>. And the before-and-after photos coming out of it are the reason dermatologists are furious.</p>
 
-    <div class="highlight-box">
-      <h3>&#128269; Descubra Seu Perfil de Pele</h3>
-      <p>Responda 8 perguntas r&aacute;pidas e receba uma an&aacute;lise personalizada com recomenda&ccedil;&otilde;es para o seu tipo de pele.</p>
-    </div>
+ <!-- Ingredient image placeholder (swap img/AMAZON_IMG_INGREDIENTS.jpeg) -->
+ <div style="width:100%; border-radius: 20px; overflow:hidden; margin:24px 0; box-shadow: var(--shadow-md); background: linear-gradient(135deg, #FFF5EB, #FFEEDB);">
+ <img src="img/AMAZON_IMG_INGREDIENTS.jpeg" alt="Amazonian Coffee, Brazil Nut Oil, Cupua&ccedil;u Extract" style="width:100%; height:auto; display:block;" onerror="this.style.display='none';">
+ </div>
 
-    <a href="/quiz" class="cta-btn">
-      FAZER O QUIZ GRATUITO &rarr;
-    </a>
-    <p class="cta-sub">Leva menos de 2 minutos &bull; 100% gratuito &bull; Resultado imediato</p>
+ <blockquote>
+ "What impressed us wasn't the marketing. It was the ingredients. Amazonian coffee extract, Brazil nut oil and cupua&ccedil;u in the same formula &mdash; at clinical doses &mdash; is something we'd only seen in dermatologist-dispensed products costing 10x more."
+ <cite>&mdash; Independent Dermatology Panel, 2025</cite>
+ </blockquote>
 
-    <div class="testimonial">
-      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="text">"Fiz o quiz, descobri que meu tipo de celulite era grau 2 e come&ccedil;ei a usar seguindo as recomenda&ccedil;&otilde;es. Em 2 semanas, meu marido j&aacute; notou a diferen&ccedil;a!"</p>
-      <p class="author">Juliana S. &mdash; Los Angeles, CA</p>
-      <p class="verified">&#10003; Compra verificada</p>
-    </div>
+ <p>The cream works on <em>three levels at the same time</em>:</p>
 
-    <a href="/quiz" class="cta-btn" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: 0 4px 20px rgba(200,149,108,0.35);">
-      COME&Ccedil;AR MINHA AN&Aacute;LISE GRATUITA
-    </a>
-    <p class="cta-sub">Estoque limitado &bull; Oferta especial para quem completar o quiz</p>
+ <p><strong>1. It activates your fibroblasts.</strong> These are the cells that rebuild your skin's support matrix. When they wake up, your skin gets firmer and tighter from the inside out.</p>
 
-  </article>
+ <p><strong>2. It creates an anti-aging barrier.</strong> A protective shield that stops future elasticity loss &mdash; so you're not fighting this same battle again next year.</p>
 
-  <!-- Footer simples -->
-  <footer style="text-align:center; padding:32px 20px; font-size:12px; color:#999; border-top:1px solid #E8DDD3; margin-top:40px;">
-    <p>Este artigo &eacute; um an&uacute;ncio publicit&aacute;rio. Os resultados podem variar de pessoa para pessoa.</p>
-    <p style="margin-top:8px;">&copy; 2026 BumbumCream. Todos os direitos reservados.</p>
-    <p style="margin-top:8px;">
-      <a href="#" style="color:#999; text-decoration:underline;">Pol&iacute;tica de Privacidade</a> &bull;
-      <a href="#" style="color:#999; text-decoration:underline;">Termos de Uso</a>
-    </p>
-  </footer>
+ <p><strong>3. It fills the "gaps" that cause sagging.</strong> Brazilian formulators call this the <em>"Biological Cement Effect"</em> &mdash; the ingredients literally fill the micro-gaps inside your skin where cellulite dimples form.</p>
+
+ <p>All of this using ingredients imported directly from Brazil, with production 100 based in the USA &but; and with FDA, GMP, ISO and Made-in-USA certifications.</p>
+
+ <div class="highlight-box" style="background: linear-gradient(135deg, #1A1A1A, #2D2D2D); border-color: var(--accent);">
+ <h3 style="color:#FFD700;">What This Cream Does (In Plain English)</h3>
+ <ul style="list-style:none; padding:0; margin:0; text-align:left; max-width:500px; margin:0 auto;">
+ <li style="color:white; padding:8px 0; font-size:16px;">&#9989; <strong>OBLITERATES CELLULITE &amp; STRETCH MARKS FASTER</strong> &mdash; stubborn dimples don't stand a chance.</li>
+ <li style="color:white; padding:8px 0; font-size:16px;">&#9989; <strong>VISIBLY FIRMER, TIGHTER SKIN IN RECORD TIME</strong> &mdash; not a moisturizer, a body transformation.</li>
+ <li style="color:white; padding:8px 0; font-size:16px;">&#9989; <strong>INTENSE HYDRATION THAT ABSORBS INSTANTLY</strong> &mdash; no grease, no stickiness, no ruined clothes.</li>
+ <li style="color:white; padding:8px 0; font-size:16px;">&#9989; <strong>LONG-TERM TRANSFORMATION, NOT A QUICK FIX</strong> &mdash; consistency is the secret.</li>
+ </ul>
+ </div>
+
+ <div class="highlight-box">
+ <h3>&#127469;&#127479; Real Women. Real Results. 15 Days.</h3>
+ <p>Over 41,000 jars sold in the U.S. since launch. 4.9 stars across 2,400+ verified reviews. Featured in beauty columns from Miami to Los Angeles.</p>
+ </div>
+
+ <div class="testimonial">
+ <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ <p class="text">"I'm 38, two kids, and I'd given up. Fifteen days with this Brazilian cream and my husband literally asked what I did. My thighs look like they did in college. I cried in the bathroom."</p>
+ <p class="author">Amanda R. &mdash; Miami, FL</p>
+ <p class="verified">&#10003; Verified purchase</p>
+ </div>
+
+ <div class="testimonial">
+ <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ <p class="text">"I spent $4,220 on laser treatments last year. This Brazilian jar did more in 2 weeks than six laser sessions did in six months. I feel scammed &mdash; by the whole industry."</p>
+ <p class="author">Carolina M. &mdash; New York, NY</p>
+ <p class="verified">&#10003; Verified purchase</p>
+ </div>
+
+ <h2>But Will It Work For <em>Your</em? Body?</h2>
+
+ <p>Every woman's cellulite is a little different. Grade 1 is light dimpling, only visible when you pinch. Grade 3 is deeper dimples even when you stand still. And the amount of cream you need, how often you apply it, and how fast you'll see results &mdash; all depend on your personal profile.</p>
+
+ <p>That's why <strong>Its Brazilian</strong> built a <strong>free 60-second skin assessment</strong> that tells you exactly:</p>
+
+ <p>&#10003; Your cellulite grade (1, 2, or 3)<br>
+ &#10003; How many days until you'll see visible results<br>
+ &#10003; The exact routine for <em>your</em> skin type<br>
+ &#10003; Whether this cream is even right for you (it isn't for everyone)</p>
+
+ <div class="highlight-box">
+ <h3>&#128269; Take The Free Skin Assessment Now</h3>
+ <p>8 quick questions. Personalized recommendation. 100% private. Those who complete the quiz unlock an exclusive discount not available anywhere else.</p>
+ </div>
+
+ <a href="quiz.html" class="cta-btn">
+ FREE TEST IN LESS THAN 30 SECONDS &rarr;
+ </a>
+ <p class="cta-sub">100% free &bull; Instant result &bull; No credit card required</p>
+
+ <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin: 8px 0 28px; font-size:13px; color:var(--text-muted);">
+ <span>&#128293; <strong id="boughtToday" style="color:var(--accent);">312</strong> women bought today</span>
+ <span>&bull;</span>
+ <span>&#128100; <strong id="readersCta" style="color:var(--accent);">1,247</strong> reading this now</span>
+ <span>&bull;</span>
+ <span>&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 (2,412 reviews)</span>
+ </div>
+ <script>
+ (function(){
+ var bt = document.getElementById('boughtToday');
+ var rc = document.getElementById('readersCta');
+ var b = 280 + Math.floor(Math.random()*60);
+ function bump(){
+ // only increment bought-today (it resets at midnight, feels realistic)
+ if (Math.random() > 0.45) b++;
+ bt.textContent = b.toLocaleString('en-US');
+ var rv = document.getElementById('readersCount');
+ if (rv) rc.textContent = rv.textContent;
+ setTimeout(bump, 4000 + Math.random()*5000);
+ }
+ bump();
+ })();
+ </script>
+
+ <div class="testimonial">
+ <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ <p class="text">"Took the quiz, followed the routine it gave me, and by day 12 my husband noticed before I did. I'm 46 and my body hasn't looked this tight since my 20s."</p>
+ <p class="author">Juliana S. &mdash; Los Angeles, CA</p>
+ <p class="verified">&#10003; Verified purchase</p>
+ </div>
+
+ <h2>A Word of Caution Before You Click</h2>
+
+ <p>This article isn't for everyone. If you're happy with your body and don't care about cellulite or stretch marks, close this page now.</p>
+
+ <p>But if you've been silently struggling &mdash; hiding under sarongs at the beach, avoiding shorts in the summer, dodging the camera every time someone pulls out their phone &mdash; please understand something:</p>
+
+ <p>You are <strong>one free quiz</strong> away from the same formula Brazilian women have been quietly using for generations.</p>
+
+ <p>Stock is limited. The exclusive discount unlocked by the quiz is capped at a set number of jars per day. Once today's batch is gone, the price goes back to full retail.</p>
+
+ <a href="quiz.html" class="cta-btn" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: 0 4px 20px rgba(200,149,108,0.35);">
+ FREE TEST IN LESS THAN 30 SECONDS &rarr;
+ </a>
+ <p class="cta-sub">Limited stock &bull; Quiz-only pricing &bull; 60-day money-back guarantee</p>
+
+ <!-- Trust badges strip -->
+ <div style="display:flex; justify-content:center; gap:24px; padding:24px 0; flex-wrap:wrap; border-top:1px solid var(--border); border-bottom:1px solid var(--border); margin-top:32px;">
+ <div style="text-align:center; font-size:11px; color:var(--text-muted);">
+ <div style="font-size:24px;">&#128165;</div>
+ FDA<br>Approved
+ </div>
+ <div style="text-align:center; font-size:11px; color:var(--text-muted);">
+ <div style="font-size:24px;">&#9989;</div>
+ GMP<br>Certified
+ </div>
+ <div style="text-align:center; font-size:11px; color:var(--text-muted);">
+ <div style="font-size:24px;">&#128104;&#8205;&#9877;&#65039;</div>
+ PBA<br>Member
+ </div>
+ <div style="text-align:center; font-size:11px; color:var(--text-muted);">
+ <div style="font-size:24px;">&#128176;</div>
+ IBA<br>Certified
+ </div>
+ <div style="text-align:center; font-size:11px; color:var(--text-muted);">
+ <div style="font-size:24px;">&#127758;</div>
+ ISO<br>27017
+ </div>
+ <div style="text-align:center; font-size:11px; color:var(--text-muted);">
+ <div style="font-size:24px;">&#127482;&#127480;</div>
+ Made<br>in USA
+ </div>
+ </div>
+
+</article>
+
+<!-- Footer -->
+<footer style="text-align:center; padding:32px 20px; font-size:12px; color:#999; border-top:1px solid #E8DDD3; margin-top:40px;">
+ <p>This article is an advertorial. Individual results may vary. The statements above have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure or prevent any disease.</p>
+ <p style="margin-top:8px;">&copy; 2026 Its Brazilian. All rights reserved.</p>
+ <p style="margin-top:8px;">
+ <a href="#" style="color:#999; text-decoration:underline;">Privacy Policy</a> &bull;
+ <a href="#" style="color:#999; text-decoration:underline;">Terms of Use</a>
+ </p>
+</footer>
 
 </body>
 </html>
