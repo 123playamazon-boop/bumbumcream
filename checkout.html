@@ -91,14 +91,7 @@
   .pack-after-btn{font-size:11px;color:#666;text-align:center;margin-top:10px;letter-spacing:.4px}
   .pack-after-btn strong{color:#a33c00}
 
-  /* ORDER BUMP */
-  .bump-box{background:#fff8ed;border:2px dashed #e5b700;border-radius:14px;padding:18px;margin:22px 0;display:flex;gap:14px;align-items:center}
-  .bump-box .bump-check{width:24px;height:24px;flex-shrink:0;accent-color:#a33c00;cursor:pointer}
-  .bump-box .bump-content{flex:1;font-size:14px;color:#333;line-height:1.5}
-  .bump-box .bump-content strong{color:#a33c00}
-  .bump-box .bump-price{font-family:'Playfair Display',serif;font-weight:900;font-size:18px;color:#2e7d32;white-space:nowrap}
-
-  .testi-section{margin:36px 0 30px}
+.testi-section{margin:36px 0 30px}
   .testi-title{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:20px;font-weight:900}
   .testimonials{display:grid;grid-template-columns:1fr;gap:14px}
   @media(min-width:640px){.testimonials{grid-template-columns:1fr 1fr 1fr}}
@@ -298,16 +291,6 @@
 
   </div>
 
-  <!-- ORDER BUMP — LEAVE-IN SPRAY -->
-  <div class="bump-box">
-    <input type="checkbox" class="bump-check" id="bumpCheck">
-    <div class="bump-content">
-      <strong>+ ADD Leave-In Spray 2-Pack — $69.99</strong><br>
-      <span style="color:#666">The perfect companion for your cream routine. Boosts hydration + locks in actives for stronger results.</span>
-    </div>
-    <div class="bump-price">+$69.99</div>
-  </div>
-
   <!-- TESTIMONIALS -->
   <div class="testi-section">
     <h2 class="testi-title">What users with similar profiles report</h2>
@@ -483,22 +466,8 @@
     // else default: 3-jar already has recommended class
   })();
 
-  // ORDER BUMP + QUIZ PARAMS TO STRIPE
+  // Attach quiz answers to Stripe links as client_reference_id
   (function(){
-    const bump = document.getElementById('bumpCheck');
-    const BUMP_LINK = 'https://buy.stripe.com/6oU00jdCf1Up9Lx7kpfMA0m';
-    document.querySelectorAll('.buy-btn').forEach(btn => {
-      btn.addEventListener('click', function(e){
-        if(bump && bump.checked){
-          e.preventDefault();
-          // Open bump first, then main pack in new tab
-          window.open(BUMP_LINK, '_blank');
-          setTimeout(() => { window.location.href = btn.getAttribute('href'); }, 350);
-        }
-      });
-    });
-
-    // Attach quiz answers to Stripe links as client_reference_id
     const qs = window.location.search;
     if(qs){
       document.querySelectorAll('.buy-btn').forEach(a => {
