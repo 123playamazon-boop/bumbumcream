@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Personalized Analysis — BumBum Cream</title>
+<meta name="description" content="Personalized skin firmness and texture analysis based on your quiz responses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#faf7f2;color:#111;font-family:Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 70px}
+  .complete-bar{background:linear-gradient(90deg,#2e7d32,#4caf50);color:#fff;text-align:center;padding:10px 16px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+  .complete-bar .pulse{display:inline-block;width:8px;height:8px;background:#fff;border-radius:50%;margin-right:8px;vertical-align:middle;animation:pulse 1.2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+  .hero-head{text-align:center;padding:32px 0 18px}
+  .match-badge{display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:7px 18px;border-radius:30px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:16px;box-shadow:0 3px 10px rgba(46,125,50,.25)}
+  h1.headline{font-family:'Playfair Display',serif;font-size:30px;line-height:1.18;font-weight:900;margin-bottom:12px;color:#111}
+  @media(min-width:640px){h1.headline{font-size:38px}}
+  h1.headline span{color:#a33c00}
+  .subhead{color:#555;font-size:16px;line-height:1.55;max-width:580px;margin:0 auto}
+  canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:9999}
+
+  .diagnostic{margin:30px 0 26px}
+  .diagnostic-title{font-family:'Playfair Display',serif;font-size:22px;text-align:center;margin-bottom:6px;font-weight:900}
+  .diagnostic-sub{text-align:center;color:#777;font-size:13px;margin-bottom:20px;letter-spacing:.5px}
+  .profile-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:640px){.profile-grid{grid-template-columns:1fr 1fr}}
+  .profile-item{background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;gap:14px;align-items:flex-start}
+  .profile-item .icon{flex-shrink:0;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#f4efe6,#fff0e6);display:flex;align-items:center;justify-content:center;font-size:20px}
+  .profile-item .pcontent{flex:1}
+  .profile-item .plabel{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:4px}
+  .profile-item .pvalue{font-family:'Playfair Display',serif;font-size:16px;color:#111;font-weight:700;line-height:1.3;margin-bottom:4px}
+  .profile-item .pnote{font-size:12px;color:#666;line-height:1.45}
+
+  .section{margin:36px 0}
+  .section h2{font-family:'Playfair Display',serif;font-size:24px;line-height:1.25;font-weight:900;margin-bottom:14px;color:#111}
+  .section h2 span{color:#a33c00}
+  .section p{font-size:16px;line-height:1.65;color:#333;margin-bottom:14px}
+  .section p strong{color:#111}
+  .key-point{background:#fff0e6;border-left:4px solid #a33c00;padding:14px 18px;border-radius:4px;font-size:15px;line-height:1.55;color:#333;margin-top:16px}
+  .amazon-block{background:linear-gradient(135deg,#fff 0%,#fffaf4 100%);padding:26px 24px;border-radius:14px;margin:30px 0;border:1px solid #f0e4d6}
+  .amazon-block h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;margin-bottom:14px}
+  .amazon-block p{font-size:15px;line-height:1.65;color:#333;margin-bottom:12px}
+  .ingredient-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .ing-chip{background:#fff;padding:10px 14px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.04);flex:1;min-width:130px;text-align:center}
+  .ing-chip .ename{font-family:'Playfair Display',serif;font-weight:800;color:#a33c00;font-size:14px}
+  .ing-chip .edesc{font-size:11px;color:#777;margin-top:2px}
+
+  .product-intro{background:#fff;border-radius:16px;padding:24px;margin:26px 0;box-shadow:0 3px 14px rgba(0,0,0,.06);display:grid;grid-template-columns:1fr;gap:18px;align-items:center;text-align:center}
+  @media(min-width:640px){.product-intro{grid-template-columns:180px 1fr;text-align:left;gap:22px}}
+  .product-intro .pimg{width:160px;height:160px;margin:0 auto;background:#fafafa;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  @media(min-width:640px){.product-intro .pimg{width:180px;height:180px;margin:0}}
+  .product-intro .pimg img{width:100%;height:100%;object-fit:contain}
+  .product-intro h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:6px;font-weight:900}
+  .product-intro .p-tag{display:inline-block;background:#e7f5e7;color:#2e7d32;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.5px;margin-bottom:10px;text-transform:uppercase}
+  .product-intro p{font-size:14px;color:#555;line-height:1.55;margin-bottom:8px}
+
+  .paths-intro{text-align:center;margin:10px 0 18px}
+  .paths-intro h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;margin-bottom:8px}
+  .paths-intro p{color:#666;font-size:14px}
+  .paths-grid{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:640px){.paths-grid{grid-template-columns:1fr 1fr}}
+  .path-card{background:#fff;border:2px solid #eee;border-radius:14px;padding:22px;text-align:center}
+  .path-card.path-b{border-color:#2e7d32;background:linear-gradient(180deg,#fff,#f5fbf5)}
+  .path-card .path-label{display:inline-block;font-size:11px;color:#888;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .path-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;margin-bottom:12px;line-height:1.3}
+  .path-card ul{text-align:left;list-style:none;padding:0}
+  .path-card li{padding:7px 0 7px 26px;position:relative;font-size:14px;color:#444;line-height:1.45;border-bottom:1px solid rgba(0,0,0,.04)}
+  .path-card li:last-child{border-bottom:none}
+  .path-card.path-b li::before{content:"✓";position:absolute;left:0;top:7px;color:#2e7d32;font-weight:800}
+  .path-card:not(.path-b) li::before{content:"✕";position:absolute;left:0;top:7px;color:#cc0000;font-weight:800}
+
+  .reports{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+  @media(min-width:640px){.reports{grid-template-columns:1fr 1fr 1fr}}
+  .report{background:#fff;border-radius:12px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .report .rq{font-size:14px;line-height:1.55;color:#333;font-style:italic;margin-bottom:10px}
+  .report .rmeta{font-size:12px;color:#666}
+  .report .rmeta strong{color:#111}
+  .compliance-note{font-size:11px;color:#888;text-align:center;font-style:italic;margin-top:14px;line-height:1.5}
+
+  .disclaimer-block{font-size:12px;color:#777;line-height:1.55;margin-top:24px;padding:16px 18px;background:#f5f5f5;border-radius:10px}
+  .disclaimer-block strong{color:#111}
+
+  .final-cta{text-align:center;padding:36px 24px;background:linear-gradient(135deg,#fff 0%,#fff0e6 100%);border-radius:20px;margin:32px 0 16px;border:2px solid #f5c9ac}
+  .final-cta .cta-preline{font-size:13px;color:#666;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:20px 40px;font-size:16px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;text-decoration:none;border-radius:50px;box-shadow:0 8px 22px rgba(46,125,50,.35);animation:ctaPulse 1.6s infinite}
+  @keyframes ctaPulse{0%,100%{transform:scale(1);box-shadow:0 8px 22px rgba(46,125,50,.35)}50%{transform:scale(1.03);box-shadow:0 12px 30px rgba(46,125,50,.5)}}
+  .cta-subline{font-size:12px;color:#888;margin-top:12px;letter-spacing:.5px}
+  .trust-icons{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:20px;font-size:11px;color:#666}
+  .trust-icons span{display:inline-flex;align-items:center;gap:4px}
+
+  /* STICKY MOBILE CTA */
+  .sticky-mobile-cta{display:none;position:fixed;left:0;right:0;bottom:0;z-index:9997;background:rgba(255,255,255,.98);border-top:1px solid #e5e5e5;padding:10px 14px env(safe-area-inset-bottom) 10px;box-shadow:0 -4px 14px rgba(0,0,0,.08);backdrop-filter:blur(10px)}
+  .sticky-mobile-cta a{display:block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;font-family:Roboto,sans-serif;font-size:15px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;text-align:center;padding:15px 10px;border-radius:8px;box-shadow:0 3px 10px rgba(46,125,50,.4);animation:stickyPulseG 1.6s infinite}
+  @keyframes stickyPulseG{0%,100%{box-shadow:0 3px 10px rgba(46,125,50,.4)}50%{box-shadow:0 3px 18px rgba(46,125,50,.65)}}
+  .sticky-mobile-cta .tiny{font-size:10.5px;color:#777;text-align:center;margin-top:4px}
+  @media(max-width:760px){.sticky-mobile-cta{display:block}body{padding-bottom:90px}}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="complete-bar"><span class="pulse"></span>Analysis complete · Personal report ready</div>
+
+<div class="wrap">
+
+  <header class="hero-head">
+    <div class="match-badge">✓ 96% Profile Match</div>
+    <h1 class="headline">Your results indicate a pattern commonly seen in <span id="h1-span">skin-laxity &amp; firmness signaling</span></h1>
+    <p class="subhead">Based on behavioral and dermatological pattern data observed across <strong>62,000+</strong> U.S. women who completed this assessment. Your profile has been matched to the nearest responder cluster identified in the Brazilian field-study data.</p>
+  </header>
+
+  <div class="diagnostic">
+    <h2 class="diagnostic-title">Your Personal Skin Profile</h2>
+    <div class="diagnostic-sub">Key patterns from your 8 responses</div>
+    <div class="profile-grid">
+
+      <div class="profile-item">
+        <div class="icon">🎯</div>
+        <div class="pcontent">
+          <div class="plabel">Primary Goal</div>
+          <div class="pvalue" id="p-goal">Firmer, lifted skin</div>
+          <div class="pnote" id="n-goal">Best achieved when paired with active microcirculation support.</div>
+        </div>
+      </div>
+
+      <div class="profile-item">
+        <div class="icon">📍</div>
+        <div class="pcontent">
+          <div class="plabel">Focus Area</div>
+          <div class="pvalue" id="p-area">Butt &amp; back of thighs</div>
+          <div class="pnote" id="n-area">Common zone for cellulite; responds well to deep-firming actives.</div>
+        </div>
+      </div>
+
+      <div class="profile-item">
+        <div class="icon">✨</div>
+        <div class="pcontent">
+          <div class="plabel">Skin Profile</div>
+          <div class="pvalue" id="p-skin">Loose &amp; less elastic</div>
+          <div class="pnote" id="n-skin">Tied to collagen decline common after 35; responds to elasticity-support ingredients.</div>
+        </div>
+      </div>
+
+      <div class="profile-item">
+        <div class="icon">🔄</div>
+        <div class="pcontent">
+          <div class="plabel">Behavioral History</div>
+          <div class="pvalue" id="p-prior">Tried multiple lotions without success</div>
+          <div class="pnote" id="n-prior">Typical for responder-group profiles — surface creams don't reach the deeper layers.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Why this pattern <span>keeps showing up</span></h2>
+    <p>Your profile aligns with what dermatologists describe as <strong>"skin signaling fatigue"</strong> — a pattern commonly observed in women after age 35, especially after pregnancies or weight changes.</p>
+    <p>In simple terms: the skin's natural mechanisms for producing collagen, maintaining elasticity, and burning subcutaneous fat start slowing down. Your skin isn't "broken" — the signaling that once kept it firm has quieted.</p>
+    <p>When those signals fade, three things typically follow: loss of firmness (especially on butt, belly, and thighs), cellulite dimpling, and stretch marks that don't fade on their own.</p>
+    <div class="key-point">This is why generic drugstore lotions produce limited results for women in this profile. The issue isn't hydration — it's signaling. Surface-level creams never reach the layers where the change needs to happen.</div>
+  </div>
+
+  <div class="amazon-block">
+    <h2>The Brazilian dermatology connection</h2>
+    <p>For generations, Brazilian coastal women have built their body-care routines around three Amazonian ingredients: <em>guaraná, cupuaçu butter, and açaí oil</em>.</p>
+    <p>Field research has noted that these populations tend to show later-onset skin-laxity and firmer body composition than populations relying on standard U.S. or European lotions — a finding researchers associate with the unique polyphenol, methylxanthine, and fatty-acid profile of these plants.</p>
+    <p>These compounds are commonly studied for their role in supporting <em>microcirculation</em>, <em>dermal elasticity</em>, and <em>oxidative-stress defense</em>.</p>
+    <div class="ingredient-row">
+      <div class="ing-chip"><div class="ename">Guaraná</div><div class="edesc">Methylxanthines</div></div>
+      <div class="ing-chip"><div class="ename">Cupuaçu</div><div class="edesc">Elasticity butter</div></div>
+      <div class="ing-chip"><div class="ename">Açaí Oil</div><div class="edesc">Antioxidants</div></div>
+      <div class="ing-chip"><div class="ename">Amazonian</div><div class="edesc">Direct sourcing</div></div>
+    </div>
+  </div>
+
+  <div class="product-intro">
+    <div class="pimg"><img src="img/product_jar.jpg" alt="BumBum Cream jar" onerror="this.replaceWith(document.createTextNode('BUMBUM'))"></div>
+    <div>
+      <span class="p-tag">Matched to your profile</span>
+      <h3>BumBum Cream</h3>
+      <p>A Brazilian body-firming formula that combines <strong>wild Amazonian guaraná, cupuaçu butter, and açaí oil</strong> — targeting skin firmness, cellulite, and stretch marks in a single daily routine.</p>
+      <p>Designed around the 3-ingredient pattern observed in the Brazilian responder group.</p>
+      <p style="font-size:12px;color:#888;margin-top:10px">Non-GMO · Cruelty-Free · Made in USA · Amazonian-Sourced</p>
+    </div>
+  </div>
+
+  <!-- MID-PAGE CTA -->
+  <div class="final-cta" style="margin-top:20px">
+    <div class="cta-preline">Your personalized recommendation</div>
+    <div id="rec-badge-top" style="display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:700;margin-bottom:18px;box-shadow:0 3px 12px rgba(46,125,50,.3)">✓ Your profile matches the <strong>3-jar · 90-day</strong> protocol</div>
+    <a href="checkout.html" class="cta-btn" id="ctaBtnTop">Continue With My Recommended Plan →</a>
+    <div class="cta-subline">60-day money-back guarantee · U.S. shipping included</div>
+  </div>
+
+  <div class="paths-intro">
+    <h2>From here, you have two paths</h2>
+    <p>Your next step is your choice. Here's what each path typically looks like.</p>
+  </div>
+
+  <div class="paths-grid">
+    <div class="path-card">
+      <div class="path-label">Option A</div>
+      <h3>Keep trying generic creams</h3>
+      <ul>
+        <li>Continue using drugstore lotions with surface-level hydration</li>
+        <li>No active firming, no deep-layer signaling support</li>
+        <li>Wait and hope the pattern reverses on its own</li>
+        <li>Consider $8,000–$15,000 procedures as the next step</li>
+      </ul>
+    </div>
+    <div class="path-card path-b">
+      <div class="path-label">Option B</div>
+      <h3>Give your skin profile structured support</h3>
+      <ul>
+        <li>Use a formula matched to responder-group patterns</li>
+        <li>Support firmness with the 3-ingredient Brazilian blend</li>
+        <li>Start the 60- or 90-day protocol used in the assessment data</li>
+        <li>Backed by a 60-day money-back guarantee</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What users in similar profiles report</h2>
+    <div class="reports">
+      <div class="report">
+        <div class="rq">"Within about 10 days the dimpling looked softer. I lost track of how many creams I'd tried. This was the first one that felt like it was actually doing something."</div>
+        <div class="rmeta"><strong>Rachel M.</strong> · 43 · Austin, TX</div>
+      </div>
+      <div class="report">
+        <div class="rq">"I'd tried everything for my C-section scar and stretch marks. Two months in and the difference is visible. My daughter pointed it out before I said anything."</div>
+        <div class="rmeta"><strong>Jennifer L.</strong> · 38 · San Diego, CA</div>
+      </div>
+      <div class="report">
+        <div class="rq">"I was scheduled for a BBL. I canceled. Two months of this cream and I'm shocked at the lift. Some individuals may respond differently."</div>
+        <div class="rmeta"><strong>Amanda K.</strong> · 45 · Orlando, FL</div>
+      </div>
+    </div>
+    <div class="compliance-note">Customer submissions above reflect voluntary reports — individual results vary, and outcomes are not guaranteed.</div>
+  </div>
+
+  <div class="disclaimer-block">
+    <strong>Important:</strong> Statements about cosmetic ingredients have not been evaluated by the U.S. Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease or condition. This assessment does not constitute medical advice. Individual results vary and are not guaranteed. Always consult a qualified healthcare provider before starting any new skincare regimen — especially if you are pregnant, nursing, or have an existing skin condition.
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta">
+    <div class="cta-preline">Your personalized recommendation</div>
+    <div id="rec-badge" style="display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:700;margin-bottom:18px;box-shadow:0 3px 12px rgba(46,125,50,.3)">✓ Your profile matches the <strong>3-jar · 90-day</strong> protocol</div>
+    <a href="checkout.html" class="cta-btn" id="ctaBtn">Continue With My Recommended Plan →</a>
+    <div class="cta-subline">60-day money-back guarantee · U.S. shipping included</div>
+    <div class="trust-icons">
+      <span>🔒 SSL Secure</span><span>🌿 Cruelty-Free</span><span>🏭 Made in USA</span><span>📦 Ships from USA</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-mobile-cta">
+  <a href="checkout.html" id="stickyMobCta">Continue With My Recommended Plan →</a>
+  <div class="tiny">60-day risk-free · held for your profile</div>
+</div>
+
+<script>
+  // PERSONALIZATION
+  (function(){
+    const params = new URLSearchParams(window.location.search);
+    const a = {
+      q1: params.get('q1') || 'firm',
+      q2: params.get('q2') || 'butt',
+      q3: params.get('q3') || 'lotions',
+      q4: params.get('q4') || 'postbaby',
+      q5: params.get('q5') || 'loose',
+      q6: params.get('q6') || 'medium',
+      q7: params.get('q7') || '35_44',
+      q8: params.get('q8') || 'somewhat',
+      recommended: params.get('recommended') || '3'
+    };
+
+    // Headline by goal
+    const h1 = {
+      firm: 'skin firmness &amp; elasticity signaling fatigue',
+      cellulite: 'cellulite &amp; microcirculation pattern',
+      stretch: 'stretch-mark &amp; elasticity-recovery pattern',
+      overall: 'overall skin-aging &amp; firmness signaling'
+    };
+    document.getElementById('h1-span').innerHTML = h1[a.q1] || h1.firm;
+
+    // Goal card
+    const goalMap = {
+      firm: ['Firmer, lifted skin','Best achieved when paired with active microcirculation support.'],
+      cellulite: ['Reduce visible cellulite','Profile responds well to methylxanthine-based firming.'],
+      stretch: ['Fade stretch marks','Elasticity-supporting butters help the skin lighten over time.'],
+      overall: ['Overall smoother skin','Whole-profile approach indicated — supports firmness, texture, and tone.']
+    };
+    const goal = goalMap[a.q1] || goalMap.firm;
+    document.getElementById('p-goal').textContent = goal[0];
+    document.getElementById('n-goal').textContent = goal[1];
+
+    // Area
+    const areaMap = {
+      butt: ['Butt &amp; back of thighs','Common zone for cellulite; responds well to deep-firming actives.'],
+      belly: ['Belly &amp; waist','Frequent post-pregnancy / weight-change area; responds to elasticity support.'],
+      legs: ['Front of thighs &amp; legs','Benefits from daily microcirculation stimulation.'],
+      arms: ['Arms, shoulders &amp; texture','Overall skin-texture improvement is a whole-profile response.']
+    };
+    const area = areaMap[a.q2] || areaMap.butt;
+    document.getElementById('p-area').innerHTML = area[0];
+    document.getElementById('n-area').innerHTML = area[1];
+
+    // Skin feel
+    const skinMap = {
+      dry: ['Dry, dull, or papery','Indicates reduced lipid retention — responds fast to cupuaçu-butter based formulas.'],
+      loose: ['Loose &amp; less elastic','Tied to collagen decline common after 35; responds to elasticity-support ingredients.'],
+      dimpled: ['Textured / dimpled','Microcirculation-support ingredients target this pattern directly.'],
+      mixed: ['Mixed-profile skin','Whole-profile blend recommended to address all patterns together.']
+    };
+    const skin = skinMap[a.q5] || skinMap.loose;
+    document.getElementById('p-skin').innerHTML = skin[0];
+    document.getElementById('n-skin').innerHTML = skin[1];
+
+    // Prior
+    const priorMap = {
+      lotions: ['Tried multiple lotions without success','Typical for responder-group profiles — surface creams don\'t reach the deeper layers.'],
+      clinics: ['Dermatology / laser attempts','Suggests the issue is signaling, not surface — responds better to ingredient-based daily care.'],
+      surgery: ['Considered invasive procedures','The profile this formula was designed for — non-invasive alternative.'],
+      first_time: ['First structured attempt','Advantage: starting with a profile-matched protocol from day one.']
+    };
+    const prior = priorMap[a.q3] || priorMap.lotions;
+    document.getElementById('p-prior').textContent = prior[0];
+    document.getElementById('n-prior').textContent = prior[1];
+
+    // Recommended badge
+    let badgeHtml;
+    if(a.recommended === '6'){
+      badgeHtml = '⭐ Your profile matches the <strong>6-jar · 6-month</strong> complete transformation protocol';
+    } else if(a.recommended === '2'){
+      badgeHtml = '✓ Your profile matches the <strong>2-jar · 60-day</strong> starter protocol';
+    } else {
+      badgeHtml = '⭐ Your profile matches the <strong>3-jar · 90-day</strong> protocol';
+    }
+    const rec = document.getElementById('rec-badge');
+    const recTop = document.getElementById('rec-badge-top');
+    if(rec) rec.innerHTML = badgeHtml;
+    if(recTop) recTop.innerHTML = badgeHtml;
+
+    // Forward querystring to all CTAs
+    const qs = window.location.search;
+    ['ctaBtn','ctaBtnTop','stickyMobCta'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el && qs) el.href = 'checkout.html' + qs;
+    });
+  })();
+
+  // CONFETTI
+  (function(){
+    const c = document.getElementById('confetti'); const ctx = c.getContext('2d');
+    function resize(){ c.width = innerWidth; c.height = innerHeight; } resize(); addEventListener('resize', resize);
+    const colors = ['#a33c00','#cc5500','#2e7d32','#4caf50','#e5b700','#ffd98a'];
+    const parts = [];
+    for(let i=0;i<120;i++){ parts.push({x:Math.random()*c.width,y:-20-Math.random()*c.height*0.6,vx:(Math.random()-.5)*3,vy:2+Math.random()*4,s:3+Math.random()*6,c:colors[Math.floor(Math.random()*colors.length)],r:Math.random()*Math.PI,vr:(Math.random()-.5)*.2}); }
+    let stopAt = Date.now() + 4500;
+    function loop(){
+      ctx.clearRect(0,0,c.width,c.height);
+      parts.forEach(p=>{ p.x += p.vx; p.y += p.vy; p.r += p.vr; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6); ctx.restore(); });
+      if(Date.now() < stopAt || parts.some(p=>p.y < c.height+40)) requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+</script>
+
+</body>
+</html>
