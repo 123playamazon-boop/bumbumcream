@@ -100,7 +100,7 @@
   .as-reported{background:#fafafa;border-bottom:1px solid #eee;padding:12px 14px;text-align:center;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
   .as-reported .ar-label{font-size:10.5px;color:#888;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px}
   .as-reported .ar-sources{font-size:12.5px;color:#333;font-style:italic}
-  .as-reported .ar-sources span{margin:0 10px;white-space:nowrap;display:inline-block;font-weight:600;color:#2e4a6b}
+  .as-reported .ar-sources span{margin:0 10px;white-space:nowrap;display:inline-block;font-weight:500;color:#666;cursor:default;pointer-events:none}
 
   /* EMBEDDED MINI-QUIZ */
   .mini-quiz{background:linear-gradient(135deg,#fff6ee 0%,#fff 100%);border:2px solid #cc5500;border-radius:18px;padding:26px 24px;margin:32px 0;box-shadow:0 6px 24px rgba(204,85,0,.12)}
@@ -224,6 +224,14 @@
   .final-reserve .fr-stock{display:inline-block;background:rgba(255,100,100,.15);border:1px solid #cc4444;color:#ff9999;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:16px}
   .final-reserve .fr-cta{display:inline-block;background:#cc0000;color:#fff;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:900;font-size:17px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;padding:20px 36px;border-radius:8px;box-shadow:0 6px 22px rgba(204,0,0,.4);animation:stickyPulse 1.5s infinite}
   .final-reserve .fr-sub{font-size:12px;color:#aaa;margin-top:12px}
+
+  /* Pulse animation on primary CTA to capture attention */
+  @keyframes ctaPulse{
+    0%,100%{box-shadow:0 4px 14px rgba(204,85,0,.35)}
+    50%{box-shadow:0 4px 24px rgba(204,85,0,.6),0 0 0 6px rgba(204,85,0,.08)}
+  }
+  .cta-wrap .cta{animation:ctaPulse 2.4s ease-in-out infinite}
+  .cta-wrap .cta:hover{animation-play-state:paused}
 </style>
 <!-- Newsbreak Pixel -->
 <script>
