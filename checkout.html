@@ -174,6 +174,21 @@
   .exit-modal .exit-no{display:block;text-align:center;color:#999;font-size:12px;background:none;border:none;cursor:pointer;text-decoration:underline;padding:6px;margin:0 auto;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
   .exit-modal .exit-trust{display:flex;gap:10px;justify-content:center;margin-top:14px;font-size:11px;color:#777}
 </style>
+<!-- Newsbreak Pixel -->
+<script>
+!(function(e,n,t,i,p,a,s){e[i]||(((p=e[i]=function(){p.process?p.process.apply(p,arguments):p.queue.push(arguments)}).queue=[]),(pt=+new Date),((a=n.createElement(t)).async=1),(a.src='https://static.newsbreak.com/business/tracking/nbpixel.js?t='+864e5*Math.ceil(new Date/864e5)),(s=n.getElementsByTagName(t)[0]).parentNode.insertBefore(a,s))})(window,document,'script','nbpix'),
+nbpix('init','ID-2032552853944918018'),
+nbpix('event','page_view'),
+nbpix('event','viewed_offer');
+</script>
+<!-- /Newsbreak Pixel -->
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","whxdotwqls");
+clarity("event","viewed_offer");
+clarity("set","funnel_step","viewed_offer");
+</script>
+<!-- /Microsoft Clarity -->
 </head>
 <body>
 
@@ -585,5 +600,29 @@
   })();
 </script>
 
+<script>
+/* Tracking: fire initiate_checkout on Stripe button clicks */
+(function(){
+  var packPrices = {'2': 99, '3': 129, '6': 199};
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var pack = btn.getAttribute('data-pack') || '3';
+        var value = packPrices[pack] || 129;
+        if(typeof nbpix === 'function'){
+          try { nbpix('event','initiate_checkout',{ nb_value: value }); } catch(e) {}
+        }
+        if(typeof clarity === 'function'){
+          try {
+            clarity('event','initiate_checkout');
+            clarity('set','plan_clicked', pack + '-jar');
+            clarity('set','order_value', String(value));
+          } catch(e) {}
+        }
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
