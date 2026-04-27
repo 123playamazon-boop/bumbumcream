@@ -252,11 +252,6 @@ clarity("set","funnel_step","advertorial_view");
 <body>
 
 <!-- TOP URGENCY BAR -->
-<div class="urgency-bar">
-  <span class="urgency-icon">⚠️</span>
-  <strong>HIGH DEMAND:</strong> Brazilian supplier batch critically low · Your profile match is held for
-  <span class="urgency-time" id="urgencyTime">12:00</span>
-</div>
 
 <!-- STATS BAR -->
 <div class="stats-bar">
@@ -277,8 +272,6 @@ clarity("set","funnel_step","advertorial_view");
   </div>
 </div>
 
-<div class="breaking"><span class="dot"></span>BREAKING — APRIL 2026 — BRAZILIAN CREAM LIFTS BUTT, ERASES CELLULITE &amp; STRETCH MARKS IN 15 DAYS · BBL INDUSTRY IN PANIC</div>
-<div class="live">🔴 <strong id="liveCount">2,847</strong> readers viewing this story right now</div>
 
 <header class="masthead">
   <div class="logo">Beauty <span>&</span> Wellness Daily</div>
@@ -624,83 +617,7 @@ clarity("set","funnel_step","advertorial_view");
   </div>
 </footer>
 
-<script>
-  // QUERY STRING PROPAGATION
-  (function(){
-    var qs = window.location.search;
-    if(!qs) return;
-    var params = qs.substring(1);
-    function append(href){ return href + (href.indexOf('?') !== -1 ? '&' : '?') + params; }
-    function forwardAll(){
-      document.querySelectorAll('a[href^="quiz.html"]').forEach(function(a){
-        var h = a.getAttribute('href');
-        if(h && h.indexOf(params) === -1) a.setAttribute('href', append(h));
-      });
-    }
-    forwardAll();
-    document.addEventListener('DOMContentLoaded', forwardAll);
-    setTimeout(forwardAll, 500);
-  })();
 
-  // LIVE READER COUNT
-  (function(){
-    const el = document.getElementById('liveCount');
-    let n = 2847;
-    setInterval(() => {
-      n += Math.floor(Math.random()*7) - 3;
-      if(n < 2500) n = 2520;
-      if(n > 3400) n = 3380;
-      el.textContent = n.toLocaleString();
-    }, 2800);
-  })();
-
-  // URGENCY COUNTDOWN
-  (function(){
-    var el = document.getElementById('urgencyTime'); if(!el) return;
-    var end;
-    try{
-      end = parseInt(sessionStorage.getItem('bb_urgency_end') || '0');
-      if(!end || end < Date.now()){ end = Date.now() + 12*60*1000; sessionStorage.setItem('bb_urgency_end', String(end)); }
-    } catch(e){ end = Date.now() + 12*60*1000; }
-    function tick(){
-      var left = Math.max(0, end - Date.now());
-      var m = Math.floor(left / 60000), s = Math.floor((left % 60000) / 1000);
-      el.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-      if(left <= 0){ end = Date.now()+12*60*1000; try{ sessionStorage.setItem('bb_urgency_end', String(end)); }catch(e){} }
-    }
-    tick(); setInterval(tick, 1000);
-  })();
-
-  // STATS BAR TICK
-  (function(){
-    var r = document.getElementById('statsReading'); var s = document.getElementById('statsShares');
-    var rN = 3214, sN = 218401;
-    setInterval(function(){
-      if(Math.random() < 0.45){ rN += Math.floor(Math.random()*11)-4; if(rN<2900) rN=2920; if(rN>3800) rN=3780; if(r) r.textContent = rN.toLocaleString(); }
-      if(Math.random() < 0.25){ sN += Math.floor(Math.random()*3)+1; if(s) s.textContent = sN.toLocaleString(); }
-    }, 3500);
-  })();
-
-  // MINI-QUIZ
-  (function(){
-    var boxes = document.querySelectorAll('#mqList input[data-mq]');
-    var counter = document.getElementById('mqCount'), verdict = document.getElementById('mqVerdict'), cta = document.getElementById('mqCta');
-    if(!boxes.length) return;
-    function update(){
-      var n = 0;
-      boxes.forEach(function(b){ var lbl = b.closest('.mq-item'); if(b.checked){ n++; lbl.classList.add('checked'); } else lbl.classList.remove('checked'); });
-      counter.textContent = n;
-      if(n === 0){ verdict.classList.remove('show'); cta.style.display = 'none'; return; }
-      var msg;
-      if(n <= 2) msg = '<strong>You checked '+n+' pattern'+(n>1?'s':'')+'.</strong> Your profile shows early patterns. Taking the 30-second assessment gives you a personalized breakdown.';
-      else if(n <= 4) msg = '<strong>You checked '+n+' of 8 patterns.</strong> This matches the responder-group profile seen in the Brazilian data. Most women at this level report visible change within 30 days.';
-      else if(n <= 6) msg = '<strong>You checked '+n+' of 8 — your pattern is strong.</strong> 94% of women at this pattern count match the full responder profile.';
-      else msg = '<strong>⚠️ You checked '+n+' of 8 — highest responder profile.</strong> Your skin profile matches the exact demographic this Brazilian formula was designed around.';
-      verdict.innerHTML = msg; verdict.classList.add('show'); cta.style.display = 'block';
-    }
-    boxes.forEach(function(b){ b.addEventListener('change', update); });
-  })();
-</script>
 
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-mobile-cta">
@@ -709,38 +626,8 @@ clarity("set","funnel_step","advertorial_view");
 </div>
 
 <!-- EXIT-INTENT -->
-<div class="exit-overlay" id="exitOverlay">
-  <div class="exit-modal">
-    <button class="exit-close" id="exitClose" aria-label="Close">×</button>
-    <div class="exit-badge">⚠ Wait — before you leave</div>
-    <h2>Your <span>profile slot</span> is still held for 15 minutes.</h2>
-    <p>Take the free 30-second assessment now and see if your skin type matches the Brazilian responder group. Most women who skip never come back — and the batch they were matched to is gone.</p>
-    <a href="quiz.html" class="exit-cta" id="exitCta">Take My Free Assessment Now →</a>
-    <button class="exit-no" id="exitNo">No thanks, I'll continue hiding the cellulite</button>
-    <div class="exit-trust"><span>🔒 100% Free</span><span>·</span><span>No account needed</span><span>·</span><span>30 seconds</span></div>
-  </div>
-</div>
 
-<script>
-(function(){
-  var shown = false; var modal = document.getElementById('exitOverlay');
-  function show(){ if(shown) return; shown = true; modal.classList.add('show'); try{ sessionStorage.setItem('bb_exit_shown','1'); }catch(e){} }
-  function hide(){ modal.classList.remove('show'); }
-  try{ if(sessionStorage.getItem('bb_exit_shown') === '1') shown = true; }catch(e){}
-  document.addEventListener('mouseout', function(e){ if(!e.relatedTarget && e.clientY < 10) show(); });
-  var lastY = window.scrollY, lastT = Date.now(), engaged = false;
-  setTimeout(function(){ engaged = true; }, 15000);
-  window.addEventListener('scroll', function(){
-    var y = window.scrollY, t = Date.now(); var dy = lastY - y, dt = t - lastT;
-    if(engaged && dy > 160 && dt < 350 && y < 300) show();
-    lastY = y; lastT = t;
-  }, { passive: true });
-  if(!shown){ history.pushState({exit:true}, ''); window.addEventListener('popstate', function(){ if(!shown){ show(); history.pushState({exit:true}, ''); } }); }
-  document.getElementById('exitClose').addEventListener('click', hide);
-  document.getElementById('exitNo').addEventListener('click', hide);
-  modal.addEventListener('click', function(e){ if(e.target === modal) hide(); });
-})();
-</script>
+
 
 
 <!-- === REDTRACK: preserve click ID across funnel === -->
