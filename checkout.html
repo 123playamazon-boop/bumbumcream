@@ -488,10 +488,11 @@ clarity("set","funnel_step","viewed_offer");
   // SOCIAL PROOF TICK
   (function(){
     var reviews = document.getElementById('spReviewCount'); var buyers = document.getElementById('spRecentBuyers');
+    if(!reviews && !buyers) return;
     var r = 4128, b = 247;
     setInterval(function(){
-      if(Math.random() < 0.25){ r++; reviews.textContent = r.toLocaleString(); }
-      if(Math.random() < 0.35){ b++; buyers.textContent = b; }
+      if(Math.random() < 0.25){ r++; if(reviews) reviews.textContent = r.toLocaleString(); }
+      if(Math.random() < 0.35){ b++; if(buyers) buyers.textContent = b; }
     }, 12000);
   })();
 
