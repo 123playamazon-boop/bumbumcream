@@ -634,6 +634,30 @@ clarity("set","funnel_step","advertorial_view");
 
 
 
+<!-- MINI-QUIZ: any checkbox click redirects to quiz with querystring -->
+<script>
+(function(){
+  var items = document.querySelectorAll('.mq-item');
+  if(!items.length) return;
+  var triggered = false;
+  items.forEach(function(item){
+    var cb = item.querySelector('input[type="checkbox"]');
+    if(!cb) return;
+    cb.addEventListener('change', function(){
+      if(triggered) return;
+      triggered = true;
+      item.classList.add('checked');
+      var counter = document.getElementById('mqCount');
+      if(counter) counter.textContent = '1';
+      try { if(typeof clarity === 'function') clarity('event','mini_quiz_clicked'); } catch(e){}
+      try { if(typeof nbpix === 'function') nbpix('event','mini_quiz_clicked'); } catch(e){}
+      var qs = window.location.search || '';
+      setTimeout(function(){ window.location.href = 'quiz.html' + qs; }, 350);
+    });
+  });
+})();
+</script>
+
 <!-- === REDTRACK: preserve click ID across funnel === -->
 <script>
 (function(){
