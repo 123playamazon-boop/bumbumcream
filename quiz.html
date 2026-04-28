@@ -119,7 +119,7 @@ clarity("set","funnel_step","quiz_started");
       <h2>Find Your Skin &amp; Body Profile</h2>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
-    <div class="step-counter">Question <span id="stepNow">1</span> of <span id="stepTotal">8</span></div>
+    <div class="step-counter">Question <span id="stepNow">1</span> of <span id="stepTotal">4</span></div>
 
     <div id="quiz">
 
@@ -135,17 +135,6 @@ clarity("set","funnel_step","quiz_started");
       </div>
 
       <div class="card q hidden" data-q="2">
-        <div class="q-label">Biggest Concern</div>
-        <div class="question">Which area bothers you the most?</div>
-        <div class="options">
-          <button class="option" data-v="butt"><span class="emoji">🍑</span>Butt &amp; back of thighs (cellulite, firmness)</button>
-          <button class="option" data-v="belly"><span class="emoji">🤰</span>Belly (post-baby or weight change marks)</button>
-          <button class="option" data-v="legs"><span class="emoji">🦵</span>Front of thighs &amp; legs</button>
-          <button class="option" data-v="arms"><span class="emoji">💁‍♀️</span>Arms, shoulders &amp; overall skin texture</button>
-        </div>
-      </div>
-
-      <div class="card q hidden" data-q="3">
         <div class="q-label">Skin History</div>
         <div class="question">What have you tried before?</div>
         <div class="options">
@@ -156,7 +145,7 @@ clarity("set","funnel_step","quiz_started");
         </div>
       </div>
 
-      <div class="card q hidden" data-q="4">
+      <div class="card q hidden" data-q="3">
         <div class="q-label">Life Stage</div>
         <div class="question">Have you had pregnancies or significant weight changes?</div>
         <div class="options">
@@ -167,40 +156,7 @@ clarity("set","funnel_step","quiz_started");
         </div>
       </div>
 
-      <div class="card q hidden" data-q="5">
-        <div class="q-label">Skin Feel</div>
-        <div class="question">How does your skin feel most of the time?</div>
-        <div class="options">
-          <button class="option" data-v="dry"><span class="emoji">🏜️</span>Dry, dull, or papery</button>
-          <button class="option" data-v="loose"><span class="emoji">📉</span>Loose and less elastic than it used to be</button>
-          <button class="option" data-v="dimpled"><span class="emoji">🌰</span>Textured / dimpled — especially visible in lighting</button>
-          <button class="option" data-v="mixed"><span class="emoji">🔀</span>A bit of everything</button>
-        </div>
-      </div>
-
-      <div class="card q hidden" data-q="6">
-        <div class="q-label">Consistency</div>
-        <div class="question">How consistent are you with a daily routine?</div>
-        <div class="options">
-          <button class="option" data-v="low"><span class="emoji">😓</span>Not very — I forget or quit quickly</button>
-          <button class="option" data-v="medium"><span class="emoji">🌀</span>Depends on the week</button>
-          <button class="option" data-v="high"><span class="emoji">💪</span>High — once I commit, I stick with it</button>
-          <button class="option" data-v="varies"><span class="emoji">⚖️</span>Depends on stress or travel</button>
-        </div>
-      </div>
-
-      <div class="card q hidden" data-q="7">
-        <div class="q-label">Age Range</div>
-        <div class="question">What's your age range?</div>
-        <div class="options">
-          <button class="option" data-v="under35"><span class="emoji">🌱</span>Under 35</button>
-          <button class="option" data-v="35_44"><span class="emoji">🌿</span>35 – 44</button>
-          <button class="option" data-v="45_54"><span class="emoji">🍃</span>45 – 54</button>
-          <button class="option" data-v="55plus"><span class="emoji">🌳</span>55 and over</button>
-        </div>
-      </div>
-
-      <div class="card q hidden" data-q="8">
+      <div class="card q hidden" data-q="4">
         <div class="q-label">Your Commitment</div>
         <div class="question">How serious are you about visible change in the next 90 days?</div>
         <div class="options">
@@ -246,7 +202,7 @@ clarity("set","funnel_step","quiz_started");
 </audio>
 
 <script>
-  const total = 8;
+  const total = 4;
   let current = 1;
   const answers = {};
   const sfx = document.getElementById('clickSfx');
@@ -275,7 +231,9 @@ clarity("set","funnel_step","quiz_started");
     btn.addEventListener('click', () => {
       try { sfx.currentTime = 0; sfx.play().catch(()=>{}); } catch(e){}
       const q = btn.closest('.q').dataset.q;
-      answers['q'+q] = btn.dataset.v;
+      // Map renumbered q (1-4) -> original answer keys (q1, q3, q4, q8) for result.html compatibility
+      const qMap = {'1':'q1', '2':'q3', '3':'q4', '4':'q8'};
+      answers[qMap[q] || ('q'+q)] = btn.dataset.v;
       if(parseInt(q) < total){
         setStep(parseInt(q)+1);
         window.scrollTo({top:0, behavior:'smooth'});
