@@ -352,26 +352,6 @@ clarity("set","funnel_step","advertorial_view");
     </div>
 
     <!-- EMBEDDED MINI-QUIZ -->
-    <div class="mini-quiz">
-      <div class="mq-head">
-        <div class="mq-badge">Quick Check — Self Assessment</div>
-        <h3>Do any of these sound like <em>you</em>?</h3>
-        <p class="mq-sub">Women who check 3 or more of the patterns below are the ones most likely to see visible change within the first 30 days, according to our responder data.</p>
-      </div>
-      <div class="mq-list" id="mqList">
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Cellulite on thighs, butt or belly</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Stretch marks that never faded</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Skin feels looser after 35</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Post-pregnancy body changes</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Avoiding shorts, swimsuits, or beach</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Tried creams that didn't work</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Considered BBL or tummy tuck</span></label>
-        <label class="mq-item"><input type="checkbox" data-mq> <span>Dry, dull, or less elastic skin</span></label>
-      </div>
-      <div class="mq-counter">You checked <span class="num" id="mqCount">0</span> of 8 patterns</div>
-      <div class="mq-verdict" id="mqVerdict"></div>
-      <a href="quiz.html" class="mq-cta" id="mqCta" style="display:none">Take My Free 30-Second Assessment →</a>
-    </div>
 
   </div>
 
@@ -633,30 +613,6 @@ clarity("set","funnel_step","advertorial_view");
 
 
 
-
-<!-- MINI-QUIZ: any checkbox click redirects to quiz with querystring -->
-<script>
-(function(){
-  var items = document.querySelectorAll('.mq-item');
-  if(!items.length) return;
-  var triggered = false;
-  items.forEach(function(item){
-    var cb = item.querySelector('input[type="checkbox"]');
-    if(!cb) return;
-    cb.addEventListener('change', function(){
-      if(triggered) return;
-      triggered = true;
-      item.classList.add('checked');
-      var counter = document.getElementById('mqCount');
-      if(counter) counter.textContent = '1';
-      try { if(typeof clarity === 'function') clarity('event','mini_quiz_clicked'); } catch(e){}
-      try { if(typeof nbpix === 'function') nbpix('event','mini_quiz_clicked'); } catch(e){}
-      var qs = window.location.search || '';
-      setTimeout(function(){ window.location.href = 'quiz.html' + qs; }, 350);
-    });
-  });
-})();
-</script>
 
 <!-- === REDTRACK: preserve click ID across funnel === -->
 <script>
