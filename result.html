@@ -555,12 +555,8 @@ clarity("set","funnel_step","quiz_completed");
     if(recTop) recTop.innerHTML = badgeHtml;
     if(recEarly) recEarly.innerHTML = badgeHtml;
 
-    // Forward querystring to all CTAs
-    const qs = window.location.search;
-    ['ctaBtn','ctaBtnTop','ctaBtnEarly','stickyMobCta'].forEach(id => {
-      const el = document.getElementById(id);
-      if(el && qs) el.href = 'checkout.html' + qs;
-    });
+    // Forward querystring DISABLED — CTAs now scroll to #offer (see data-scroll attr)
+    // (params still propagate to all <a> via the global script below)
   })();
 
   // CONFETTI
