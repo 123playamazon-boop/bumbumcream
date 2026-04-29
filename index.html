@@ -95,6 +95,8 @@
   @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.55}}
   .stats-bar .stats-sep{color:#ccb68a;margin:0 8px}
   @media(max-width:560px){.stats-bar .stats-sep{display:none}.stats-bar span.stats-item{display:block;margin:2px 0}}
+  /* mobile-hide-trust: hide stats-bar and as-reported on mobile to free up space */
+  @media(max-width:768px){.stats-bar,.as-reported{display:none !important}}
 
   /* AS REPORTED IN */
   .as-reported{background:#fafafa;border-bottom:1px solid #eee;padding:12px 14px;text-align:center;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
