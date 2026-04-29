@@ -87,5 +87,26 @@ clarity("set","funnel_step","purchase_complete");
   try { sessionStorage.removeItem('rtkcid'); } catch(e){}
 })();
 </script>
+<script>
+(function() {
+    const urlParams = window.location.search;
+    if (!urlParams) return;
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+            const separator = href.includes('?') ? '&' : '?';
+            const cleanParams = urlParams.startsWith('?') ? urlParams.substring(1) : urlParams;
+            link.setAttribute('href', href + separator + cleanParams);
+        }
+    });
+    const params = new URLSearchParams(window.location.search);
+    params.forEach((value, key) => {
+        const input = document.querySelector('input[name="' + key + '"]');
+        if (input) input.value = value;
+    });
+})();
+</script>
+
 </body>
 </html>
