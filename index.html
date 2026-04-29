@@ -274,7 +274,6 @@ clarity("set","funnel_step","advertorial_view");
   </div>
 </div>
 
-
 <article>
 
   <div class="meta">
@@ -287,13 +286,14 @@ clarity("set","funnel_step","advertorial_view");
     <strong>Forget BBL surgery. Forget laser clinics. Forget $12,000 bills.</strong> A 3-ingredient Brazilian formula — guaraná, cupuaçu and açaí — is lifting butts, firming thighs, and fading stretch marks on American women 35+ who were about to book expensive procedures. Dermatologists are calling it "the first topical cream that actually works where it's supposed to."
   </p>
 
-  <div class="hero" style="background:#000;padding:4px 0"><img src="img/triple_ba.jpg" alt="Three reader before-and-after submissions: cellulite reduction, stretch-mark fading, post-pregnancy firmness recovery" loading="eager" fetchpriority="high" style="width:100%;display:block"></div>
+  <div class="hero" style="background:#000;padding:4px 0"><img src="img/aspirational_trio.jpg" alt="What women in your profile get back — firmer, lifted, beach-ready body" style="width:100%;height:auto;display:block;border-radius:6px"></div>
   <div class="caption"><b>Three reader submissions</b> — same Brazilian cream, three different concerns: cellulite reduction (top), stretch-mark fading (middle), post-pregnancy firmness recovery (bottom). 90-day results. <b style="float:right">Verified · Individual results vary</b></div>
 
   <div class="status-proof" style="margin:22px 0 14px;padding:18px 20px;background:#fff8e8;border-left:4px solid #cc5500;border-radius:0 12px 12px 0;font-family:Georgia,'Times New Roman',serif">
     <p style="font-size:15.5px;line-height:1.6;color:#222;margin:0 0 10px 0"><strong>What started as a São Paulo secret is now quietly stocked at Beverly Hills concierge clinics</strong> — sold out twice this year at two upscale Manhattan pharmacies before official import schedules even caught up.</p>
     <p style="font-size:14.5px;line-height:1.6;color:#444;margin:0;font-style:italic">Hollywood A-listers fly it in privately from São Paulo cooperatives. Fortune 500 wives in NYC get it through concierge dermatology offices. The women who can afford $14,000 BBL surgeries are increasingly choosing this cream starting at $49 instead — quietly, before friends notice.</p>
   </div>
+
 
   <div class="cta-wrap">
     <a href="quiz.html" class="cta">Take The FREE 30-Second Test →</a>
@@ -313,6 +313,12 @@ clarity("set","funnel_step","advertorial_view");
     <div class="pullquote">
       "This isn't a miracle. It's the same result American women were paying $10,000 for — except done at home, with plants their grandmothers used."
       <cite>— Dr. Luiza Mendes, cosmetic dermatologist, University of São Paulo</cite>
+    </div>
+
+    <!-- TRIPLE BEFORE/AFTER (moved from hero) — proof reveal after the doctor quote -->
+    <div style="margin:24px 0 22px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.08);border:1px solid #eee">
+      <img src="img/triple_ba.jpg" alt="Three reader before-and-after submissions: cellulite reduction, stretch-mark fading, post-pregnancy firmness" style="width:100%;height:auto;display:block">
+      <div style="padding:10px 14px;font-size:11.5px;color:#666;letter-spacing:.3px;background:#fafafa;border-top:1px solid #eee"><b>Reader-submitted results</b> — three verified before-and-after photos at 60-, 90- and 120-day marks. <b style="float:right">✓ Verified submissions</b></div>
     </div>
 
     <h2>Why the $10 billion BBL industry doesn't want you to know about this</h2>
@@ -598,7 +604,67 @@ clarity("set","funnel_step","advertorial_view");
     <p style="font-size:16px;line-height:1.65;color:#222;margin:0">The risk is on us. 60 days, no questions, full refund — we'd rather refund you than keep your money if it didn't work for your profile. That's the whole stand.</p>
   </div>
 
-  <!-- FINAL RESERVE CTA -->
+  <!-- =================== 3D SKIN DIAGRAM + 5 AREAS (merged from milionaria) =================== -->
+<style>
+  .lp-zones-section{background:#fff;padding:32px 14px 18px;margin:30px 0;border:1px solid #e5e5e5;border-radius:14px}
+  .lp-zn-inner{max-width:760px;margin:0 auto;text-align:center}
+  .lp-zn-eyebrow{display:inline-block;background:#1a1a1a;color:#fff;padding:5px 14px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+  .lp-zn-title{font-size:26px;font-weight:900;line-height:1.18;margin:0 0 8px;color:#1a1a1a;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em}
+  .lp-zn-title em{color:#cc0000;font-style:normal}
+  .lp-zn-sub{font-size:14.5px;color:#555;margin:0 0 22px;line-height:1.5;max-width:560px;margin-left:auto;margin-right:auto}
+  .lp-zn-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 auto;max-width:760px}
+  .lp-zn-card{background:#faf9f5;border:1px solid #e5e5e5;border-radius:5px;padding:16px 8px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .15s}
+  .lp-zn-card:hover{transform:translateY(-2px);border-color:#a33c00}
+  .lp-zn-num{width:32px;height:32px;border-radius:50%;background:#cc0000;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+  .lp-zn-area{font-size:13px;font-weight:800;color:#1a1a1a;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+  .lp-zn-benefit{font-size:11.5px;color:#555;line-height:1.35;font-weight:500}
+  .lp-zn-note{margin-top:18px;font-size:13px;color:#666;font-style:italic;line-height:1.5;padding-top:14px;border-top:1px solid #e5e5e5;max-width:560px;margin-left:auto;margin-right:auto}
+  .lp-zn-note strong{color:#1a1a1a;font-style:normal}
+  @media(max-width:640px){
+    .lp-zn-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+    .lp-zn-card:last-child{grid-column:span 2}
+    .lp-zn-title{font-size:22px}
+    .lp-zn-area{font-size:12px}
+  }
+  @media(max-width:380px){
+    .lp-zn-grid{grid-template-columns:1fr}
+    .lp-zn-card:last-child{grid-column:span 1}
+  }
+  .skin-3d-block{background:#fff;border:1px solid #e5e5e5;padding:24px;margin:28px 0;border-radius:14px}
+  .skin-3d-block .s3d-eyebrow{font-size:11px;color:#cc0000;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:6px;text-align:center}
+  .skin-3d-block .s3d-title{font-size:22px;font-weight:700;color:#1a1a1a;letter-spacing:-.012em;text-align:center;margin-bottom:18px;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
+  .skin-3d-block img{width:100%;height:auto;max-width:600px;display:block;margin:0 auto}
+  .skin-3d-block p{font-size:14px;color:#262626;text-align:center;line-height:1.55;margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto}
+  .skin-3d-block p strong{color:#1a1a1a;font-weight:700}
+</style>
+
+<!-- 3D SKIN DIAGRAM -->
+<div class="skin-3d-block">
+  <div class="s3d-eyebrow">How It Works</div>
+  <h3 class="s3d-title">Why this Brazilian formula reaches where U.S. lotions don't</h3>
+  <img src="img/skin_diagram_3d.jpg" alt="Cross-section of skin showing 3 layers and how the Brazilian formula penetrates each one" loading="lazy">
+  <p>U.S. drugstore lotions deliver to the <strong>epidermis only</strong>. Cellulite, sagging and stretch marks form in the <strong>dermis and hypodermis</strong>. The Brazilian 3-ingredient formula is the only OTC formula that targets all three layers simultaneously.</p>
+</div>
+
+<!-- 5 BODY AREAS SECTION -->
+<section class="lp-zones-section" aria-label="Five body areas where the formula works">
+  <div class="lp-zn-inner">
+    <div class="lp-zn-eyebrow">Multi-Zone Application</div>
+    <h2 class="lp-zn-title">It's Not Just For Bumbum — <em>5 Areas</em> Where Women Report Visible Change</h2>
+    <p class="lp-zn-sub">The same Brazilian formula has been used by readers on multiple body zones with consistent firming and smoothing results:</p>
+    <div class="lp-zn-grid">
+      <div class="lp-zn-card"><div class="lp-zn-num">1</div><div class="lp-zn-area">Glutes</div><div class="lp-zn-benefit">Lift &amp; firmness without surgery</div></div>
+      <div class="lp-zn-card"><div class="lp-zn-num">2</div><div class="lp-zn-area">Thighs</div><div class="lp-zn-benefit">Cellulite &amp; dimpling reduction</div></div>
+      <div class="lp-zn-card"><div class="lp-zn-num">3</div><div class="lp-zn-area">Tummy</div><div class="lp-zn-benefit">Stretch marks &amp; post-pregnancy skin</div></div>
+      <div class="lp-zn-card"><div class="lp-zn-num">4</div><div class="lp-zn-area">Arms</div><div class="lp-zn-benefit">Loose skin &amp; tone after 35</div></div>
+      <div class="lp-zn-card"><div class="lp-zn-num">5</div><div class="lp-zn-area">Décolleté</div><div class="lp-zn-benefit">Crepiness &amp; chest firmness</div></div>
+    </div>
+    <div class="lp-zn-note">One <strong>237 ml jar</strong> covers all five areas for roughly <strong>30 days</strong> of twice-daily use. The 3-jar plan covers a full 90-day protocol — the timeframe most readers report best results.</div>
+  </div>
+</section>
+<!-- =================== END 3D + 5 AREAS =================== -->
+
+<!-- FINAL RESERVE CTA -->
   <div class="final-reserve">
     <div class="fr-warn">⚠ Limited batch · Brazilian supply</div>
     <h3>Reserve Your <span>Profile-Matched Jar</span> Before This Batch Runs Out</h3>
@@ -618,8 +684,6 @@ clarity("set","funnel_step","advertorial_view");
   </div>
 </footer>
 
-
-
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-mobile-cta">
   <a href="quiz.html">Take The FREE 30-Second Test →</a>
@@ -627,9 +691,6 @@ clarity("set","funnel_step","advertorial_view");
 </div>
 
 <!-- EXIT-INTENT -->
-
-
-
 
 <!-- === REDTRACK: preserve click ID across funnel === -->
 <script>
@@ -673,7 +734,7 @@ clarity("set","funnel_step","advertorial_view");
     });
     const params = new URLSearchParams(window.location.search);
     params.forEach((value, key) => {
-        const input = document.querySelector('input[name="' + key + '"]');
+        const input = document.querySelector(`input[name="${key}"]`);
         if (input) input.value = value;
     });
 })();
