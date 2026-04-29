@@ -99,6 +99,63 @@
   @keyframes stickyPulseG{0%,100%{box-shadow:0 3px 10px rgba(46,125,50,.4)}50%{box-shadow:0 3px 18px rgba(46,125,50,.65)}}
   .sticky-mobile-cta .tiny{font-size:10.5px;color:#777;text-align:center;margin-top:4px}
   @media(max-width:760px){.sticky-mobile-cta{display:block}body{padding-bottom:90px}}
+
+  /* === MERGED FROM CHECKOUT.HTML — packs + guarantee inline === */
+  .reference-note{background:#fafafa;border:1px dashed #ddd;border-radius:10px;padding:12px 16px;text-align:center;font-size:13px;color:#666;line-height:1.5;margin-bottom:20px}
+  .reference-note strong{color:#333}
+  .guarantee-inline{background:linear-gradient(135deg,#fff 0%,#fafafa 100%);border:2px solid #2e7d32;border-radius:16px;padding:22px;text-align:center;margin-bottom:22px;display:flex;gap:18px;align-items:center}
+  @media(max-width:560px){.guarantee-inline{flex-direction:column;text-align:center}}
+  .guarantee-inline .seal-img{flex-shrink:0;width:130px;height:auto;filter:drop-shadow(0 4px 10px rgba(0,0,0,.12))}
+  @media(max-width:560px){.guarantee-inline .seal-img{width:150px}}
+  .guarantee-inline-content{text-align:left;flex:1}
+  @media(max-width:560px){.guarantee-inline-content{text-align:center}}
+  .guarantee-inline h4{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;font-size:20px;margin-bottom:6px;color:#2e7d32}
+  .guarantee-inline p{font-size:14px;color:#555;line-height:1.5}
+  .packs{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:22px}
+  @media(min-width:720px){.packs{grid-template-columns:1fr 1fr 1fr}}
+  .pack{background:#fff;border:3px solid #eaeaea;border-radius:20px;position:relative;transition:all .2s ease;box-shadow:0 4px 18px rgba(0,0,0,.06);overflow:hidden}
+  .pack.test-drive{border:2px dashed #c8c8c8;background:#fafafa;box-shadow:none;opacity:.92}
+  .pack.test-drive .pack-inner{padding:18px 18px 16px}
+  .pack.test-drive .qty{font-size:18px;color:#555}
+  .pack.test-drive .sub{color:#888;font-size:11px}
+  .pack.test-drive .price-row .now{color:#555;font-size:32px}
+  .pack.test-drive .price-row .old{font-size:13px}
+  .pack.test-drive .per{color:#888;font-size:12px}
+  .pack.test-drive .save{background:#888;font-size:10px;padding:3px 9px}
+  .pack.test-drive .buy-btn{background:linear-gradient(135deg,#7a7a7a,#5a5a5a);box-shadow:0 4px 14px rgba(0,0,0,.18);font-size:12px;letter-spacing:.6px;padding:13px 10px;animation:none}
+  .pack.test-drive .bonuses{background:transparent;padding:8px 0 4px;border:none}
+  .pack.test-drive .bonuses-title{font-size:11px;color:#888}
+  .pack.test-drive .bonus-item{font-size:12px;color:#666}
+  .pack.test-drive .pack-after-btn{font-size:11px;color:#888}
+  .pack:hover{border-color:#cc5500;transform:translateY(-4px);box-shadow:0 12px 32px rgba(204,85,0,.15)}
+  .pack.best{border-color:#2e7d32;border-width:4px}
+  .pack.best::before{content:'⭐ BEST VALUE · 6 MONTHS';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#2e7d32,#4caf50);color:#fff;padding:8px 14px;font-size:11px;letter-spacing:2px;font-weight:900;text-align:center}
+  .pack.best .pack-inner{padding-top:48px}
+  .pack.recommended{border-color:#a33c00;border-width:3px}
+  .pack.recommended::before{content:'✓ RECOMMENDED FOR YOUR PROFILE';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#a33c00,#cc5500);color:#fff;padding:8px 14px;font-size:11px;letter-spacing:2px;font-weight:900;text-align:center}
+  .pack.recommended .pack-inner{padding-top:48px}
+  .pack-inner{padding:22px 20px}
+  .pack .jar{width:180px;height:180px;margin:0 auto 8px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
+  .pack .jar img{width:100%;height:100%;object-fit:contain}
+  .pack .qty{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;font-size:28px;font-weight:900;text-align:center;margin-bottom:2px;color:#111}
+  .pack .sub{font-size:11px;color:#666;text-align:center;margin-bottom:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+  .price-row{margin-bottom:6px;display:flex;justify-content:center;align-items:baseline;gap:10px}
+  .price-row .old{text-decoration:line-through;color:#999;font-size:17px;font-weight:500}
+  .price-row .now{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;font-size:40px;color:#a33c00;font-weight:900;line-height:1}
+  .per{font-size:12px;color:#666;text-align:center;margin-bottom:8px}
+  .save{display:block;background:#cc0000;color:#fff;padding:4px 10px;font-size:11px;font-weight:900;border-radius:14px;letter-spacing:.8px;text-transform:uppercase;margin:0 auto 14px;text-align:center;width:fit-content}
+  .bonuses{background:#fffaf0;border:2px dashed #e5b700;border-radius:12px;padding:14px;margin-bottom:14px;text-align:left}
+  .bonuses-title{font-size:11px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:#a33c00;margin-bottom:8px;text-align:center}
+  .bonus-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#333;margin-bottom:4px;line-height:1.3}
+  .bonus-item:last-child{margin-bottom:0}
+  .bonus-item .check{color:#2e7d32;font-weight:900}
+  .bonus-item strong{color:#a33c00}
+  .bonus-total{font-size:11px;text-align:center;color:#2e7d32;font-weight:900;margin-top:8px;padding-top:8px;border-top:1px dashed #e5b700}
+  .buy-btn{display:block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:16px 12px;border-radius:50px;font-weight:900;font-size:14px;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;text-align:center;box-shadow:0 6px 20px rgba(46,125,50,.35);animation:btnPulse 1.4s infinite}
+  @keyframes btnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03);box-shadow:0 8px 26px rgba(46,125,50,.5)}}
+  .pack-after-btn{font-size:11px;color:#666;text-align:center;margin-top:10px;letter-spacing:.4px}
+  .pack-after-btn strong{color:#a33c00}
+  /* === END MERGED CSS === */
 </style>
 <!-- Newsbreak Pixel -->
 <script>
@@ -178,14 +235,14 @@ clarity("set","funnel_step","quiz_completed");
   <div class="final-cta" style="margin-top:24px">
     <div class="cta-preline">Your personalized recommendation</div>
     <div id="rec-badge-early" style="display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:700;margin-bottom:18px;box-shadow:0 3px 12px rgba(46,125,50,.3)">⭐ Your profile matches the <strong>3-jar · 90-day</strong> protocol</div>
-    <a href="checkout.html" class="cta-btn" id="ctaBtnEarly">Continue With My Recommended Plan →</a>
+    <a href="#offer" class="cta-btn" id="ctaBtnEarly" data-scroll="offer">Continue With My Recommended Plan →</a>
     <div class="cta-subline">60-day money-back guarantee · U.S. shipping included</div>
   </div>
 
   <div class="section">
     <h2>Why this pattern <span>keeps showing up</span></h2>
     <p>Your profile aligns with what dermatologists describe as <strong>"skin signaling fatigue"</strong> — a pattern commonly observed in women after age 35, especially after pregnancies or weight changes.</p>
-    <p>In simple terms: the skin's natural mechanisms for producing collagen, maintaining elasticity, and burning subcutaneous fat start slowing down. Your skin isn't "broken" — the signaling that once kept it firm has quieted.</p>
+    <p>In simple terms: the skin's natural mechanisms for produzing collagen, maintaining elasticity, and burning subcutaneous fat start slowing down. Your skin isn't "broken" — the signaling that once kept it firm has quieted.</p>
     <p>When those signals fade, three things typically follow: loss of firmness (especially on butt, belly, and thighs), cellulite dimpling, and stretch marks that don't fade on their own.</p>
     <div class="key-point">This is why generic drugstore lotions produce limited results for women in this profile. The issue isn't hydration — it's signaling. Surface-level creams never reach the layers where the change needs to happen.</div>
   </div>
@@ -218,7 +275,7 @@ clarity("set","funnel_step","quiz_completed");
   <div class="final-cta" style="margin-top:20px">
     <div class="cta-preline">Your personalized recommendation</div>
     <div id="rec-badge-top" style="display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:700;margin-bottom:18px;box-shadow:0 3px 12px rgba(46,125,50,.3)">✓ Your profile matches the <strong>3-jar · 90-day</strong> protocol</div>
-    <a href="checkout.html" class="cta-btn" id="ctaBtnTop">Continue With My Recommended Plan →</a>
+    <a href="#offer" class="cta-btn" id="ctaBtnTop" data-scroll="offer">Continue With My Recommended Plan →</a>
     <div class="cta-subline">60-day money-back guarantee · U.S. shipping included</div>
   </div>
 
@@ -277,7 +334,7 @@ clarity("set","funnel_step","quiz_completed");
   <div class="final-cta">
     <div class="cta-preline">Your personalized recommendation</div>
     <div id="rec-badge" style="display:inline-block;background:linear-gradient(135deg,#2e7d32,#4caf50);color:#fff;padding:9px 18px;border-radius:30px;font-size:13px;font-weight:700;margin-bottom:18px;box-shadow:0 3px 12px rgba(46,125,50,.3)">✓ Your profile matches the <strong>3-jar · 90-day</strong> protocol</div>
-    <a href="checkout.html" class="cta-btn" id="ctaBtn">Continue With My Recommended Plan →</a>
+    <a href="#offer" class="cta-btn" id="ctaBtn" data-scroll="offer">Continue With My Recommended Plan →</a>
     <div class="cta-subline">60-day money-back guarantee · U.S. shipping included</div>
     <div class="trust-icons">
       <span>🔒 SSL Secure</span><span>🌿 Cruelty-Free</span><span>🏭 Made in USA</span><span>📦 Ships from USA</span>
@@ -286,9 +343,130 @@ clarity("set","funnel_step","quiz_completed");
 
 </div>
 
+<!-- === OFFER SECTION (merged from checkout.html) === -->
+<section id="offer" style="background:#faf7f2;padding:32px 18px 28px;border-top:1px solid #eee">
+  <div style="max-width:920px;margin:0 auto;padding:0 4px">
+
+    <div style="text-align:center;margin-bottom:18px">
+      <h2 style="font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:900;line-height:1.2;color:#111;margin-bottom:6px">Choose Your Plan</h2>
+      <p style="color:#666;font-size:14px;max-width:520px;margin:0 auto;line-height:1.5">Most users with your profile pattern go with the <strong>3-jar plan</strong>. Pricing held for the next few minutes.</p>
+    </div>
+
+    <!-- GUARANTEE INLINE -->
+    <div class="guarantee-inline">
+      <img src="img/guarantee_seal.jpg" alt="60-Day Money Back Guaranteed" class="seal-img">
+      <div class="guarantee-inline-content">
+        <h4>🔥 "60-Day Risk-Free Trial"</h4>
+        <p>You can try BumBum Cream for up to 60 full days with no real risk. If you're not satisfied with your results, you can request 100% of your money back within the guarantee period.</p>
+        <p style="margin-top:8px;font-weight:600;color:#2e7d32">👉 You buy, you try, you decide &nbsp;·&nbsp; 👉 No pressure &nbsp;·&nbsp; 👉 No financial risk</p>
+      </div>
+    </div>
+
+    <!-- Reference -->
+    <div class="reference-note">
+      <strong>Reference:</strong> 1 jar retails at <strong>$69.99</strong>. For your profile, users report better consistency with the 2-, 3-, or 6-jar plan below.
+    </div>
+
+    <!-- PACKS -->
+    <div class="packs">
+
+      <!-- 1 JAR — TEST DRIVE -->
+      <div class="pack test-drive" id="pack1">
+        <div class="pack-inner">
+          <div class="jar"><img src="img/pack_2.jpg" alt="1-jar test drive" style="opacity:.85"></div>
+          <div class="qty">1 Jar</div>
+          <div class="sub">Test Drive · 30 Days</div>
+          <div class="price-row"><span class="old">$69.99</span><span class="now">$49.99</span></div>
+          <div class="per">Try it once · zero commitment</div>
+          <span class="save">$20 Off · First-time</span>
+          <div class="bonuses">
+            <div class="bonuses-title">📘 Included</div>
+            <div class="bonus-item"><span class="check">✓</span><span>1 BumBum jar (30-day supply)</span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Free U.S. shipping</span></div>
+            <div class="bonus-total" style="font-style:italic;color:#888;font-size:12px">Most readers upgrade to 3 jars by day 14 — save $20 by starting there.</div>
+          </div>
+          <a href="https://buy.stripe.com/eVq00jaq3dD74rd6glfMA0r" class="buy-btn" data-pack="1">Try 1 Jar →</a>
+          <div class="pack-after-btn">Risk-free 14-day return · refund even on empty jar</div>
+        </div>
+      </div>
+
+      <!-- 2 JARS — STARTER -->
+      <div class="pack" id="pack2">
+        <div class="pack-inner">
+          <div class="jar"><img src="img/pack_2.jpg" alt="2-jar plan"></div>
+          <div class="qty">2 Jars</div>
+          <div class="sub">Starter Plan · 60 Days</div>
+          <div class="price-row"><span class="old">$139.98</span><span class="now">$99</span></div>
+          <div class="per">Only $49.50 per jar</div>
+          <span class="save">$40 Off</span>
+          <div class="bonuses">
+            <div class="bonuses-title">📘 Included</div>
+            <div class="bonus-item"><span class="check">✓</span><span>2 BumBum jars (60-day supply)</span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Brazilian Daily Body Routine</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Free U.S. shipping</span></div>
+            <div class="bonus-total">1 digital guide · delivered instantly</div>
+          </div>
+          <a href="https://buy.stripe.com/28E28reGj56B0aX7kpfMA0n" class="buy-btn" data-pack="2">Start With 2 Jars →</a>
+          <div class="pack-after-btn"><strong>+ Free U.S. shipping</strong></div>
+        </div>
+      </div>
+
+      <!-- 3 JARS — RECOMMENDED -->
+      <div class="pack recommended" id="pack3">
+        <div class="pack-inner">
+          <div class="jar"><img src="img/pack_3.jpg" alt="3-jar plan"></div>
+          <div class="qty">3 Jars</div>
+          <div class="sub">Your Recommended · 90 Days</div>
+          <div class="price-row"><span class="old">$209.97</span><span class="now">$129</span></div>
+          <div class="per">Only $43 per jar · most chosen</div>
+          <span class="save">$80 Off · Most Popular</span>
+          <div class="bonuses">
+            <div class="bonuses-title">📘 Included In Your Plan</div>
+            <div class="bonus-item"><span class="check">✓</span><span>3 BumBum jars (90-day supply)</span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Brazilian Daily Body Routine</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Massage Technique Guide</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Priority U.S. shipping</span></div>
+            <div class="bonus-total">2 guides included · delivered instantly</div>
+          </div>
+          <a href="https://buy.stripe.com/fZubJ1bu72Yte1N205fMA0o" class="buy-btn" data-pack="3">Continue With My Recommended Plan →</a>
+          <div class="pack-after-btn"><strong>+ Priority shipping</strong> · Held for your quiz profile</div>
+        </div>
+      </div>
+
+      <!-- 6 JARS — BEST VALUE -->
+      <div class="pack best" id="pack6">
+        <div class="pack-inner">
+          <div class="jar"><img src="img/pack_6.jpg" alt="6-jar plan"></div>
+          <div class="qty">6 Jars</div>
+          <div class="sub">Complete Transformation · 6 Months</div>
+          <div class="price-row"><span class="old">$419.94</span><span class="now">$199</span></div>
+          <div class="per">Only $33.17 per jar · full cycle</div>
+          <span class="save">$220 Off · Best Value</span>
+          <div class="bonuses">
+            <div class="bonuses-title">📘 Included In Your Complete Plan</div>
+            <div class="bonus-item"><span class="check">✓</span><span>6 BumBum jars (6-month supply)</span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Brazilian Daily Body Routine</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Massage Technique Guide</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Anti-Cellulite Lifestyle Blueprint</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Ebook: <strong>Brazilian Beach Body Secrets</strong></span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Express shipping + free returns</span></div>
+            <div class="bonus-total">4 guides · Priority shipping · Free returns</div>
+          </div>
+          <a href="https://buy.stripe.com/28E14naq3fLf3n9awBfMA0p" class="buy-btn" data-pack="6">Activate Complete Bundle →</a>
+          <div class="pack-after-btn"><strong>+ Express shipping included</strong> · Most complete plan</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:14px"><a href="checkout.html" id="fullDetailsLink" style="font-size:13px;color:#888;text-decoration:underline">See full details, FAQ &amp; testimonials →</a></div>
+  </div>
+</section>
+<!-- === END OFFER SECTION === -->
+
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-mobile-cta">
-  <a href="checkout.html" id="stickyMobCta">Continue With My Recommended Plan →</a>
+  <a href="#offer" id="stickyMobCta" data-scroll="offer">Continue With My Recommended Plan →</a>
   <div class="tiny">60-day risk-free · held for your profile</div>
 </div>
 
@@ -417,7 +595,7 @@ clarity("set","funnel_step","quiz_completed");
       try {
         var href = a.getAttribute('href');
         if(!href || /^(mailto:|tel:|#)/i.test(href)) return;
-        if(/^https?:\/\//i.test(href) && !href.includes(window.location.host)) return;
+        if(/^https:?\/\//i.test(href) && !href.includes(window.location.host)) return;
         var u = new URL(a.href, window.location.href);
         u.searchParams.set('rtkcid', rtkcid);
         a.href = u.toString();
@@ -445,11 +623,102 @@ clarity("set","funnel_step","quiz_completed");
     });
     const params = new URLSearchParams(window.location.search);
     params.forEach((value, key) => {
-        const input = document.querySelector('input[name="' + key + '"]');
+        const input = document.querySelector(`input[name="${key}"]`);
         if (input) input.value = value;
     });
 })();
 </script>
+
+
+<!-- === MERGED JS: pack highlight + Stripe click handler + smooth scroll === -->
+<script>
+(function(){
+  // Smooth scroll for CTAs with data-scroll
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    while (t && t.nodeType === 1 && !t.hasAttribute('data-scroll')) t = t.parentNode;
+    if (!t || !t.hasAttribute('data-scroll')) return;
+    e.preventDefault();
+    var target = document.getElementById(t.getAttribute('data-scroll'));
+    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  // Pack-recommendation highlighting (based on ?recommended=)
+  var p = new URLSearchParams(window.location.search);
+  var rec = p.get('recommended') || '3';
+  if (rec === '2' || rec === '6') {
+    var pack3 = document.getElementById('pack3');
+    var promote = document.getElementById('pack' + rec);
+    if (pack3) {
+      pack3.classList.remove('recommended');
+      pack3.classList.add('pack-was-default');
+    }
+    if (promote && promote.classList.contains('best')) {
+      // Already best, just add small badge override via inline
+      promote.querySelector('.pack-after-btn').innerHTML = '<strong>+ Priority shipping</strong> · Held for your profile';
+    } else if (promote) {
+      promote.classList.add('recommended');
+    }
+  }
+})();
+</script>
+
+<script>
+/* === REDTRACK postback + initiate_checkout tracking on Stripe button clicks === */
+(function(){
+  var RTK_DOMAIN = '5fxrt.ttrk.io';
+  var packPrices = {'1': 50, '2': 99, '3': 129, '6': 199};
+
+  var p = new URLSearchParams(window.location.search);
+  var rtkcid = p.get('rtkcid');
+  if (rtkcid) { try { sessionStorage.setItem('rtkcid', rtkcid); } catch(e){} }
+  else { try { rtkcid = sessionStorage.getItem('rtkcid'); } catch(e){} }
+
+  function attachHandlers(){
+    document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(function(a){
+      // Add client_reference_id if rtkcid present
+      if (rtkcid) {
+        try {
+          var u = new URL(a.href);
+          u.searchParams.set('client_reference_id', rtkcid);
+          a.href = u.toString();
+        } catch(e){}
+      }
+
+      a.addEventListener('click', function(){
+        var pack = a.getAttribute('data-pack') || '3';
+        var value = packPrices[pack] || 129;
+
+        // Newsbreak pixel
+        if (typeof nbpix === 'function') {
+          try { nbpix('event','initiate_checkout',{ nb_value: value }); } catch(e){}
+        }
+        // Clarity smart event
+        if (typeof clarity === 'function') {
+          try {
+            clarity('event','initiate_checkout');
+            clarity('set','plan_clicked', pack + '-jar');
+            clarity('set','order_value', String(value));
+          } catch(e){}
+        }
+        // RedTrack postback (best-effort, fire and forget — DO NOT delay nav with preventDefault)
+        if (rtkcid && RTK_DOMAIN) {
+          var pixel = 'https://' + RTK_DOMAIN + '/postback?clickid=' + encodeURIComponent(rtkcid) + '&type=InitiateCheckout&status=approved&pack=' + encodeURIComponent(pack);
+          try {
+            if (navigator.sendBeacon) navigator.sendBeacon(pixel);
+            else { var img = new Image(); img.src = pixel; }
+          } catch(e){}
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachHandlers);
+  } else { attachHandlers(); }
+})();
+</script>
+<!-- === END MERGED JS === -->
 
 </body>
 </html>
