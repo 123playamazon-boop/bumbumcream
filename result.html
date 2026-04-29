@@ -1004,7 +1004,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('click', function(e){
     var t = e.target;
     while (t && t.nodeType === 1 && !t.hasAttribute('data-scroll')) t = t.parentNode;
-    if (!t || !t.hasAttribute('data-scroll')) return;
+    if (!t || t.nodeType !== 1 || t.nodeType !== 1 || !t.hasAttribute('data-scroll')) return;
     e.preventDefault();
     var target = document.getElementById(t.getAttribute('data-scroll'));
     if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
