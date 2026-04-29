@@ -280,13 +280,13 @@ clarity("set","funnel_step","advertorial_view");
     <span>FEATURED STORY</span> &nbsp;·&nbsp; By Dr. Beatriz Santos, Dermatology Correspondent &nbsp;·&nbsp; Published April 21, 2026 &nbsp;·&nbsp; 12 min read
   </div>
 
-  <h1>The <em>Brazilian Lift-and-Firm Cream</em> Erasing Cellulite, Stretch Marks &amp; Sagging Skin <em>In Just 15 Days</em> — Without A Single Injection</h1>
+  <h1 data-clickable="quiz" style="cursor:pointer">The <em>Brazilian Lift-and-Firm Cream</em> Erasing Cellulite, Stretch Marks &amp; Sagging Skin <em>In Just 15 Days</em> — Without A Single Injection</h1>
 
-  <p class="subhead">
+  <p class="subhead" data-clickable="quiz" style="cursor:pointer">
     <strong>Forget BBL surgery. Forget laser clinics. Forget $12,000 bills.</strong> A 3-ingredient Brazilian formula — guaraná, cupuaçu and açaí — is lifting butts, firming thighs, and fading stretch marks on American women 35+ who were about to book expensive procedures. Dermatologists are calling it "the first topical cream that actually works where it's supposed to."
   </p>
 
-  <div class="hero" style="background:#000;padding:4px 0"><img src="img/aspirational_trio.jpg" alt="What women in your profile get back — firmer, lifted, beach-ready body" style="width:100%;height:auto;display:block;border-radius:6px"></div>
+  <div class="hero" data-clickable="quiz" style="background:#000;padding:4px 0;cursor:pointer"><img src="img/aspirational_trio.jpg" alt="What women in your profile get back — firmer, lifted, beach-ready body" style="width:100%;height:auto;display:block;border-radius:6px"></div>
   <div class="caption"><b>Three reader submissions</b> — same Brazilian cream, three different concerns: cellulite reduction (top), stretch-mark fading (middle), post-pregnancy firmness recovery (bottom). 90-day results. <b style="float:right">Verified · Individual results vary</b></div>
 
   <div class="status-proof" style="margin:22px 0 14px;padding:18px 20px;background:#fff8e8;border-left:4px solid #cc5500;border-radius:0 12px 12px 0;font-family:Georgia,'Times New Roman',serif">
@@ -740,5 +740,23 @@ clarity("set","funnel_step","advertorial_view");
 })();
 </script>
 
+
+<!-- DEAD CLICK FIX -->
+<script data-deadclick-fix="true">
+(function(){
+  var qs = window.location.search || '';
+  var quizUrl = 'quiz.html' + qs;
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    while (t && t.nodeType === 1 && !t.hasAttribute('data-clickable')) t = t.parentNode;
+    if (!t || t.nodeType !== 1) return;
+    if (t.getAttribute('data-clickable') !== 'quiz') return;
+    var orig = e.target;
+    if (orig.tagName === 'A' || orig.tagName === 'BUTTON' || (orig.closest && orig.closest('a, button'))) return;
+    e.preventDefault();
+    window.location.href = quizUrl;
+  });
+})();
+</script>
 </body>
 </html>
