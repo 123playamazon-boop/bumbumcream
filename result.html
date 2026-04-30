@@ -131,9 +131,13 @@
   .pack.best{border-color:#2e7d32;border-width:4px}
   .pack.best::before{content:'⭐ BEST VALUE · 6 MONTHS';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#2e7d32,#4caf50);color:#fff;padding:8px 14px;font-size:11px;letter-spacing:2px;font-weight:900;text-align:center}
   .pack.best .pack-inner{padding-top:48px}
-  .pack.recommended{border-color:#a33c00;border-width:3px}
-  .pack.recommended::before{content:'✓ RECOMMENDED FOR YOUR PROFILE';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#a33c00,#cc5500);color:#fff;padding:8px 14px;font-size:11px;letter-spacing:2px;font-weight:900;text-align:center}
-  .pack.recommended .pack-inner{padding-top:48px}
+  .pack.recommended{border-color:#a33c00;border-width:3px;transform:scale(1.035);box-shadow:0 12px 36px rgba(204,85,0,.25),0 0 0 6px rgba(204,85,0,.08);position:relative;z-index:2}
+  @media(min-width:640px){.pack.recommended{transform:scale(1.05)}}
+  .pack.recommended::before{content:'✓ RECOMMENDED FOR YOUR PROFILE';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#a33c00,#cc5500);color:#fff;padding:10px 14px;font-size:12px;letter-spacing:2px;font-weight:900;text-align:center;animation:recPulse 2.6s ease-in-out infinite}
+  .pack.recommended .pack-inner{padding-top:52px}
+  .pack.recommended .buy-btn{font-size:16px;padding:18px 22px;animation:btnGlow 2.4s ease-in-out infinite}
+  @keyframes recPulse{0%,100%{box-shadow:0 0 0 0 rgba(204,85,0,.5)}50%{box-shadow:0 0 0 4px rgba(204,85,0,0)}}
+  @keyframes btnGlow{0%,100%{box-shadow:0 6px 18px rgba(204,85,0,.30)}50%{box-shadow:0 8px 26px rgba(204,85,0,.55)}}
   .pack-inner{padding:22px 20px}
   .pack .jar{width:180px;height:180px;margin:0 auto 8px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
   .pack .jar img{width:100%;height:100%;object-fit:contain}
@@ -288,6 +292,45 @@ clarity("event","quiz_completed");
 clarity("set","funnel_step","quiz_completed");
 </script>
 <!-- /Microsoft Clarity -->
+
+<!-- viewed_offer pixel — fires when .packs enters viewport, fallback after 3s -->
+<script>
+(function(){
+  function fireViewedOffer(){
+    if (window.__viewedOfferFired) return;
+    window.__viewedOfferFired = true;
+    try { if (typeof nbpix === 'function') nbpix('event','viewed_offer'); } catch(e){}
+    try {
+      if (typeof clarity === 'function') {
+        clarity('event','viewed_offer');
+        clarity('set','funnel_step','viewed_offer');
+      }
+    } catch(e){}
+  }
+  function startObserver(){
+    var packs = document.querySelector('.packs');
+    if (!packs) { fireViewedOffer(); return; }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        for (var i=0;i<entries.length;i++){
+          if (entries[i].isIntersecting){ fireViewedOffer(); io.disconnect(); break; }
+        }
+      }, {threshold: 0.10});
+      io.observe(packs);
+      // Fallback: se não scrollar em 3s, dispara mesmo assim (já está na page)
+      setTimeout(fireViewedOffer, 3000);
+    } else {
+      fireViewedOffer();
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startObserver);
+  } else {
+    startObserver();
+  }
+})();
+</script>
+<!-- /viewed_offer pixel -->
 </head>
 <body>
 
@@ -344,6 +387,27 @@ clarity("set","funnel_step","quiz_completed");
       <div class="as-foot">Aspirational reference — not a customer photo. Individual results vary.</div>
     </div>
 
+    </div>
+
+    <!-- BBL PRICE ANCHOR — comparativo cirurgia vs creme, antes dos packs -->
+    <div class="bbl-anchor-banner" style="max-width:680px;margin:18px auto 22px;padding:18px 20px;background:linear-gradient(135deg,#fff8f4 0%,#fff 100%);border:1px solid #f4d4be;border-radius:14px;box-shadow:0 4px 14px rgba(204,85,0,.08)">
+      <div style="text-align:center;margin-bottom:10px">
+        <span style="display:inline-block;background:#fff;color:#a33c00;padding:4px 12px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #f4d4be">Smart cost comparison</span>
+      </div>
+      <div style="display:flex;align-items:stretch;gap:14px;flex-wrap:wrap;justify-content:center">
+        <div style="flex:1;min-width:160px;text-align:center;padding:14px 12px;background:#fff;border-radius:10px;border:1px solid #f4d4be;position:relative;opacity:.78">
+          <div style="font-size:11px;color:#999;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:4px">BBL surgery</div>
+          <div style="font-family:'Inter';letter-spacing:-.02em;font-size:24px;font-weight:900;color:#666;text-decoration:line-through;text-decoration-color:#cc0000;margin-bottom:2px">$8,000–$15,000</div>
+          <div style="font-size:11px;color:#888;line-height:1.35">4–6 weeks recovery · scars · 92% regret in 5 yrs</div>
+        </div>
+        <div style="display:flex;align-items:center;color:#a33c00;font-weight:900;font-size:20px">→</div>
+        <div style="flex:1;min-width:160px;text-align:center;padding:14px 12px;background:linear-gradient(135deg,#fff7ee 0%,#fff 100%);border-radius:10px;border:2px solid #a33c00;position:relative">
+          <div style="font-size:11px;color:#a33c00;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;margin-bottom:4px">Your protocol</div>
+          <div style="font-family:'Inter';letter-spacing:-.02em;font-size:24px;font-weight:900;color:#a33c00;margin-bottom:2px">From <span style="font-size:18px;color:#999;text-decoration:line-through">$209.97</span> $129</div>
+          <div style="font-size:11px;color:#444;line-height:1.35">Zero downtime · home application · 60-day refund</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:12px;color:#666;font-style:italic">A fraction of the cost. Reversible. Skin-only — no scalpel, no scars.</div>
     </div>
 
     <div style="text-align:center;margin-bottom:18px">
@@ -1000,11 +1064,11 @@ document.addEventListener('DOMContentLoaded', function(){
 <!-- === MERGED JS: pack highlight + Stripe click handler + smooth scroll === -->
 <script>
 (function(){
-  // Smooth scroll for CTAs with data-scroll
+  // Smooth scroll for CTAs with data-scroll (defensive: skip non-element nodes)
   document.addEventListener('click', function(e){
     var t = e.target;
     while (t && t.nodeType === 1 && !t.hasAttribute('data-scroll')) t = t.parentNode;
-    if (!t || t.nodeType !== 1 || t.nodeType !== 1 || !t.hasAttribute('data-scroll')) return;
+    if (!t || t.nodeType !== 1 || !t.hasAttribute('data-scroll')) return;
     e.preventDefault();
     var target = document.getElementById(t.getAttribute('data-scroll'));
     if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
