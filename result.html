@@ -1074,6 +1074,44 @@ document.addEventListener('DOMContentLoaded', function(){
     if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
   });
 
+  // Dead-click capture — clicks em headlines/badges/imgs/social proof viram scroll pro #offer
+  document.addEventListener('click', function(e){
+    if (!(e.target instanceof Element)) return;
+    var t = e.target;
+    // Skip if click already handled by a real link/button or the smooth-scroll handler
+    if (t.closest('a, button, input, textarea, select, [data-scroll], [data-pack], .buy-btn, .pack, .faq-q, .faq-a, .cta-btn, label, [role="button"]')) return;
+
+    // Selectors known to attract dead clicks (text/visuals que aparentam clicáveis)
+    var deadClickTargets = [
+      '.match-badge',
+      '.headline', 'h1.headline', '.subhead',
+      '.diagnostic-title', '.diagnostic-sub',
+      '.profile-item', '.profile-item .pvalue', '.profile-item .icon',
+      '.aspirational-section', '.as-title', '.as-eyebrow', '.as-sub', '.as-horizontal img',
+      '.amazon-block', '.amazon-block h2', '.amazon-block p',
+      '.ing-chip', '.ingredient-row',
+      '.social-proof-bar', '.sp-rating', '.sp-meta',
+      '.live-viewers-bar', '.stock-bar', '.countdown-bar',
+      '.testi-title', '.testi-card', '.testi-avatar', '.testi-photo',
+      '.section h2', '.section p strong',
+      '.bbl-anchor-banner', '.bbl-anchor-banner div',
+      '.complete-bar', '.match-badge'
+    ];
+
+    var matched = deadClickTargets.some(function(sel){ return t.closest(sel); });
+    if (!matched) return;
+
+    var offer = document.getElementById('offer');
+    if (!offer) return;
+    e.preventDefault();
+    offer.scrollIntoView({behavior:'smooth', block:'start'});
+
+    // Track na Clarity como dead-click capturado (pra medir quantos viram conversão)
+    try {
+      if (typeof clarity === 'function') clarity('event','dead_click_captured');
+    } catch(err){}
+  }, true); // capture phase pra rodar antes de outros handlers
+
   // Pack-recommendation highlighting (based on ?recommended=)
   var p = new URLSearchParams(window.location.search);
   var rec = p.get('recommended') || '3';
