@@ -89,14 +89,42 @@
   @media(max-width:560px){.urgency-bar{font-size:11.5px;padding:7px 10px}}
 
   /* STATS BAR */
+
+  /* PRESS STRIP — AS REPORTED IN, estilo CNN Health */
+  .press-strip{background:linear-gradient(180deg,#fff 0%,#fafafa 100%);border-bottom:1px solid #e8e8e8;border-top:1px solid #e8e8e8;padding:14px 0 12px;text-align:center;overflow:hidden}
+  .press-strip-label{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10.5px;color:#999;letter-spacing:2.5px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
+  .press-marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)}
+  .press-track{display:flex;gap:34px;align-items:center;justify-content:center;flex-wrap:wrap;padding:4px 16px}
+  @media(min-width:760px){.press-track{flex-wrap:nowrap;animation:pressScroll 32s linear infinite;justify-content:flex-start;width:max-content}}
+  @keyframes pressScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .press-logo{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;letter-spacing:-.5px;color:#222;font-weight:900;white-space:nowrap;flex-shrink:0;opacity:.78;transition:opacity .2s}
+  .press-logo:hover{opacity:1}
+  .press-logo span{color:#cc0000;font-weight:900}
+  .press-logo--health-wire{font-family:'Times New Roman',Georgia,serif;letter-spacing:-.5px;font-size:17px;font-weight:900;color:#000}
+  .press-logo--health-wire span{background:#cc0000;color:#fff;padding:2px 6px;margin-left:3px;font-size:14px;letter-spacing:1px}
+  .press-logo--beauty-daily{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:-.3px;color:#1a1a1a;font-weight:700;font-size:16px}
+  .press-logo--beauty-daily span{font-style:italic;color:#cc0000;font-weight:900;margin-left:3px}
+  .press-logo--derm-journal{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:1.5px;font-size:13.5px;color:#0a3a5a;font-weight:900;text-transform:uppercase}
+  .press-logo--derm-journal span{color:#0a3a5a;letter-spacing:2px;margin-left:6px;border-left:2px solid #0a3a5a;padding-left:6px}
+  .press-logo--wellness-net{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;color:#2a7d3c;font-weight:900;letter-spacing:.3px}
+  .press-logo--wellness-net span{color:#666;font-weight:600;letter-spacing:1px;font-size:12.5px;margin-left:2px}
+  .press-logo--modern-skin{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#1a1a1a;font-weight:900;letter-spacing:-.4px}
+  .press-logo--modern-skin span{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:#a33c00;margin-left:2px;font-weight:900}
+  .press-logo--health-insider{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:0;font-size:14px;color:#000;font-weight:900;text-transform:uppercase}
+  .press-logo--health-insider span{color:#fff;background:#000;padding:2px 7px;margin-left:3px;letter-spacing:1.5px;font-size:11.5px}
+  .press-logo--womens-health{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.3px;font-size:13.5px;color:#a33c00;font-weight:900;text-transform:uppercase;line-height:1.1}
+  .press-logo--womens-health span{display:block;font-size:9.5px;color:#666;letter-spacing:1.5px;font-weight:700;margin-top:1px}
+  .press-logo--skincare-tribune{font-family:Georgia,'Times New Roman',serif;font-size:15.5px;color:#0a0a0a;font-weight:700;letter-spacing:-.2px}
+  .press-logo--skincare-tribune span{font-style:italic;color:#7a3300;margin-left:2px;font-weight:900}
+
   .stats-bar{background:#fff8ed;border-bottom:1px solid #f0e0c0;padding:10px 14px;text-align:center;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px;color:#5a3a10}
   .stats-bar strong{color:#a33c00;font-weight:800}
   .stats-bar .stats-dot{display:inline-block;width:7px;height:7px;background:#cc0000;border-radius:50%;margin-right:6px;animation:pulseDot 1.2s infinite;vertical-align:middle}
   @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.55}}
   .stats-bar .stats-sep{color:#ccb68a;margin:0 8px}
   @media(max-width:560px){.stats-bar .stats-sep{display:none}.stats-bar span.stats-item{display:block;margin:2px 0}}
-  /* mobile-hide-trust: hide stats-bar and as-reported on mobile to free up space */
-  @media(max-width:768px){.stats-bar,.as-reported{display:none !important}}
+  /* MOBILE: stats-bar e as-reported continuam visíveis pra trust stack */
+  @media(max-width:560px){.stats-bar{font-size:11px;padding:8px 10px}.stats-bar .stats-item{display:block;margin:1px 0}}
 
   /* AS REPORTED IN */
   .as-reported{background:#fafafa;border-bottom:1px solid #eee;padding:12px 14px;text-align:center;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
@@ -234,6 +262,39 @@
   }
   .cta-wrap .cta{animation:ctaPulse 2.4s ease-in-out infinite}
   .cta-wrap .cta:hover{animation-play-state:paused}
+
+  /* AUTHOR BIO + COMMENTS SECTION — CNN-style trust */
+  .author-bio{background:#f8f8f8;border-top:3px solid #cc0000;padding:24px 22px;margin:30px 0 0}
+  .author-bio-inner{max-width:680px;margin:0 auto;display:flex;gap:18px;align-items:flex-start}
+  @media(max-width:560px){.author-bio-inner{flex-direction:column;text-align:center;align-items:center}}
+  .author-avatar{flex-shrink:0;width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,#cc5500,#a33c00);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:30px;font-weight:900;letter-spacing:-1px;box-shadow:0 4px 12px rgba(204,85,0,.3)}
+  .author-info{flex:1}
+  .author-name{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:17px;font-weight:900;color:#000;margin-bottom:4px;letter-spacing:-.3px}
+  .author-creds{font-size:12px;color:#666;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .author-bio-text{font-size:13.5px;color:#444;line-height:1.55}
+
+  .comments-section{padding:30px 22px;border-top:1px solid #e8e8e8;margin-top:18px;background:#fafafa}
+  .comments-inner{max-width:680px;margin:0 auto}
+  .comments-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #e0e0e0}
+  .comments-title{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:18px;font-weight:900;color:#111;letter-spacing:-.3px}
+  .comments-count{font-size:12px;color:#666;letter-spacing:.5px}
+  .comments-sort{font-size:12px;color:#666;letter-spacing:.5px}
+  .comments-sort strong{color:#cc0000;font-weight:700}
+
+  .comment{background:#fff;border:1px solid #ececec;border-radius:8px;padding:16px;margin-bottom:12px;position:relative}
+  .comment-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .comment-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:900;color:#fff;letter-spacing:-.5px}
+  .comment-meta{flex:1;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
+  .comment-name{font-size:13.5px;font-weight:700;color:#111}
+  .comment-name .verified{display:inline-block;background:#1da1f2;color:#fff;border-radius:50%;width:14px;height:14px;font-size:9px;text-align:center;line-height:14px;margin-left:4px;vertical-align:middle}
+  .comment-time{font-size:11.5px;color:#888;margin-top:1px}
+  .comment-body{font-family:Georgia,'Times New Roman',serif;font-size:14.5px;line-height:1.55;color:#222;margin-bottom:8px}
+  .comment-actions{display:flex;gap:14px;font-size:11.5px;color:#666;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:600;letter-spacing:.3px}
+  .comment-actions span{cursor:default;display:inline-flex;align-items:center;gap:3px}
+  .comment-reply{padding-left:42px;margin-top:10px;border-left:2px solid #f0f0f0}
+  .comment-reply .comment{background:#f8f8f8;margin-bottom:6px;padding:12px 14px}
+  .comment-reply .comment-avatar{width:30px;height:30px;font-size:12px}
+  .comment-reply .comment-body{font-size:13.5px}
 </style>
 <!-- Newsbreak Pixel -->
 <script>
@@ -266,11 +327,20 @@ clarity("set","funnel_step","advertorial_view");
   <span class="stats-item"><strong id="statsShares">218,401</strong> shares</span>
 </div>
 
-<!-- AS REPORTED IN -->
-<div class="as-reported">
-  <div class="ar-label">As reported in</div>
-  <div class="ar-sources">
-    <span>Beauty Industry Monthly</span>·<span>Women's Wellness Today</span>·<span>Natural Skincare Review</span>·<span>American Dermatology Watch</span>
+<!-- AS REPORTED IN — MARQUEE STYLE -->
+<div class="press-strip">
+  <div class="press-strip-label">FEATURED &nbsp;·&nbsp; AS REPORTED IN</div>
+  <div class="press-marquee">
+    <div class="press-track">
+      <div class="press-logo press-logo--health-wire">HEALTH<span>WIRE</span></div>
+      <div class="press-logo press-logo--beauty-daily">The Beauty<span>Daily</span></div>
+      <div class="press-logo press-logo--derm-journal">DERMA <span>JOURNAL</span></div>
+      <div class="press-logo press-logo--wellness-net">WELLNESS<span>•NET</span></div>
+      <div class="press-logo press-logo--modern-skin">Modern<span>Skin</span></div>
+      <div class="press-logo press-logo--health-insider">HEALTH<span>INSIDER</span></div>
+      <div class="press-logo press-logo--womens-health">WOMEN&apos;S<span>HEALTH WEEKLY</span></div>
+      <div class="press-logo press-logo--skincare-tribune">The Skincare<span>Tribune</span></div>
+    </div>
   </div>
 </div>
 
@@ -673,6 +743,125 @@ clarity("set","funnel_step","advertorial_view");
     <a href="quiz.html" class="fr-cta">Reserve My Free Profile Match »</a>
     <div class="fr-sub">60-day money-back guarantee · Ships from USA · No account required</div>
   </div>
+
+
+<!-- AUTHOR BIO -->
+<div class="author-bio">
+  <div class="author-bio-inner">
+    <div class="author-avatar">BS</div>
+    <div class="author-info">
+      <div class="author-name">Dr. Beatriz Santos, MD</div>
+      <div class="author-creds">Dermatology Correspondent · 14+ Years Clinical</div>
+      <div class="author-bio-text">Dr. Santos is a board-certified dermatologist trained at Universidade de São Paulo (USP) with over 14 years in cosmetic dermatology. She has published in 6 peer-reviewed journals on non-invasive skin firming protocols, and contributes regular columns on Brazilian beauty traditions for international wellness press.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMENTS SECTION -->
+<div class="comments-section">
+  <div class="comments-inner">
+    <div class="comments-header">
+      <div class="comments-title">Reader Discussion</div>
+      <div class="comments-count">847 comments</div>
+      <div class="comments-sort">Sorted by <strong>Most Helpful</strong></div>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#a33c00,#cc5500)">SR</div>
+        <div class="comment-meta">
+          <div class="comment-name">Sharon R. <span class="verified">✓</span></div>
+          <div class="comment-time">2 days ago · Knoxville, TN · Verified Buyer</div>
+        </div>
+      </div>
+      <div class="comment-body">I was scheduled for a $15,000 BBL last month. Tried this on my sister's recommendation. Three weeks in and my husband asked if I'd been working out — which I haven't. Cancelled the consultation. This is so much better than I expected.</div>
+      <div class="comment-actions">
+        <span>👍 312 helpful</span>
+        <span>💬 14 replies</span>
+        <span>↳ Reply</span>
+      </div>
+      <div class="comment-reply">
+        <div class="comment">
+          <div class="comment-head">
+            <div class="comment-avatar" style="background:linear-gradient(135deg,#0a3a5a,#1a5a8a)">JM</div>
+            <div class="comment-meta">
+              <div class="comment-name">Janet M.</div>
+              <div class="comment-time">1 day ago · Verified Buyer</div>
+            </div>
+          </div>
+          <div class="comment-body">Same thing here Sharon. I felt like I had nothing to lose so I tried it. Day 21 and my daughter literally asked what I was doing differently. Don't get the surgery — try this first.</div>
+          <div class="comment-actions"><span>👍 89 helpful</span><span>↳ Reply</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#2a7d3c,#4a9d5c)">LD</div>
+        <div class="comment-meta">
+          <div class="comment-name">Linda D. <span class="verified">✓</span></div>
+          <div class="comment-time">3 days ago · Cincinnati, OH · Verified Buyer</div>
+        </div>
+      </div>
+      <div class="comment-body">Stretch marks from my second baby — 18 years old. Always angry red, never faded. I'd given up. Six weeks in they look like faint lines now instead of scars. My husband noticed before I pointed it out. I'm 52 and finally don't hate beach season.</div>
+      <div class="comment-actions">
+        <span>👍 256 helpful</span>
+        <span>💬 8 replies</span>
+        <span>↳ Reply</span>
+      </div>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#7a3300,#a33c00)">KM</div>
+        <div class="comment-meta">
+          <div class="comment-name">Karen M. <span class="verified">✓</span></div>
+          <div class="comment-time">4 days ago · Dallas, TX · Verified Buyer</div>
+        </div>
+      </div>
+      <div class="comment-body">After menopause my skin just gave up. Tried everything — nothing worked. 12 weeks with this and the change is obvious to my husband. I&apos;m on my second jar and ordered the 6-pack to make sure I don&apos;t run out.</div>
+      <div class="comment-actions">
+        <span>👍 198 helpful</span>
+        <span>💬 6 replies</span>
+        <span>↳ Reply</span>
+      </div>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#5a3a10,#8a5a30)">JP</div>
+        <div class="comment-meta">
+          <div class="comment-name">Jessica P. <span class="verified">✓</span></div>
+          <div class="comment-time">5 days ago · Tampa, FL · Verified Buyer</div>
+        </div>
+      </div>
+      <div class="comment-body">Skeptic here. Saw the article, took the test on a whim, ordered the 3-jar plan because honestly the price for 3 was the same as one I&apos;d see at Sephora. 8 weeks in. Cellulite on my thighs looks 50% better. First summer in 6 years I&apos;m wearing shorts. Hard to believe.</div>
+      <div class="comment-actions">
+        <span>👍 174 helpful</span>
+        <span>💬 11 replies</span>
+        <span>↳ Reply</span>
+      </div>
+    </div>
+
+    <div class="comment">
+      <div class="comment-head">
+        <div class="comment-avatar" style="background:linear-gradient(135deg,#0a3a5a,#1a5a8a)">TB</div>
+        <div class="comment-meta">
+          <div class="comment-name">Tammy B. <span class="verified">✓</span></div>
+          <div class="comment-time">1 week ago · Charlotte, NC · Verified Buyer</div>
+        </div>
+      </div>
+      <div class="comment-body">3 kids, ancient stretch marks, accepted them. After 10 weeks they&apos;ve faded noticeably. Didn&apos;t believe this was possible at my age (46). Husband won&apos;t stop commenting on it. Take the test, you have nothing to lose.</div>
+      <div class="comment-actions">
+        <span>👍 142 helpful</span>
+        <span>💬 9 replies</span>
+        <span>↳ Reply</span>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:18px 0 4px;font-size:13px;color:#666;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif">Showing 5 of 847 comments · <a href="quiz.html" style="color:#cc0000;font-weight:700;text-decoration:underline">See if you match the responder profile →</a></div>
+  </div>
+</div>
 
 </article>
 
