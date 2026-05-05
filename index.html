@@ -971,5 +971,49 @@ clarity("set","funnel_step","advertorial_view");
   }
 })();
 </script>
+
+<!-- Dead-click capture — converte cliques em headlines/badges/comments/press marquee em scroll-to-quiz -->
+<script>
+(function(){
+  document.addEventListener('click', function(e){
+    if (!(e.target instanceof Element)) return;
+    var t = e.target;
+    // Skip cliques em CTAs/links reais
+    if (t.closest('a, button, input, textarea, select, [data-clickable], [data-scroll], .cta, .fr-cta, .exit-cta, .sticky-mobile-cta, label, [role="button"], iframe, video')) return;
+
+    var deadClickTargets = [
+      // Trust stack v6
+      '.press-strip', '.press-strip-label', '.press-marquee', '.press-track', '.press-logo',
+      '.author-bio', '.author-bio-inner', '.author-avatar', '.author-name', '.author-creds', '.author-bio-text', '.author-info',
+      '.comments-section', '.comments-inner', '.comments-header', '.comments-title', '.comments-count', '.comments-sort',
+      '.comment', '.comment-avatar', '.comment-name', '.comment-body', '.comment-meta', '.comment-time', '.comment-actions',
+      // Header / stats
+      '.stats-bar', '.stats-bar strong', '.breaking', '.live',
+      '.masthead', '.masthead .logo', '.masthead .tag',
+      '.urgency-bar', '.urgency-time',
+      // Editorial elements
+      '.meta', '.meta span', '.subhead', '.caption',
+      '.pullquote', '.pullquote cite',
+      '.ingredient-note', '.ingredient-note h4', '.ingredient-note p',
+      '.stats', '.stat', '.stat .num', '.stat .lbl',
+      '.body h2', '.body h3', '.body strong', '.body em',
+      '.status-proof', '.status-proof p',
+      '.fr-warn', '.fr-stock', '.fr-sub',
+      '.body p:first-of-type::first-letter'
+    ];
+
+    var matched = deadClickTargets.some(function(sel){ try { return t.closest(sel); } catch(_) { return false; } });
+    if (!matched) return;
+
+    e.preventDefault();
+    // Encontra o target — quiz.html sempre
+    window.location.href = 'quiz.html';
+
+    try { if (typeof clarity === 'function') clarity('event','dead_click_captured'); } catch(err){}
+    try { if (typeof nbpix === 'function') nbpix('event','dead_click_captured'); } catch(err){}
+  }, true);
+})();
+</script>
+<!-- /Dead-click capture -->
 </body>
 </html>

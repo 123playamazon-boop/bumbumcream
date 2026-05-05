@@ -1139,7 +1139,9 @@ document.addEventListener('DOMContentLoaded', function(){
       '.testi-title', '.testi-card', '.testi-avatar', '.testi-photo',
       '.section h2', '.section p strong',
       '.bbl-anchor-banner', '.bbl-anchor-banner div',
-      '.complete-bar', '.match-badge'
+      '.complete-bar',
+      // Trust stack adicionado v6
+      '.press-strip', '.press-strip-label', '.press-marquee', '.press-track', '.press-logo'
     ];
 
     var matched = deadClickTargets.some(function(sel){ return t.closest(sel); });
