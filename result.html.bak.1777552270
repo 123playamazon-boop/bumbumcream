@@ -131,13 +131,9 @@
   .pack.best{border-color:#2e7d32;border-width:4px}
   .pack.best::before{content:'⭐ BEST VALUE · 6 MONTHS';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#2e7d32,#4caf50);color:#fff;padding:8px 14px;font-size:11px;letter-spacing:2px;font-weight:900;text-align:center}
   .pack.best .pack-inner{padding-top:48px}
-  .pack.recommended{border-color:#a33c00;border-width:3px;transform:scale(1.035);box-shadow:0 12px 36px rgba(204,85,0,.25),0 0 0 6px rgba(204,85,0,.08);position:relative;z-index:2}
-  @media(min-width:640px){.pack.recommended{transform:scale(1.05)}}
-  .pack.recommended::before{content:'✓ RECOMMENDED FOR YOUR PROFILE';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#a33c00,#cc5500);color:#fff;padding:10px 14px;font-size:12px;letter-spacing:2px;font-weight:900;text-align:center;animation:recPulse 2.6s ease-in-out infinite}
-  .pack.recommended .pack-inner{padding-top:52px}
-  .pack.recommended .buy-btn{font-size:16px;padding:18px 22px;animation:btnGlow 2.4s ease-in-out infinite}
-  @keyframes recPulse{0%,100%{box-shadow:0 0 0 0 rgba(204,85,0,.5)}50%{box-shadow:0 0 0 4px rgba(204,85,0,0)}}
-  @keyframes btnGlow{0%,100%{box-shadow:0 6px 18px rgba(204,85,0,.30)}50%{box-shadow:0 8px 26px rgba(204,85,0,.55)}}
+  .pack.recommended{border-color:#a33c00;border-width:3px}
+  .pack.recommended::before{content:'✓ RECOMMENDED FOR YOUR PROFILE';position:absolute;top:-1px;left:-1px;right:-1px;background:linear-gradient(90deg,#a33c00,#cc5500);color:#fff;padding:8px 14px;font-size:11px;letter-spacing:2px;font-weight:900;text-align:center}
+  .pack.recommended .pack-inner{padding-top:48px}
   .pack-inner{padding:22px 20px}
   .pack .jar{width:180px;height:180px;margin:0 auto 8px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
   .pack .jar img{width:100%;height:100%;object-fit:contain}
@@ -276,49 +272,6 @@
   .impact-cta-line{font-size:13.5px;color:#2e4d2e;line-height:1.55;font-weight:500;font-style:italic}
   .compliance-note{font-size:11px;color:#888;text-align:center;font-style:italic;margin-top:14px}
   /* === END MERGED CSS === */
-
-  /* PRESS STRIP — AS REPORTED IN */
-  .press-strip{background:linear-gradient(180deg,#fff 0%,#fafafa 100%);border-bottom:1px solid #e8e8e8;border-top:1px solid #e8e8e8;padding:14px 0 12px;text-align:center;overflow:hidden;margin:18px 0}
-  .press-strip-label{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10.5px;color:#999;letter-spacing:2.5px;font-weight:700;margin-bottom:10px;text-transform:uppercase}
-  .press-marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)}
-  .press-track{display:flex;gap:34px;align-items:center;justify-content:center;flex-wrap:wrap;padding:4px 16px}
-  @media(min-width:760px){.press-track{flex-wrap:nowrap;animation:pressScroll 32s linear infinite;justify-content:flex-start;width:max-content}}
-  @keyframes pressScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .press-logo{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;letter-spacing:-.5px;color:#222;font-weight:900;white-space:nowrap;flex-shrink:0;opacity:.78;transition:opacity .2s}
-  .press-logo:hover{opacity:1}
-  .press-logo span{color:#cc0000;font-weight:900}
-  .press-logo--health-wire{font-family:'Times New Roman',Georgia,serif;letter-spacing:-.5px;font-size:17px;font-weight:900;color:#000}
-  .press-logo--health-wire span{background:#cc0000;color:#fff;padding:2px 6px;margin-left:3px;font-size:14px;letter-spacing:1px}
-  .press-logo--beauty-daily{font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:-.3px;color:#1a1a1a;font-weight:700;font-size:16px}
-  .press-logo--beauty-daily span{font-style:italic;color:#cc0000;font-weight:900;margin-left:3px}
-  .press-logo--derm-journal{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:1.5px;font-size:13.5px;color:#0a3a5a;font-weight:900;text-transform:uppercase}
-  .press-logo--derm-journal span{color:#0a3a5a;letter-spacing:2px;margin-left:6px;border-left:2px solid #0a3a5a;padding-left:6px}
-  .press-logo--wellness-net{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14.5px;color:#2a7d3c;font-weight:900;letter-spacing:.3px}
-  .press-logo--wellness-net span{color:#666;font-weight:600;letter-spacing:1px;font-size:12.5px;margin-left:2px}
-  .press-logo--modern-skin{font-family:Georgia,'Times New Roman',serif;font-size:16px;color:#1a1a1a;font-weight:900;letter-spacing:-.4px}
-  .press-logo--modern-skin span{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:#a33c00;margin-left:2px;font-weight:900}
-  .press-logo--health-insider{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:0;font-size:14px;color:#000;font-weight:900;text-transform:uppercase}
-  .press-logo--health-insider span{color:#fff;background:#000;padding:2px 7px;margin-left:3px;letter-spacing:1.5px;font-size:11.5px}
-  .press-logo--womens-health{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.3px;font-size:13.5px;color:#a33c00;font-weight:900;text-transform:uppercase;line-height:1.1}
-  .press-logo--womens-health span{display:block;font-size:9.5px;color:#666;letter-spacing:1.5px;font-weight:700;margin-top:1px}
-  .press-logo--skincare-tribune{font-family:Georgia,'Times New Roman',serif;font-size:15.5px;color:#0a0a0a;font-weight:700;letter-spacing:-.2px}
-  .press-logo--skincare-tribune span{font-style:italic;color:#7a3300;margin-left:2px;font-weight:900}
-
-  /* PAYMENT RETRY BANNER — shown when user returns from failed Stripe checkout */
-  .retry-banner{background:linear-gradient(135deg,#fff5e6 0%,#fff 100%);border:2px solid #ff8c00;border-radius:14px;padding:18px 20px;margin:14px auto 22px;max-width:640px;box-shadow:0 6px 20px rgba(255,140,0,.18);animation:retrySlide .4s cubic-bezier(.2,.9,.3,1.4);position:relative}
-  @keyframes retrySlide{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
-  .retry-banner-inner{display:flex;align-items:center;gap:14px}
-  .retry-banner-icon{flex-shrink:0;font-size:30px;animation:retrySpin 2.4s ease-in-out infinite}
-  @keyframes retrySpin{0%,100%{transform:rotate(0)}50%{transform:rotate(180deg)}}
-  .retry-banner-content{flex:1}
-  .retry-banner-content strong{display:block;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:900;color:#a05a00;letter-spacing:-.2px;margin-bottom:2px}
-  .retry-banner-content p{font-size:13.5px;color:#5a3a10;line-height:1.45;margin:0}
-  .retry-banner-content .retry-suggestions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-  .retry-banner-content .retry-suggestion{display:inline-flex;align-items:center;gap:4px;background:#fff;color:#a05a00;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:14px;border:1px solid #f4d4a0;letter-spacing:.3px}
-  .retry-close{position:absolute;top:8px;right:10px;background:none;border:none;font-size:22px;color:#a05a00;cursor:pointer;line-height:1;padding:4px 8px;opacity:.6}
-  .retry-close:hover{opacity:1}
-  @media(max-width:560px){.retry-banner{padding:14px 16px}.retry-banner-inner{gap:10px}.retry-banner-icon{font-size:24px}.retry-banner-content strong{font-size:14.5px}}
-
 </style>
 <!-- Newsbreak Pixel -->
 <script>
@@ -335,45 +288,6 @@ clarity("event","quiz_completed");
 clarity("set","funnel_step","quiz_completed");
 </script>
 <!-- /Microsoft Clarity -->
-
-<!-- viewed_offer pixel — fires when .packs enters viewport, fallback after 3s -->
-<script>
-(function(){
-  function fireViewedOffer(){
-    if (window.__viewedOfferFired) return;
-    window.__viewedOfferFired = true;
-    try { if (typeof nbpix === 'function') nbpix('event','viewed_offer'); } catch(e){}
-    try {
-      if (typeof clarity === 'function') {
-        clarity('event','viewed_offer');
-        clarity('set','funnel_step','viewed_offer');
-      }
-    } catch(e){}
-  }
-  function startObserver(){
-    var packs = document.querySelector('.packs');
-    if (!packs) { fireViewedOffer(); return; }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(entries){
-        for (var i=0;i<entries.length;i++){
-          if (entries[i].isIntersecting){ fireViewedOffer(); io.disconnect(); break; }
-        }
-      }, {threshold: 0.10});
-      io.observe(packs);
-      // Fallback: se não scrollar em 3s, dispara mesmo assim (já está na page)
-      setTimeout(fireViewedOffer, 3000);
-    } else {
-      fireViewedOffer();
-    }
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startObserver);
-  } else {
-    startObserver();
-  }
-})();
-</script>
-<!-- /viewed_offer pixel -->
 </head>
 <body>
 
@@ -388,23 +302,6 @@ clarity("set","funnel_step","quiz_completed");
     <h1 class="headline">Your results indicate a pattern commonly seen in <span id="h1-span">skin-laxity &amp; firmness signaling</span></h1>
     <p class="subhead">Based on behavioral and dermatological pattern data observed across <strong>62,000+</strong> U.S. women who completed this assessment. Your profile has been matched to the nearest responder cluster identified in the Brazilian field-study data.</p>
   </header>
-
-<!-- AS REPORTED IN — same trust stack as advertorial -->
-<div class="press-strip">
-  <div class="press-strip-label">FEATURED &nbsp;·&nbsp; AS REPORTED IN</div>
-  <div class="press-marquee">
-    <div class="press-track">
-      <div class="press-logo press-logo--health-wire">HEALTH<span>WIRE</span></div>
-      <div class="press-logo press-logo--beauty-daily">The Beauty<span>Daily</span></div>
-      <div class="press-logo press-logo--derm-journal">DERMA <span>JOURNAL</span></div>
-      <div class="press-logo press-logo--wellness-net">WELLNESS<span>•NET</span></div>
-      <div class="press-logo press-logo--modern-skin">Modern<span>Skin</span></div>
-      <div class="press-logo press-logo--health-insider">HEALTH<span>INSIDER</span></div>
-      <div class="press-logo press-logo--womens-health">WOMEN&apos;S<span>HEALTH WEEKLY</span></div>
-      <div class="press-logo press-logo--skincare-tribune">The Skincare<span>Tribune</span></div>
-    </div>
-  </div>
-</div>
 
 <!-- === OFFER SECTION (merged from checkout.html) === -->
 <section id="offer" style="background:#faf7f2;padding:32px 18px 28px;border-top:1px solid #eee">
@@ -449,27 +346,6 @@ clarity("set","funnel_step","quiz_completed");
 
     </div>
 
-    <!-- BBL PRICE ANCHOR — comparativo cirurgia vs creme, antes dos packs -->
-    <div class="bbl-anchor-banner" style="max-width:680px;margin:18px auto 22px;padding:18px 20px;background:linear-gradient(135deg,#fff8f4 0%,#fff 100%);border:1px solid #f4d4be;border-radius:14px;box-shadow:0 4px 14px rgba(204,85,0,.08)">
-      <div style="text-align:center;margin-bottom:10px">
-        <span style="display:inline-block;background:#fff;color:#a33c00;padding:4px 12px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border:1px solid #f4d4be">Smart cost comparison</span>
-      </div>
-      <div style="display:flex;align-items:stretch;gap:14px;flex-wrap:wrap;justify-content:center">
-        <div style="flex:1;min-width:160px;text-align:center;padding:14px 12px;background:#fff;border-radius:10px;border:1px solid #f4d4be;position:relative;opacity:.78">
-          <div style="font-size:11px;color:#999;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:4px">BBL surgery</div>
-          <div style="font-family:'Inter';letter-spacing:-.02em;font-size:24px;font-weight:900;color:#666;text-decoration:line-through;text-decoration-color:#cc0000;margin-bottom:2px">$8,000–$15,000</div>
-          <div style="font-size:11px;color:#888;line-height:1.35">4–6 weeks recovery · scars · 92% regret in 5 yrs</div>
-        </div>
-        <div style="display:flex;align-items:center;color:#a33c00;font-weight:900;font-size:20px">→</div>
-        <div style="flex:1;min-width:160px;text-align:center;padding:14px 12px;background:linear-gradient(135deg,#fff7ee 0%,#fff 100%);border-radius:10px;border:2px solid #a33c00;position:relative">
-          <div style="font-size:11px;color:#a33c00;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;margin-bottom:4px">Your protocol</div>
-          <div style="font-family:'Inter';letter-spacing:-.02em;font-size:24px;font-weight:900;color:#a33c00;margin-bottom:2px">From <span style="font-size:18px;color:#999;text-decoration:line-through">$209.97</span> $129</div>
-          <div style="font-size:11px;color:#444;line-height:1.35">Zero downtime · home application · 60-day refund</div>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:12px;font-size:12px;color:#666;font-style:italic">A fraction of the cost. Reversible. Skin-only — no scalpel, no scars.</div>
-    </div>
-
     <div style="text-align:center;margin-bottom:18px">
       <h2 style="font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;font-size:26px;font-weight:900;line-height:1.2;color:#111;margin-bottom:6px">Choose Your Plan</h2>
       <p style="color:#666;font-size:14px;max-width:520px;margin:0 auto;line-height:1.5">Most users with your profile pattern go with the <strong>3-jar plan</strong>. Pricing held for the next few minutes.</p>
@@ -477,7 +353,7 @@ clarity("set","funnel_step","quiz_completed");
 
     <!-- GUARANTEE INLINE -->
     <div class="guarantee-inline">
-      <img src="img/guarantee_seal.jpg" alt="60-Day Money Back Guaranteed" class="seal-img" loading="lazy" decoding="async">
+      <img src="img/guarantee_seal.jpg" alt="60-Day Money Back Guaranteed" class="seal-img">
       <div class="guarantee-inline-content">
         <h4>🔥 "60-Day Risk-Free Trial"</h4>
         <p>You can try BumBum Cream for up to 60 full days with no real risk. If you're not satisfied with your results, you can request 100% of your money back within the guarantee period.</p>
@@ -493,10 +369,30 @@ clarity("set","funnel_step","quiz_completed");
     <!-- PACKS -->
     <div class="packs">
 
+      <!-- 1 JAR — TEST DRIVE -->
+      <div class="pack test-drive" id="pack1">
+        <div class="pack-inner">
+          <div class="jar"><img src="img/pack_1.jpg" alt="1-jar test drive"></div>
+          <div class="qty">1 Jar</div>
+          <div class="sub">Test Drive · 30 Days</div>
+          <div class="price-row"><span class="old">$69.99</span><span class="now">$49.99</span></div>
+          <div class="per">Try it once · zero commitment</div>
+          <span class="save">$20 Off · First-time</span>
+          <div class="bonuses">
+            <div class="bonuses-title">📘 Included</div>
+            <div class="bonus-item"><span class="check">✓</span><span>1 BumBum jar (30-day supply)</span></div>
+            <div class="bonus-item"><span class="check">✓</span><span>Free U.S. shipping</span></div>
+            <div class="bonus-total" style="font-style:italic;color:#888;font-size:12px">Most readers upgrade to 3 jars by day 14 — save $20 by starting there.</div>
+          </div>
+          <a href="https://buy.stripe.com/eVq00jaq3dD74rd6glfMA0r" class="buy-btn" data-pack="1">Try 1 Jar →</a>
+          <div class="pack-after-btn">Risk-free 14-day return · refund even on empty jar</div>
+        </div>
+      </div>
+
       <!-- 2 JARS — STARTER -->
       <div class="pack" id="pack2">
         <div class="pack-inner">
-          <div class="jar"><img src="img/pack_2.jpg" alt="2-jar plan" loading="lazy" decoding="async" width="180" height="180"></div>
+          <div class="jar"><img src="img/pack_2.jpg" alt="2-jar plan"></div>
           <div class="qty">2 Jars</div>
           <div class="sub">Starter Plan · 60 Days</div>
           <div class="price-row"><span class="old">$139.98</span><span class="now">$99</span></div>
@@ -517,7 +413,7 @@ clarity("set","funnel_step","quiz_completed");
       <!-- 3 JARS — RECOMMENDED -->
       <div class="pack recommended" id="pack3">
         <div class="pack-inner">
-          <div class="jar"><img src="img/pack_3.jpg" alt="3-jar plan" loading="lazy" decoding="async" width="180" height="180"></div>
+          <div class="jar"><img src="img/pack_3.jpg" alt="3-jar plan"></div>
           <div class="qty">3 Jars</div>
           <div class="sub">Your Recommended · 90 Days</div>
           <div class="price-row"><span class="old">$209.97</span><span class="now">$129</span></div>
@@ -539,7 +435,7 @@ clarity("set","funnel_step","quiz_completed");
       <!-- 6 JARS — BEST VALUE -->
       <div class="pack best" id="pack6">
         <div class="pack-inner">
-          <div class="jar"><img src="img/pack_6.jpg" alt="6-jar plan" loading="lazy" decoding="async" width="180" height="180"></div>
+          <div class="jar"><img src="img/pack_6.jpg" alt="6-jar plan"></div>
           <div class="qty">6 Jars</div>
           <div class="sub">Complete Transformation · 6 Months</div>
           <div class="price-row"><span class="old">$419.94</span><span class="now">$199</span></div>
@@ -557,27 +453,6 @@ clarity("set","funnel_step","quiz_completed");
           </div>
           <a href="https://buy.stripe.com/28E14naq3fLf3n9awBfMA0p" class="buy-btn" data-pack="6">Activate Complete Bundle →</a>
           <div class="pack-after-btn"><strong>+ Express shipping included</strong> · Most complete plan</div>
-        </div>
-      </div>
-
-
-      <!-- 1 JAR — TEST DRIVE -->
-      <div class="pack test-drive" id="pack1">
-        <div class="pack-inner">
-          <div class="jar"><img src="img/pack_1.jpg" alt="1-jar test drive" loading="lazy" decoding="async" width="180" height="180"></div>
-          <div class="qty">1 Jar</div>
-          <div class="sub">Smallest Available · 30 Days</div>
-          <div class="price-row"><span class="old">$69.99</span><span class="now">$49.99</span></div>
-          <div class="per">Just want to try first?</div>
-          <span class="save">Minimum trial pack</span>
-          <div class="bonuses">
-            <div class="bonuses-title">📘 Included</div>
-            <div class="bonus-item"><span class="check">✓</span><span>1 BumBum jar (30-day supply)</span></div>
-            <div class="bonus-item"><span class="check">✓</span><span>Free U.S. shipping</span></div>
-            <div class="bonus-total" style="font-style:italic;color:#888;font-size:12px">Note — most readers upgrade to the 3-jar plan by day 14. Starting there saves $80 vs. ordering twice.</div>
-          </div>
-          <a href="https://buy.stripe.com/eVq00jaq3dD74rd6glfMA0r" class="buy-btn" data-pack="1">Just Try 1 Jar →</a>
-          <div class="pack-after-btn">Risk-free 14-day return · refund even on empty jar</div>
         </div>
       </div>
 
@@ -631,7 +506,7 @@ clarity("set","funnel_step","quiz_completed");
 
     <!-- BENEFITS IMAGE -->
     <div style="margin:26px 0 22px;background:#fff;border-radius:16px;padding:14px;box-shadow:0 3px 14px rgba(0,0,0,.06);overflow:hidden">
-      <img src="img/checkout_benefits.jpg" alt="BumBum Cream benefits" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border-radius:10px">
+      <img src="img/checkout_benefits.jpg" alt="BumBum Cream benefits" style="width:100%;height:auto;display:block;border-radius:10px">
     </div>
 
     <!-- FAQ -->
@@ -746,7 +621,7 @@ clarity("set","funnel_step","quiz_completed");
   </div>
 
   <div class="product-intro">
-    <div class="pimg"><img src="img/product_jar.jpg" alt="BumBum Cream jar" loading="lazy" decoding="async" onerror="this.replaceWith(document.createTextNode('BUMBUM'))"></div>
+    <div class="pimg"><img src="img/product_jar.jpg" alt="BumBum Cream jar" onerror="this.replaceWith(document.createTextNode('BUMBUM'))"></div>
     <div>
       <span class="p-tag">Matched to your profile</span>
       <h3>BumBum Cream</h3>
@@ -1135,46 +1010,6 @@ document.addEventListener('DOMContentLoaded', function(){
     if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
   });
 
-  // Dead-click capture — clicks em headlines/badges/imgs/social proof viram scroll pro #offer
-  document.addEventListener('click', function(e){
-    if (!(e.target instanceof Element)) return;
-    var t = e.target;
-    // Skip if click already handled by a real link/button or the smooth-scroll handler
-    if (t.closest('a, button, input, textarea, select, [data-scroll], [data-pack], .buy-btn, .pack, .faq-q, .faq-a, .cta-btn, label, [role="button"]')) return;
-
-    // Selectors known to attract dead clicks (text/visuals que aparentam clicáveis)
-    var deadClickTargets = [
-      '.match-badge',
-      '.headline', 'h1.headline', '.subhead',
-      '.diagnostic-title', '.diagnostic-sub',
-      '.profile-item', '.profile-item .pvalue', '.profile-item .icon',
-      '.aspirational-section', '.as-title', '.as-eyebrow', '.as-sub', '.as-horizontal img',
-      '.amazon-block', '.amazon-block h2', '.amazon-block p',
-      '.ing-chip', '.ingredient-row',
-      '.social-proof-bar', '.sp-rating', '.sp-meta',
-      '.live-viewers-bar', '.stock-bar', '.countdown-bar',
-      '.testi-title', '.testi-card', '.testi-avatar', '.testi-photo',
-      '.section h2', '.section p strong',
-      '.bbl-anchor-banner', '.bbl-anchor-banner div',
-      '.complete-bar',
-      // Trust stack adicionado v6
-      '.press-strip', '.press-strip-label', '.press-marquee', '.press-track', '.press-logo'
-    ];
-
-    var matched = deadClickTargets.some(function(sel){ return t.closest(sel); });
-    if (!matched) return;
-
-    var offer = document.getElementById('offer');
-    if (!offer) return;
-    e.preventDefault();
-    offer.scrollIntoView({behavior:'smooth', block:'start'});
-
-    // Track na Clarity como dead-click capturado (pra medir quantos viram conversão)
-    try {
-      if (typeof clarity === 'function') clarity('event','dead_click_captured');
-    } catch(err){}
-  }, true); // capture phase pra rodar antes de outros handlers
-
   // Pack-recommendation highlighting (based on ?recommended=)
   var p = new URLSearchParams(window.location.search);
   var rec = p.get('recommended') || '3';
@@ -1251,105 +1086,6 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 <!-- === END MERGED JS === -->
-
-
-<!-- Payment retry banner — detect failed Stripe return + show friendly retry message -->
-<script>
-(function(){
-  var ATTEMPT_KEY = 'bb_stripe_attempt';
-  var BANNER_SHOWN_KEY = 'bb_retry_shown';
-
-  // Track click on Stripe buttons (save attempt timestamp + pack)
-  document.querySelectorAll('a.buy-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      try {
-        sessionStorage.setItem(ATTEMPT_KEY, JSON.stringify({
-          ts: Date.now(),
-          pack: this.getAttribute('data-pack') || '3',
-          href: this.getAttribute('href') || ''
-        }));
-      } catch(e){}
-    });
-  });
-
-  // On page load: detect return from Stripe with failure
-  function detectFailedReturn(){
-    var stored = null;
-    try { stored = JSON.parse(sessionStorage.getItem(ATTEMPT_KEY) || 'null'); } catch(e) {}
-
-    var ref = (document.referrer || '').toLowerCase();
-    var fromStripe = /stripe\.com|buy\.stripe/.test(ref);
-    var hasErrParam = /canceled|payment_failed|error|declined/i.test(location.search);
-    var alreadyShown = sessionStorage.getItem(BANNER_SHOWN_KEY) === '1';
-
-    if (alreadyShown) return;
-
-    var elapsedMin = stored ? (Date.now() - stored.ts) / 60000 : 999;
-
-    // Show banner if:
-    // 1. Came back from Stripe.com (any failure scenario)
-    // 2. Has explicit error/canceled URL param
-    // 3. Recent attempt (<30 min) without thank-you redirect
-    if (fromStripe || hasErrParam || (stored && elapsedMin < 30)) {
-      showBanner(stored && stored.pack ? stored.pack : '3');
-      sessionStorage.setItem(BANNER_SHOWN_KEY, '1');
-      sessionStorage.removeItem(ATTEMPT_KEY);
-
-      // Track via Clarity
-      try {
-        if (typeof clarity === 'function') {
-          clarity('event','payment_attempt_failed');
-          clarity('set','failed_pack', (stored && stored.pack) || 'unknown');
-        }
-      } catch(e){}
-      try { if (typeof nbpix === 'function') nbpix('event','payment_attempt_failed'); } catch(e){}
-    }
-  }
-
-  function showBanner(pack){
-    var packLabel = ({'1':'1-jar','2':'2-jar','3':'3-jar','6':'6-jar'})[pack] || 'recommended';
-
-    var banner = document.createElement('div');
-    banner.className = 'retry-banner';
-    banner.setAttribute('role','alert');
-    banner.innerHTML =
-      '<button class="retry-close" aria-label="Close">×</button>' +
-      '<div class="retry-banner-inner">' +
-        '<div class="retry-banner-icon">🔄</div>' +
-        '<div class="retry-banner-content">' +
-          '<strong>Payment didn&apos;t go through? It happens.</strong>' +
-          '<p>Your ' + packLabel + ' plan is still held. Try Apple Pay or a different card — most retries succeed in 30 seconds.</p>' +
-          '<div class="retry-suggestions">' +
-            '<span class="retry-suggestion">📱 Apple Pay</span>' +
-            '<span class="retry-suggestion">💳 Different card</span>' +
-            '<span class="retry-suggestion">🔒 Secure checkout</span>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-
-    var offer = document.getElementById('offer');
-    if (offer && offer.firstChild) {
-      offer.insertBefore(banner, offer.firstChild);
-      setTimeout(function(){ banner.scrollIntoView({behavior:'smooth', block:'center'}); }, 300);
-    } else {
-      document.body.insertBefore(banner, document.body.firstChild);
-    }
-
-    banner.querySelector('.retry-close').addEventListener('click', function(){
-      banner.style.transition = 'opacity .3s ease';
-      banner.style.opacity = '0';
-      setTimeout(function(){ banner.remove(); }, 300);
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', detectFailedReturn);
-  } else {
-    detectFailedReturn();
-  }
-})();
-</script>
-<!-- /Payment retry banner -->
 
 </body>
 </html>
