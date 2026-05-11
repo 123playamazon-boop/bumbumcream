@@ -360,10 +360,6 @@ clarity("set","funnel_step","advertorial_view");
         preload="auto"
         style="width:100%;height:100%;display:block;background:#000;object-fit:cover"
       ></video>
-      <!-- Tap-to-unmute overlay -->
-      <button id="vslUnmute" type="button" aria-label="Tap for sound" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(204,0,0,.95);color:#fff;border:3px solid #fff;border-radius:50px;padding:14px 22px;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13.5px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;box-shadow:0 6px 24px rgba(0,0,0,.55);cursor:pointer;display:flex;align-items:center;gap:8px;z-index:5;animation:vslPulse 1.6s ease-in-out infinite">
-        <span style="font-size:18px">🔊</span><span>Tap For Sound</span>
-      </button>
       <!-- Bottom progress bar overlay -->
       <div id="vslProgress" style="position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.15);z-index:4;pointer-events:none">
         <div id="vslProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#cc5500,#ff8c00);transition:width .2s linear"></div>
@@ -380,10 +376,7 @@ clarity("set","funnel_step","advertorial_view");
   <script>
   (function(){
     var v = document.getElementById('vslBumbum');
-    var c = document.getElementById('vslContainer');
-    var unmuteBtn = document.getElementById('vslUnmute');
     var progressFill = document.getElementById('vslProgressFill');
-    var wrap = document.querySelector('.vsl-wrap');
     if(!v) return;
 
     // Track engagement milestones (fire once each)
@@ -393,36 +386,78 @@ clarity("set","funnel_step","advertorial_view");
       try{ if(typeof nbpix==='function') nbpix('event', ev); }catch(e){}
     }
 
-    // Scroll-into-view autoplay/pause
+    // STRATEGY: try autoplay with sound first. If browser blocks (most cases on
+    // iOS Safari and Chrome cold-load), fall back to muted autoplay AND auto-
+    // unmute on the very first user gesture anywhere on the page.
+
+    function tryUnmutedAutoplay(){
+      v.muted = false;
+      v.volume = 1.0;
+      return v.play();
+    }
+
+    function fallbackMutedAutoplay(){
+      v.muted = true;
+      return v.play();
+    }
+
+    function autoUnmuteOnFirstGesture(){
+      if(fired.unmuted) return;
+      v.muted = false;
+      // Don't restart — just unmute mid-playback so user doesn't lose progress
+      v.play().catch(function(){});
+      fired.unmuted = true;
+      track('vsl_unmuted');
+    }
+
+    function attemptPlay(){
+      var p = tryUnmutedAutoplay();
+      if(p && typeof p.then === 'function'){
+        p.then(function(){
+          // Worked! Unmuted autoplay succeeded.
+          if(!fired.unmuted){ fired.unmuted = true; track('vsl_unmuted'); }
+          if(!fired.start){ fired.start = true; track('vsl_autoplay_started'); }
+        }).catch(function(){
+          // Blocked by browser. Fall back to muted autoplay + listen for first gesture.
+          fallbackMutedAutoplay().then(function(){
+            if(!fired.start){ fired.start = true; track('vsl_autoplay_started'); }
+          }).catch(function(){});
+
+          // First interaction anywhere on page = unmute
+          var opts = {once:true, passive:true, capture:true};
+          ['touchstart','click','scroll','keydown','wheel'].forEach(function(evt){
+            window.addEventListener(evt, autoUnmuteOnFirstGesture, opts);
+            document.addEventListener(evt, autoUnmuteOnFirstGesture, opts);
+          });
+        });
+      }
+    }
+
+    // Scroll-into-view trigger: only attempt play when visible
     if('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
           if(e.isIntersecting && e.intersectionRatio >= 0.5){
-            v.play().catch(function(){});
-            if(!fired.start){ fired.start = true; track('vsl_autoplay_started'); }
-          } else if(!e.isIntersecting){
-            if(!v.paused) v.pause();
+            attemptPlay();
+            io.unobserve(v); // only attempt once
           }
         });
       }, {threshold:[0, 0.5, 1]});
       io.observe(v);
     } else {
-      // Fallback: just attempt autoplay
-      v.play().catch(function(){});
+      attemptPlay();
     }
 
-    // Tap-to-unmute (anywhere on video or button)
-    function unmute(){
-      if(fired.unmuted) return;
-      v.muted = false;
-      v.currentTime = 0; // restart from beginning with audio
-      v.play().catch(function(){});
-      if(wrap) wrap.classList.add('unmuted');
-      fired.unmuted = true;
-      track('vsl_unmuted');
+    // Pause when scrolled completely out of viewport (save bandwidth)
+    if('IntersectionObserver' in window){
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting && !v.paused){ v.pause(); }
+          else if(e.isIntersecting && v.paused && fired.start){ v.play().catch(function(){}); }
+        });
+      }, {threshold:0});
+      io2.observe(v);
     }
-    if(unmuteBtn) unmuteBtn.addEventListener('click', function(e){ e.stopPropagation(); unmute(); });
-    if(c) c.addEventListener('click', function(){ unmute(); });
 
     // Engagement milestone tracking
     v.addEventListener('timeupdate', function(){
