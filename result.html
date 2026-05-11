@@ -1350,5 +1350,77 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <!-- /Payment retry banner -->
 
+
+<!-- === FB/IG IN-APP BROWSER DETECTOR + REDIRECT TO SAFARI/CHROME === -->
+<style>
+  .fb-warn-banner{position:fixed;left:10px;right:10px;bottom:90px;z-index:9999;background:linear-gradient(135deg,#fff8e8 0%,#fff 100%);border:2px solid #cc5500;border-radius:14px;padding:14px 14px 12px;box-shadow:0 8px 26px rgba(0,0,0,.25);font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;animation:fbWarnSlide .4s cubic-bezier(.2,.9,.3,1.4)}
+  @keyframes fbWarnSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .fb-warn-banner .fb-warn-icon{font-size:22px;margin-bottom:6px}
+  .fb-warn-banner h4{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;font-weight:900;color:#cc5500;margin-bottom:4px;letter-spacing:-.01em;line-height:1.25}
+  .fb-warn-banner p{font-size:13px;color:#444;margin-bottom:10px;line-height:1.4}
+  .fb-warn-banner .fb-warn-cta{display:block;background:linear-gradient(135deg,#cc5500,#a33c00);color:#fff;font-weight:900;font-size:14px;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;text-align:center;padding:12px 10px;border-radius:8px;box-shadow:0 4px 14px rgba(204,85,0,.4);font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
+  .fb-warn-banner .fb-warn-close{position:absolute;top:4px;right:8px;background:none;border:none;color:#999;font-size:18px;cursor:pointer;padding:2px 6px;line-height:1;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif}
+  .fb-warn-banner .fb-warn-steps{font-size:11.5px;color:#666;margin-top:8px;line-height:1.4}
+  .fb-warn-banner .fb-warn-steps strong{color:#cc5500}
+</style>
+<script>
+(function(){
+  var ua = navigator.userAgent || '';
+  var isFB = /\bFB[\w_]+/.test(ua) || /FBAN|FBAV|Instagram/.test(ua);
+  if (!isFB) return;
+
+  // Fire Clarity event so we can track FB in-app traffic
+  try { if (typeof clarity === 'function') clarity('event','fb_inapp_detected'); } catch(e){}
+
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var currentUrl = window.location.href;
+
+  // Banner appears after 6s on the page (after they've engaged with content)
+  setTimeout(function(){
+    if (sessionStorage.getItem('bb_fb_dismissed') === '1') return;
+    if (document.getElementById('fbWarnBanner')) return;
+
+    var banner = document.createElement('div');
+    banner.id = 'fbWarnBanner';
+    banner.className = 'fb-warn-banner';
+
+    var ctaUrl, ctaLabel, steps;
+    if (isIOS) {
+      // iOS: x-safari-https:// scheme opens current URL in Safari
+      ctaUrl = 'x-safari-https://' + currentUrl.replace(/^https?:\/\//, '');
+      ctaLabel = 'Open In Safari →';
+      steps = 'Or: tap the <strong>···</strong> menu (top-right) and choose <strong>"Open in Safari"</strong>.';
+    } else {
+      // Android: intent:// scheme opens in default browser (Chrome typically)
+      ctaUrl = 'intent://' + currentUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
+      ctaLabel = 'Open In Chrome →';
+      steps = 'Or: tap the <strong>···</strong> menu (top-right) and choose <strong>"Open in Browser"</strong>.';
+    }
+
+    banner.innerHTML =
+      '<button class="fb-warn-close" id="fbWarnClose" aria-label="Close">\u00d7</button>' +
+      '<div class="fb-warn-icon">\u26a0\ufe0f</div>' +
+      '<h4>For fastest secure checkout: open this in your browser</h4>' +
+      '<p>Facebook&apos;s in-app browser doesn&apos;t support Apple Pay or saved cards, which can slow down or block checkout.</p>' +
+      '<a href="' + ctaUrl + '" class="fb-warn-cta" id="fbWarnCta">' + ctaLabel + '</a>' +
+      '<div class="fb-warn-steps">' + steps + '</div>';
+
+    document.body.appendChild(banner);
+
+    try { if (typeof clarity === 'function') clarity('event','fb_inapp_banner_shown'); } catch(e){}
+
+    document.getElementById('fbWarnClose').addEventListener('click', function(){
+      banner.remove();
+      try { sessionStorage.setItem('bb_fb_dismissed','1'); } catch(e){}
+      try { if (typeof clarity === 'function') clarity('event','fb_inapp_banner_dismissed'); } catch(e){}
+    });
+    document.getElementById('fbWarnCta').addEventListener('click', function(){
+      try { if (typeof clarity === 'function') clarity('event','fb_inapp_banner_clicked'); } catch(e){}
+    });
+  }, 6000);
+})();
+</script>
+<!-- === END FB/IG IN-APP FIX === -->
+
 </body>
 </html>
