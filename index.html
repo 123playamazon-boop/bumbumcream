@@ -360,6 +360,8 @@ clarity("set","funnel_step","advertorial_view");
         preload="auto"
         style="width:100%;height:100%;display:block;background:#000;object-fit:cover"
       ></video>
+      <!-- TAP FOR SOUND overlay -->
+      <button id="vslTapSound" type="button" aria-label="Tap for sound" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;background:rgba(0,0,0,.88);color:#fff;border:2px solid #fff;border-radius:14px;padding:14px 22px;display:none;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:900;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;line-height:1.3;box-shadow:0 10px 36px rgba(0,0,0,.55);animation:vslTapPulse 1.4s ease-in-out infinite"><svg width="32" height="32" viewBox="0 0 24 24" fill="#fff" style="margin-bottom:6px;display:block"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>Tap For Sound</button>
       <!-- Bottom progress bar overlay -->
       <div id="vslProgress" style="position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.15);z-index:4;pointer-events:none">
         <div id="vslProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#cc5500,#ff8c00);transition:width .2s linear"></div>
@@ -371,7 +373,8 @@ clarity("set","funnel_step","advertorial_view");
   </div>
   <style>
     @keyframes vslPulse{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 6px 24px rgba(0,0,0,.55)}50%{transform:translate(-50%,-50%) scale(1.06);box-shadow:0 8px 32px rgba(204,0,0,.6)}}
-    .vsl-wrap.unmuted #vslUnmute{display:none}
+    @keyframes vslTapPulse{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 10px 36px rgba(0,0,0,.55)}50%{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 14px 44px rgba(204,0,0,.75)}}
+    .vsl-wrap.unmuted #vslUnmute,.vsl-wrap.unmuted #vslTapSound{display:none !important}
   </style>
   <script>
   (function(){
@@ -401,6 +404,17 @@ clarity("set","funnel_step","advertorial_view");
       return v.play();
     }
 
+    var tapBtn = document.getElementById('vslTapSound');
+    var vslWrap = document.querySelector('.vsl-wrap');
+    function showTapButton(){
+      if(!tapBtn) return;
+      tapBtn.style.display = 'flex';
+    }
+    function hideTapButton(){
+      if(!tapBtn) return;
+      if(vslWrap) vslWrap.classList.add('unmuted');
+      tapBtn.style.display = 'none';
+    }
     function autoUnmuteOnFirstGesture(){
       if(fired.unmuted) return;
       v.muted = false;
@@ -408,6 +422,14 @@ clarity("set","funnel_step","advertorial_view");
       v.play().catch(function(){});
       fired.unmuted = true;
       track('vsl_unmuted');
+      hideTapButton();
+    }
+    if(tapBtn){
+      tapBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        autoUnmuteOnFirstGesture();
+      }, {passive:false});
     }
 
     function attemptPlay(){
@@ -418,10 +440,11 @@ clarity("set","funnel_step","advertorial_view");
           if(!fired.unmuted){ fired.unmuted = true; track('vsl_unmuted'); }
           if(!fired.start){ fired.start = true; track('vsl_autoplay_started'); }
         }).catch(function(){
-          // Blocked by browser. Fall back to muted autoplay + listen for first gesture.
+          // Blocked by browser. Fall back to muted autoplay + show tap-for-sound button.
           fallbackMutedAutoplay().then(function(){
             if(!fired.start){ fired.start = true; track('vsl_autoplay_started'); }
-          }).catch(function(){});
+            showTapButton();
+          }).catch(function(){ showTapButton(); });
 
           // First interaction anywhere on page = unmute
           var opts = {once:true, passive:true, capture:true};
