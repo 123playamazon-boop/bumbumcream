@@ -346,51 +346,117 @@ clarity("set","funnel_step","advertorial_view");
 
 <article>
 
-  <!-- === VSL VIDEO BLOCK — VTurb smartplayer (HLS adaptive streaming) === -->
-  <div class="vsl-wrap" style="margin:14px auto 18px;padding:0 14px;max-width:400px">
+  <!-- === VSL VIDEO BLOCK — self-hosted, muted autoplay, tap to unmute === -->
+  <div class="vsl-wrap" style="margin:14px auto 18px;padding:0 14px;max-width:520px">
     <div class="vsl-ribbon" style="background:linear-gradient(90deg,#cc0000,#a00000);color:#fff;text-align:center;padding:9px 12px;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11.5px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;line-height:1.3;border-radius:10px 10px 0 0;box-shadow:0 4px 12px rgba(204,0,0,.25)">⏵ Watch: 2 Real Readers Share Their Story (3 min)</div>
-    <vturb-smartplayer id="vid-6a075e3a2a5846f34be6b86c" style="display:block;margin:0 auto;width:100%;max-width:400px;border-radius:0 0 14px 14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25)"></vturb-smartplayer>
+    <div id="vslContainer" style="background:#000;border-radius:0 0 14px 14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25);position:relative;aspect-ratio:9/16;cursor:pointer">
+      <video
+        id="vslBumbum"
+        src="img/vsl_bumbum.mp4"
+        poster="img/vsl_bumbum_poster.jpg"
+        muted
+        playsinline
+        loop
+        preload="auto"
+        style="width:100%;height:100%;display:block;background:#000;object-fit:cover"
+      ></video>
+      <!-- TAP FOR SOUND overlay -->
+      <button id="vslTapSound" type="button" aria-label="Tap for sound" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;background:rgba(0,0,0,.88);color:#fff;border:2px solid #fff;border-radius:14px;padding:14px 22px;display:none;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:900;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;line-height:1.3;box-shadow:0 10px 36px rgba(0,0,0,.55);animation:vslTapPulse 1.4s ease-in-out infinite"><svg width="32" height="32" viewBox="0 0 24 24" fill="#fff" style="margin-bottom:6px;display:block"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>Tap For Sound</button>
+      <!-- Bottom progress bar overlay -->
+      <div id="vslProgress" style="position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.15);z-index:4;pointer-events:none">
+        <div id="vslProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,#cc5500,#ff8c00);transition:width .2s linear"></div>
+      </div>
+    </div>
     <div class="vsl-caption" style="text-align:center;font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12.5px;color:#666;margin:10px auto 0;line-height:1.5"><strong style="color:#a33c00">Two verified reader submissions</strong> · Real names, real cities, individual results vary</div>
   </div>
-  <script type="text/javascript">
-    (function(){
-      var s = document.createElement("script");
-      s.src = "https://scripts.converteai.net/1f5abc79-087e-4a72-9ca1-4e5ee32cc991/players/6a075e3a2a5846f34be6b86c/v4/player.js";
-      s.async = true;
-      document.head.appendChild(s);
-    })();
-  </script>
+  <style>
+    @keyframes vslPulse{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 6px 24px rgba(0,0,0,.55)}50%{transform:translate(-50%,-50%) scale(1.06);box-shadow:0 8px 32px rgba(204,0,0,.6)}}
+    @keyframes vslTapPulse{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 10px 36px rgba(0,0,0,.55)}50%{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 14px 44px rgba(204,0,0,.75)}}
+    .vsl-wrap.unmuted #vslTapSound{display:none !important}
+  </style>
   <script>
-  // VTurb engagement tracking → Clarity + Newsbreak (poll for injected <video>)
   (function(){
+    var v = document.getElementById('vslBumbum');
+    var progressFill = document.getElementById('vslProgressFill');
+    var tapBtn = document.getElementById('vslTapSound');
+    var vslWrap = document.querySelector('.vsl-wrap');
+    if(!v) return;
     var fired = {start:false, unmuted:false, p25:false, p50:false, p75:false, p100:false};
     function track(ev){
       try{ if(typeof clarity==='function') clarity('event', ev); }catch(e){}
       try{ if(typeof nbpix==='function') nbpix('event', ev); }catch(e){}
     }
-    var poll = setInterval(function(){
-      var host = document.getElementById('vid-6a075e3a2a5846f34be6b86c');
-      var vid = host ? host.querySelector('video') : null;
-      if(!vid) return;
-      clearInterval(poll);
-      vid.addEventListener('play', function(){
-        if(!fired.start){ fired.start = true; track('vsl_autoplay_started'); }
-      });
-      vid.addEventListener('volumechange', function(){
-        if(!vid.muted && !fired.unmuted){ fired.unmuted = true; track('vsl_unmuted'); }
-      });
-      vid.addEventListener('timeupdate', function(){
-        if(!vid.duration) return;
-        var pct = vid.currentTime / vid.duration;
-        if(pct >= 0.25 && !fired.p25){ fired.p25 = true; track('vsl_25pct'); }
-        if(pct >= 0.50 && !fired.p50){ fired.p50 = true; track('vsl_50pct'); }
-        if(pct >= 0.75 && !fired.p75){ fired.p75 = true; track('vsl_75pct'); }
-      });
-      vid.addEventListener('ended', function(){
-        if(!fired.p100){ fired.p100 = true; track('vsl_completed'); }
-      });
-    }, 400);
-    setTimeout(function(){ clearInterval(poll); }, 25000);
+    function showTapButton(){ if(tapBtn) tapBtn.style.display='flex'; }
+    function hideTapButton(){
+      if(vslWrap) vslWrap.classList.add('unmuted');
+      if(tapBtn) tapBtn.style.display='none';
+    }
+    function tryUnmutedAutoplay(){ v.muted=false; v.volume=1.0; return v.play(); }
+    function fallbackMutedAutoplay(){ v.muted=true; return v.play(); }
+    function autoUnmuteOnFirstGesture(){
+      if(fired.unmuted) return;
+      v.muted=false;
+      v.play().catch(function(){});
+      fired.unmuted=true;
+      track('vsl_unmuted');
+      hideTapButton();
+    }
+    if(tapBtn){
+      tapBtn.addEventListener('click', function(e){
+        e.stopPropagation(); e.preventDefault();
+        autoUnmuteOnFirstGesture();
+      }, {passive:false});
+    }
+    function attemptPlay(){
+      var p = tryUnmutedAutoplay();
+      if(p && typeof p.then === 'function'){
+        p.then(function(){
+          if(!fired.unmuted){ fired.unmuted=true; track('vsl_unmuted'); }
+          if(!fired.start){ fired.start=true; track('vsl_autoplay_started'); }
+        }).catch(function(){
+          fallbackMutedAutoplay().then(function(){
+            if(!fired.start){ fired.start=true; track('vsl_autoplay_started'); }
+            showTapButton();
+          }).catch(function(){ showTapButton(); });
+          var opts={once:true,passive:true,capture:true};
+          ['touchstart','click','scroll','keydown','wheel'].forEach(function(evt){
+            window.addEventListener(evt, autoUnmuteOnFirstGesture, opts);
+            document.addEventListener(evt, autoUnmuteOnFirstGesture, opts);
+          });
+        });
+      }
+    }
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting && e.intersectionRatio >= 0.5){
+            attemptPlay();
+            io.unobserve(v);
+          }
+        });
+      }, {threshold:[0,0.5,1]});
+      io.observe(v);
+    } else { attemptPlay(); }
+    if('IntersectionObserver' in window){
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting && !v.paused){ v.pause(); }
+          else if(e.isIntersecting && v.paused && fired.start){ v.play().catch(function(){}); }
+        });
+      }, {threshold:0});
+      io2.observe(v);
+    }
+    v.addEventListener('timeupdate', function(){
+      if(!v.duration) return;
+      var pct = v.currentTime / v.duration;
+      if(pct >= 0.25 && !fired.p25){ fired.p25=true; track('vsl_25pct'); }
+      if(pct >= 0.50 && !fired.p50){ fired.p50=true; track('vsl_50pct'); }
+      if(pct >= 0.75 && !fired.p75){ fired.p75=true; track('vsl_75pct'); }
+      if(progressFill) progressFill.style.width = (pct*100).toFixed(1) + '%';
+    });
+    v.addEventListener('ended', function(){
+      if(!fired.p100){ fired.p100=true; track('vsl_completed'); }
+    });
   })();
   </script>
 
