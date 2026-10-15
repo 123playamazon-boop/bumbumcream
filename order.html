@@ -98,6 +98,15 @@ clarity("event","order_page_view");
 clarity("set","funnel_step","order_page");
 </script>
 <!-- /Microsoft Clarity -->
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2211877046406811');
+fbq('track','PageView');
+fbq('track','ViewContent');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2211877046406811&ev=PageView&noscript=1"/></noscript>
+<!-- /Meta Pixel -->
 </head>
 <body>
 <div class="page">
@@ -230,7 +239,7 @@ clarity("set","funnel_step","order_page");
     track('order_kit_selected');
   }
   kits.forEach(function(k){ k.addEventListener('click',function(e){ e.preventDefault(); select(k); }); });
-  btn.addEventListener('click',function(){ track('initiate_checkout'); });
+  btn.addEventListener('click',function(){ track('initiate_checkout'); try{if(window.fbq)fbq('track','InitiateCheckout');}catch(e){} });
 
   // Preselect kit from ?kit=1|3|6 (carried from the VSL)
   var kitMap={'1':'53027149480225','3':'53027149545761','6':'53028021895457'};
