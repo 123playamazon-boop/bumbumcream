@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--red:#cc0000;--accent:#a33c00;--cream:#faf7f2;--ink:#111}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -18,10 +18,10 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter','Helvetic
 .ubar .dot{display:inline-block;width:7px;height:7px;background:#fff;border-radius:50%;margin-right:7px;vertical-align:middle;animation:blink 1.2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 /* NEWS MASTHEAD */
-.masthead{border-bottom:2px solid #111;background:#fff;padding:16px 14px 11px;text-align:center}
-.masthead .logo{font-weight:900;font-size:27px;letter-spacing:-.04em;color:#000;text-transform:uppercase;line-height:1}
-.masthead .logo span{color:var(--red)}
-.masthead .tag{font-size:9.5px;letter-spacing:2.6px;text-transform:uppercase;color:#777;margin-top:5px}
+.masthead{border-bottom:3px solid var(--red);background:#fff;padding:14px 14px 10px;text-align:center}
+.masthead .logo{font-family:'Oswald','Inter',sans-serif;font-weight:700;font-size:30px;letter-spacing:.5px;color:#111;text-transform:uppercase;line-height:1;display:inline-flex;align-items:center;gap:7px}
+.masthead .logo span{background:var(--red);color:#fff;padding:2px 8px;border-radius:2px}
+.masthead .tag{font-size:9.5px;letter-spacing:2.6px;text-transform:uppercase;color:#777;margin-top:6px;font-weight:600}
 /* PRESS STRIP */
 .press-strip{background:linear-gradient(180deg,#fff,#fafafa);border-bottom:1px solid #eee;padding:12px 0 11px;text-align:center}
 .press-strip .pl-label{font-size:10px;color:#999;letter-spacing:2.4px;font-weight:700;margin-bottom:9px;text-transform:uppercase}
@@ -340,16 +340,16 @@ clarity("set","funnel_step","vsl_page");
     <div class="kit-eyebrow">Choose Your Protocol</div>
     <div class="kit-h2">Most Women Start With The 90-Day Protocol</div>
     <div class="kit-grid">
-      <a class="kit-card" href="https://itsbrazilianusa.com/cart/53027149480225:1">
+      <a class="kit-card" href="order.html?kit=1">
         <div><div class="kit-tier">Try It</div><div class="kit-qty">1 Jar · 30 Days</div><div class="kit-price">$39.99</div><div class="kit-per">was $69.99 · free shipping</div></div>
         <div class="kit-btn">Start Here →</div>
       </a>
-      <a class="kit-card hero" href="https://itsbrazilianusa.com/cart/53027149545761:1">
+      <a class="kit-card hero" href="order.html?kit=3">
         <div class="kit-badge">★ MOST POPULAR · 90-DAY</div>
         <div><div class="kit-tier">Best Results</div><div class="kit-qty">3 Jars · 90 Days</div><div class="kit-price">$89.99</div><div class="kit-per">$30/jar · was $209.97</div></div>
         <div class="kit-btn">Get The Protocol →</div>
       </a>
-      <a class="kit-card" href="https://itsbrazilianusa.com/cart/53028021895457:1">
+      <a class="kit-card" href="order.html?kit=6">
         <div><div class="kit-tier">Full Routine</div><div class="kit-qty">6 Jars · 5 Zones</div><div class="kit-price">$149.99</div><div class="kit-per">$25/jar · best value</div></div>
         <div class="kit-btn">Go All-In →</div>
       </a>
@@ -364,7 +364,7 @@ clarity("set","funnel_step","vsl_page");
     <div class="scar">🔥 Limited Brazilian batch — current stock sells out fast. Price held only on this page.</div>
 
     <div class="bigcta-wrap">
-      <a href="https://itsbrazilianusa.com/cart/53027149545761:1" class="bigcta" data-primary-cta>Get My 90-Day Protocol — $89.99 →</a>
+      <a href="order.html?kit=3" class="bigcta" data-primary-cta>Get My 90-Day Protocol — $89.99 →</a>
       <div class="bigcta-sub">60-day money-back guarantee · Free shipping from USA 🇺🇸 · Limit 6 jars per household</div>
     </div>
 
@@ -385,7 +385,7 @@ clarity("set","funnel_step","vsl_page");
 </footer>
 
 <!-- STICKY MOBILE CTA (shows after offer unlocks) -->
-<div class="sticky" id="stickyCta"><a href="https://itsbrazilianusa.com/cart/53027149545761:1">Get My 90-Day Protocol — $89.99 →</a></div>
+<div class="sticky" id="stickyCta"><a href="order.html?kit=3">Get My 90-Day Protocol — $89.99 →</a></div>
 
 <!-- === VSL PLAYER (muted autoplay first — reliable — then tap/gesture to unmute) === -->
 <script>
@@ -467,12 +467,12 @@ clarity("set","funnel_step","vsl_page");
   else { try{rtkcid=sessionStorage.getItem('rtkcid');}catch(e){} }
   if(!rtkcid) return;
   function deco(){
-    document.querySelectorAll('a[href*="itsbrazilianusa.com/cart/"]').forEach(function(a){
+    document.querySelectorAll('a[href*="itsbrazilianusa.com/cart/"],a[href*="order.html"]').forEach(function(a){
       try{
         var u=new URL(a.href,window.location.href);
         u.searchParams.set('rtkcid',rtkcid);
         var out=u.toString();
-        if(!/attributes\[rtkcid\]/.test(out)){ out+=(out.indexOf('?')>-1?'&':'?')+'attributes[rtkcid]='+encodeURIComponent(rtkcid); }
+        if(/itsbrazilianusa\.com\/cart\//.test(out) && !/attributes\[rtkcid\]/.test(out)){ out+=(out.indexOf('?')>-1?'&':'?')+'attributes[rtkcid]='+encodeURIComponent(rtkcid); }
         a.href=out;
       }catch(e){}
     });

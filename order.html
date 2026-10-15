@@ -231,6 +231,14 @@ clarity("set","funnel_step","order_page");
   kits.forEach(function(k){ k.addEventListener('click',function(e){ e.preventDefault(); select(k); }); });
   btn.addEventListener('click',function(){ track('initiate_checkout'); });
 
+  // Preselect kit from ?kit=1|3|6 (carried from the VSL)
+  var kitMap={'1':'53027149480225','3':'53027149545761','6':'53028021895457'};
+  var kitParam=new URLSearchParams(window.location.search).get('kit');
+  if(kitParam && kitMap[kitParam]){
+    var target=kits.filter(function(k){return k.getAttribute('data-id')===kitMap[kitParam];})[0];
+    if(target) select(target);
+  }
+
   // COUNTDOWN (10:00, persists per session)
   var total=600, key='bb_order_deadline';
   var deadline=+sessionStorage.getItem(key)||0;
