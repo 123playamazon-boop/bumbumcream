@@ -125,6 +125,7 @@ clarity("set","funnel_step","order_page");
 
   <div class="subbar">
     <span class="bg">Secure Checkout</span>
+    <span id="orderDate"></span>
     <span>Having trouble? <a href="mailto:support@itsbrazilianusa.com">Contact us</a></span>
   </div>
 
@@ -256,6 +257,12 @@ clarity("set","funnel_step","order_page");
   // LIVE counter wiggle
   var liveN=document.getElementById('liveN');
   setInterval(function(){ var n=42+Math.floor(Math.random()*12); liveN.textContent=n; }, 5000);
+
+  // Today's date, always current
+  try{
+    var od=document.getElementById('orderDate');
+    if(od) od.textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'long',day:'numeric',year:'numeric'});
+  }catch(e){}
 })();
 </script>
 

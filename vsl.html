@@ -22,6 +22,7 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter','Helvetic
 .masthead .logo{font-family:'Oswald','Inter',sans-serif;font-weight:700;font-size:30px;letter-spacing:.5px;color:#111;text-transform:uppercase;line-height:1;display:inline-flex;align-items:center;gap:7px}
 .masthead .logo span{background:var(--red);color:#fff;padding:2px 8px;border-radius:2px}
 .masthead .tag{font-size:9.5px;letter-spacing:2.6px;text-transform:uppercase;color:#777;margin-top:6px;font-weight:600}
+.masthead .dateline{font-size:11px;color:#999;margin-top:5px;font-weight:600}
 /* PRESS STRIP */
 .press-strip{background:linear-gradient(180deg,#fff,#fafafa);border-bottom:1px solid #eee;padding:12px 0 11px;text-align:center}
 .press-strip .pl-label{font-size:10px;color:#999;letter-spacing:2.4px;font-weight:700;margin-bottom:9px;text-transform:uppercase}
@@ -56,6 +57,9 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter','Helvetic
 @keyframes tapPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 #vslProgress{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.15);z-index:4;pointer-events:none}
 #vslProgressFill{height:100%;width:0%;background:linear-gradient(90deg,#cc5500,#ff8c00);transition:width .2s linear}
+.livewatch{display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;border:1px solid #f0d2d2;border-radius:0 0 4px 4px;margin:0 auto;padding:7px 12px;font-size:12.5px;font-weight:700;color:#333}
+.livewatch .ld{width:8px;height:8px;border-radius:50%;background:var(--red);animation:blink 1.1s infinite}
+.livewatch b{color:var(--red);font-variant-numeric:tabular-nums}
 .vcap{text-align:center;font-size:12.5px;color:#666;margin:10px auto 0;line-height:1.5}
 .vcap strong{color:var(--accent)}
 /* TRUST ROW */
@@ -188,6 +192,7 @@ clarity("set","funnel_step","vsl_page");
 <div class="masthead">
   <div class="logo">Beauty &amp; Wellness <span>Daily</span></div>
   <div class="tag">Independent Beauty &amp; Wellness Reporting</div>
+  <div class="dateline" id="dateLine"></div>
 </div>
 
 <!-- AS REPORTED IN -->
@@ -211,7 +216,7 @@ clarity("set","funnel_step","vsl_page");
   </div>
 
   <div class="byline">
-    By <b>Dr. Beatriz Santos, MD</b> · Dermatology Correspondent · Universidade de São Paulo &nbsp;·&nbsp; <span class="rev">✓ Reviewed for accuracy</span> &nbsp;·&nbsp; Updated 2026
+    By <b>Dr. Beatriz Santos, MD</b> · Dermatology Correspondent · Universidade de São Paulo &nbsp;·&nbsp; <span class="rev">✓ Reviewed for accuracy</span> &nbsp;·&nbsp; Updated <span id="updatedDate"></span>
   </div>
 
   <!-- === VSL VIDEO === -->
@@ -227,6 +232,7 @@ clarity("set","funnel_step","vsl_page");
       </button>
       <div id="vslProgress"><div id="vslProgressFill"></div></div>
     </div>
+    <div class="livewatch"><span class="ld"></span> <b id="liveWatch">0</b>&nbsp;women watching this report right now</div>
     <div class="vcap"><strong>Two verified reader submissions</strong> · Real names, real cities · Individual results vary</div>
   </div>
 
@@ -455,6 +461,31 @@ clarity("set","funnel_step","vsl_page");
     try{ offer.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){}
   };
   setTimeout(function(){ window.__revealOffer('timer'); }, REVEAL_AFTER_MS);
+})();
+</script>
+
+<!-- === TODAY'S DATE + LIVE VIEWERS === -->
+<script>
+(function(){
+  // Today's date, always current
+  try{
+    var d=new Date();
+    var full=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    var short=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var dl=document.getElementById('dateLine'); if(dl) dl.textContent=full;
+    var up=document.getElementById('updatedDate'); if(up) up.textContent=short;
+  }catch(e){}
+  // Live viewers watching now — fluctuates gently around a base
+  var el=document.getElementById('liveWatch');
+  if(el){
+    var n=238+Math.floor(Math.random()*90); // 238–327
+    el.textContent=n.toLocaleString('en-US');
+    setInterval(function(){
+      n+=Math.floor(Math.random()*9)-4; // drift ±4
+      if(n<186)n=186; if(n>412)n=412;
+      el.textContent=n.toLocaleString('en-US');
+    }, 2600);
+  }
 })();
 </script>
 
