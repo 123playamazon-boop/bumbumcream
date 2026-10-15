@@ -419,7 +419,7 @@ clarity("set","funnel_step","vsl_page");
   var tapBtn=document.getElementById('vslTapSound');
   var wrap=document.querySelector('.vsl-wrap');
   if(!v) return;
-  var fired={start:false,unmuted:false,p25:false,p50:false,p75:false,p100:false};
+  var fired={start:false,unmuted:false,p25:false,p50:false,p75:false,p80:false,p100:false};
   function track(ev){ try{if(typeof clarity==='function')clarity('event',ev);}catch(e){} try{if(typeof nbpix==='function')nbpix('event',ev);}catch(e){} }
   function startMuted(){
     v.muted=true; v.setAttribute('muted','');
@@ -454,6 +454,7 @@ clarity("set","funnel_step","vsl_page");
     if(pct>=0.25&&!fired.p25){fired.p25=true;track('vsl_25pct');}
     if(pct>=0.50&&!fired.p50){fired.p50=true;track('vsl_50pct');}
     if(pct>=0.75&&!fired.p75){fired.p75=true;track('vsl_75pct');}
+    if(pct>=0.80&&!fired.p80){fired.p80=true;track('vsl_80pct');window.__revealOffer&&window.__revealOffer('video_80pct');}
     if(fill) fill.style.width=(pct*100).toFixed(1)+'%';
   });
   v.addEventListener('ended',function(){ if(!fired.p100){fired.p100=true;track('vsl_completed');} window.__revealOffer&&window.__revealOffer('video_end'); });
@@ -463,7 +464,6 @@ clarity("set","funnel_step","vsl_page");
 <!-- === OFFER REVEAL (video end OR timer fallback) === -->
 <script>
 (function(){
-  var REVEAL_AFTER_MS = 150000; // fallback: unlock after 2.5 min even if they didn't finish
   var offer=document.getElementById('offer');
   var lock=document.getElementById('lockNote');
   var sticky=document.getElementById('stickyCta');
@@ -478,7 +478,16 @@ clarity("set","funnel_step","vsl_page");
     try{if(typeof nbpix==='function')nbpix('event','offer_revealed');}catch(e){}
     try{ offer.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){}
   };
-  setTimeout(function(){ window.__revealOffer('timer'); }, REVEAL_AFTER_MS);
+  // Fallback: arm a timer to reveal at ~80% of the real video duration (20% before the end),
+  // in case the timeupdate 80% trigger doesn't fire. Armed once metadata is known.
+  var v=document.getElementById('vslBumbum');
+  function arm(){
+    var d = v && v.duration;
+    var ms = (d && isFinite(d) && d>0) ? d*0.8*1000 : 540000; // 540s fallback if duration unknown
+    setTimeout(function(){ window.__revealOffer('timer_80pct'); }, ms);
+  }
+  if(v){ if(v.readyState>=1) arm(); else v.addEventListener('loadedmetadata', arm, {once:true}); }
+  else { setTimeout(function(){ window.__revealOffer('timer_fallback'); }, 540000); }
 })();
 </script>
 
