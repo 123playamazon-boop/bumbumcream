@@ -44,9 +44,16 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter','Helvetic
 .vsl-wrap{margin:16px auto 10px;max-width:460px}
 .vsl-ribbon{background:linear-gradient(90deg,#cc0000,#a00000);color:#fff;text-align:center;padding:9px 12px;font-size:11.5px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;border-radius:12px 12px 0 0}
 #vslContainer{background:#000;border-radius:0 0 14px 14px;overflow:hidden;box-shadow:0 10px 36px rgba(0,0,0,.28);position:relative;aspect-ratio:9/16;cursor:pointer}
-#vslBumbum{width:100%;height:100%;display:block;background:#000;object-fit:cover}
-#vslTapSound{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;background:rgba(0,0,0,.88);color:#fff;border:2px solid #fff;border-radius:14px;padding:14px 22px;display:none;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-weight:900;font-size:14px;letter-spacing:1.3px;text-transform:uppercase;line-height:1.3;box-shadow:0 10px 36px rgba(0,0,0,.55);animation:tapPulse 1.4s ease-in-out infinite}
-@keyframes tapPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.07)}}
+#vslBumbum{width:100%;height:100%;display:block;background:#000;object-fit:cover;transition:filter .45s ease}
+#vslBumbum.blurred{filter:blur(14px) brightness(.72)}
+/* FULL-COVER PLAY GATE (blurred thumbnail + big play + "click to listen") */
+#vslTapSound{position:absolute;inset:0;z-index:6;background:radial-gradient(ellipse at center,rgba(0,0,0,.28),rgba(0,0,0,.6));color:#fff;border:0;display:none;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-family:inherit;line-height:1.3;width:100%;height:100%}
+#vslTapSound .playcircle{width:88px;height:88px;border-radius:50%;background:rgba(204,0,0,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 0 10px rgba(255,255,255,.18);animation:tapPulse 1.5s ease-in-out infinite}
+#vslTapSound .playcircle svg{margin-left:5px}
+#vslTapSound .gate-label{margin-top:16px;font-weight:900;font-size:15px;letter-spacing:1px;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+#vslTapSound .gate-sub{margin-top:5px;font-weight:600;font-size:12px;color:#ffe;opacity:.92;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+#vslTapSound .soundpill{margin-top:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.95);color:#111;font-weight:800;font-size:12px;letter-spacing:.5px;text-transform:uppercase;border-radius:999px;padding:9px 16px}
+@keyframes tapPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 #vslProgress{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.15);z-index:4;pointer-events:none}
 #vslProgressFill{height:100%;width:0%;background:linear-gradient(90deg,#cc5500,#ff8c00);transition:width .2s linear}
 .vcap{text-align:center;font-size:12.5px;color:#666;margin:10px auto 0;line-height:1.5}
@@ -56,6 +63,26 @@ html,body{background:var(--cream);color:var(--ink);font-family:'Inter','Helvetic
 .trust .tb{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #e8e8e8;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:700;color:#333;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .trust .tb .i{font-size:15px}
 .trust .tb b{color:#2e7d32}
+/* FACEBOOK-STYLE COMMENTS */
+.fbc{max-width:560px;margin:26px auto 0;background:#fff;border:1px solid #e6e6e6;border-radius:14px;overflow:hidden;box-shadow:0 3px 14px rgba(0,0,0,.05)}
+.fbc-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #f0f0f0}
+.fbc-top .ct{font-weight:800;font-size:15px;color:#111}
+.fbc-top .srt{font-size:12.5px;color:#65676b;font-weight:600}
+.fbc-bar{display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid #f0f0f0;font-size:12.5px;color:#65676b;font-weight:600}
+.fbc-bar .thumbs{color:#1877f2;font-weight:800}
+.fbc-list{padding:6px 14px 4px}
+.fbc-c{display:flex;gap:9px;padding:9px 0}
+.fbc-c .fav{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#fff}
+.fbc-c .bub{background:#f0f2f5;border-radius:16px;padding:9px 13px;max-width:100%}
+.fbc-c .bub .nm{font-weight:800;font-size:13px;color:#050505;line-height:1.2}
+.fbc-c .bub .tx{font-size:13.5px;color:#111;line-height:1.5;margin-top:2px}
+.fbc-c .act{display:flex;gap:14px;align-items:center;padding:4px 0 0 13px;font-size:12px;color:#65676b;font-weight:700}
+.fbc-c .act .lk{color:#1877f2}
+.fbc-c .act .tm{font-weight:500;color:#8a8d91}
+.fbc-c .react{margin-left:6px;font-size:11px;color:#65676b;background:#fff;border:1px solid #eee;border-radius:999px;padding:1px 7px}
+.fbc-reply{margin-left:47px}
+.fbc-more{display:block;width:100%;text-align:left;background:none;border:0;padding:8px 16px 14px;font-size:13px;color:#65676b;font-weight:700;cursor:default}
+.fbc-disc{font-size:11px;color:#999;text-align:center;padding:0 16px 12px;line-height:1.5}
 /* PRE-PROOF (visible before offer) */
 .preproof{max-width:560px;margin:24px auto 0}
 .pp-head{text-align:center;margin-bottom:12px}
@@ -192,9 +219,11 @@ clarity("set","funnel_step","vsl_page");
     <div class="vsl-ribbon">⏵ Watch: How The Brazilian Lift Protocol Works (3 min)</div>
     <div id="vslContainer">
       <video id="vslBumbum" src="img/vsl_bumbum.mp4" poster="img/vsl_bumbum_poster.jpg" muted playsinline preload="auto"></video>
-      <button id="vslTapSound" type="button" aria-label="Tap for sound">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" style="margin-bottom:6px"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        Tap For Sound
+      <button id="vslTapSound" type="button" aria-label="Click to listen">
+        <span class="playcircle"><svg width="34" height="34" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="gate-label">▶ Click To Watch</span>
+        <span class="gate-sub">See the full report — 3 minutes</span>
+        <span class="soundpill"><svg width="15" height="15" viewBox="0 0 24 24" fill="#111"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> Sound is OFF · tap for sound</span>
       </button>
       <div id="vslProgress"><div id="vslProgressFill"></div></div>
     </div>
@@ -207,6 +236,51 @@ clarity("set","funnel_step","vsl_page");
     <div class="tb"><span class="i">🛡️</span>60-Day Money-Back</div>
     <div class="tb"><span class="i">🇺🇸</span>Ships from USA</div>
     <div class="tb"><span class="i">🔒</span>Secure Checkout</div>
+  </div>
+
+  <!-- FACEBOOK-STYLE COMMENTS (illustrative social proof) -->
+  <div class="fbc">
+    <div class="fbc-top"><span class="ct">1,284 Comments</span><span class="srt">Most relevant ▾</span></div>
+    <div class="fbc-bar"><span class="thumbs">👍❤️</span> <span>2.3K</span></div>
+    <div class="fbc-list">
+      <div class="fbc-c">
+        <div class="fav" style="background:#e4578a">AM</div>
+        <div>
+          <div class="bub"><div class="nm">Ashley Monroe</div><div class="tx">Okay I did NOT expect this to actually work 😅 3 weeks in and the back of my thighs look so much smoother. Wish I filmed a before pic.</div></div>
+          <div class="act"><span class="lk">Like</span><span>Reply</span><span class="tm">7h</span><span class="react">❤️ 214</span></div>
+        </div>
+      </div>
+      <div class="fbc-c">
+        <div class="fav" style="background:#4a8fe0">DK</div>
+        <div>
+          <div class="bub"><div class="nm">Danielle Keller</div><div class="tx">My sister told me about this. I almost booked a BBL consult last month — so glad I waited and tried the cream first. Skin is way firmer.</div></div>
+          <div class="act"><span class="lk">Like</span><span>Reply</span><span class="tm">11h</span><span class="react">👍 168</span></div>
+        </div>
+      </div>
+      <div class="fbc-c fbc-reply">
+        <div class="fav" style="background:#7a63c9;width:32px;height:32px;font-size:12px">RT</div>
+        <div>
+          <div class="bub"><div class="nm">Rachel T.</div><div class="tx">Which kit did you get?? trying to decide 🙈</div></div>
+          <div class="act"><span class="lk">Like</span><span>Reply</span><span class="tm">9h</span></div>
+        </div>
+      </div>
+      <div class="fbc-c">
+        <div class="fav" style="background:#3fae73">MC</div>
+        <div>
+          <div class="bub"><div class="nm">Monica Castillo</div><div class="tx">Ordered the 90-day one because everyone said one jar isn't enough to really see it. On jar 2 now and the difference is real. Smells amazing too.</div></div>
+          <div class="act"><span class="lk">Like</span><span>Reply</span><span class="tm">1d</span><span class="react">❤️ 301</span></div>
+        </div>
+      </div>
+      <div class="fbc-c">
+        <div class="fav" style="background:#d98a39">BW</div>
+        <div>
+          <div class="bub"><div class="nm">Brittany Walsh</div><div class="tx">watched the whole video twice lol. the part about why American creams don't work was eye opening. just ordered 👏</div></div>
+          <div class="act"><span class="lk">Like</span><span>Reply</span><span class="tm">1d</span><span class="react">👍 142</span></div>
+        </div>
+      </div>
+    </div>
+    <button class="fbc-more" type="button">View 1,279 more comments</button>
+    <div class="fbc-disc">Comments shown are illustrative examples, not actual Facebook posts. Individual results vary.</div>
   </div>
 
   <!-- PRE-PROOF: visible testimonials (credibility before the offer) -->
@@ -325,6 +399,7 @@ clarity("set","funnel_step","vsl_page");
   function track(ev){ try{if(typeof clarity==='function')clarity('event',ev);}catch(e){} try{if(typeof nbpix==='function')nbpix('event',ev);}catch(e){} }
   function startMuted(){
     v.muted=true; v.setAttribute('muted','');
+    v.classList.add('blurred');
     var p=v.play();
     if(p&&typeof p.then==='function'){
       p.then(function(){ if(!fired.start){fired.start=true;track('vsl_autoplay_started');} if(tapBtn)tapBtn.style.display='flex'; })
@@ -334,6 +409,7 @@ clarity("set","funnel_step","vsl_page");
   function unmute(){
     if(fired.unmuted) return;
     v.muted=false; v.volume=1.0;
+    v.classList.remove('blurred');
     v.play().catch(function(){});
     fired.unmuted=true; track('vsl_unmuted');
     if(tapBtn) tapBtn.style.display='none';
