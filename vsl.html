@@ -187,7 +187,7 @@ clarity("set","funnel_step","vsl_page");
   <div class="vsl-wrap">
     <div class="vsl-ribbon">⏵ Watch: How The Brazilian Lift Protocol Works (3 min)</div>
     <div id="vslContainer">
-      <video id="vslBumbum" src="img/vsl_bumbum.mp4" poster="img/vsl_bumbum_poster.jpg" muted playsinline loop preload="auto"></video>
+      <video id="vslBumbum" src="img/vsl_bumbum.mp4" poster="img/vsl_bumbum_poster.jpg" muted playsinline preload="auto"></video>
       <button id="vslTapSound" type="button" aria-label="Tap for sound">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" style="margin-bottom:6px"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
         Tap For Sound
@@ -301,35 +301,41 @@ clarity("set","funnel_step","vsl_page");
 <!-- STICKY MOBILE CTA (shows after offer unlocks) -->
 <div class="sticky" id="stickyCta"><a href="https://itsbrazilianusa.com/cart/53027149545761:1">Get My 90-Day Protocol — $89.99 →</a></div>
 
-<!-- === VSL PLAYER === -->
+<!-- === VSL PLAYER (muted autoplay first — reliable — then tap/gesture to unmute) === -->
 <script>
 (function(){
   var v=document.getElementById('vslBumbum');
   var fill=document.getElementById('vslProgressFill');
   var tapBtn=document.getElementById('vslTapSound');
+  var wrap=document.querySelector('.vsl-wrap');
   if(!v) return;
   var fired={start:false,unmuted:false,p25:false,p50:false,p75:false,p100:false};
   function track(ev){ try{if(typeof clarity==='function')clarity('event',ev);}catch(e){} try{if(typeof nbpix==='function')nbpix('event',ev);}catch(e){} }
-  function showTap(){ if(tapBtn) tapBtn.style.display='flex'; }
-  function hideTap(){ if(tapBtn) tapBtn.style.display='none'; }
-  function unmuteFirstGesture(){ if(fired.unmuted) return; v.muted=false; v.play().catch(function(){}); fired.unmuted=true; track('vsl_unmuted'); hideTap(); }
-  if(tapBtn){ tapBtn.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); unmuteFirstGesture(); },{passive:false}); }
-  function attemptPlay(){
-    v.muted=false; v.volume=1.0;
+  function startMuted(){
+    v.muted=true; v.setAttribute('muted','');
     var p=v.play();
     if(p&&typeof p.then==='function'){
-      p.then(function(){ if(!fired.unmuted){fired.unmuted=true;track('vsl_unmuted');} if(!fired.start){fired.start=true;track('vsl_autoplay_started');} })
-       .catch(function(){
-         v.muted=true; v.play().then(function(){ if(!fired.start){fired.start=true;track('vsl_autoplay_started');} showTap(); }).catch(function(){ showTap(); });
-         var opts={once:true,passive:true,capture:true};
-         ['touchstart','click','scroll','keydown','wheel'].forEach(function(evt){ window.addEventListener(evt,unmuteFirstGesture,opts); document.addEventListener(evt,unmuteFirstGesture,opts); });
-       });
-    }
+      p.then(function(){ if(!fired.start){fired.start=true;track('vsl_autoplay_started');} if(tapBtn)tapBtn.style.display='flex'; })
+       .catch(function(){ if(tapBtn)tapBtn.style.display='flex'; });
+    } else { if(tapBtn)tapBtn.style.display='flex'; }
   }
+  function unmute(){
+    if(fired.unmuted) return;
+    v.muted=false; v.volume=1.0;
+    v.play().catch(function(){});
+    fired.unmuted=true; track('vsl_unmuted');
+    if(tapBtn) tapBtn.style.display='none';
+    if(wrap) wrap.classList.add('unmuted');
+  }
+  if(tapBtn){ tapBtn.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); unmute(); },{passive:false}); }
+  var opts={once:true,passive:true,capture:true};
+  ['touchstart','click','keydown'].forEach(function(evt){ document.addEventListener(evt,unmute,opts); });
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting&&e.intersectionRatio>=0.5){ attemptPlay(); io.unobserve(v); } }); },{threshold:[0,0.5,1]});
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ startMuted(); io.unobserve(v); } }); },{threshold:0.25});
     io.observe(v);
-  } else { attemptPlay(); }
+  } else { startMuted(); }
+  // safety: if not started within 1.2s, force a muted play
+  setTimeout(function(){ if(v.paused){ startMuted(); } }, 1200);
   v.addEventListener('timeupdate',function(){
     if(!v.duration) return;
     var pct=v.currentTime/v.duration;
