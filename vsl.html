@@ -448,9 +448,10 @@ fbq('track','ViewContent');
     if(tapBtn) tapBtn.style.display='none';
     if(wrap) wrap.classList.add('unmuted');
   }
-  if(tapBtn){ tapBtn.addEventListener('click',function(e){ e.stopPropagation(); e.preventDefault(); unmute(); },{passive:false}); }
-  var opts={once:true,passive:true,capture:true};
-  ['touchstart','click','keydown'].forEach(function(evt){ document.addEventListener(evt,unmute,opts); });
+  function bindUnmute(el){ if(!el) return; ['click','touchend'].forEach(function(evt){ el.addEventListener(evt,function(e){ e.preventDefault(); e.stopPropagation(); unmute(); },{passive:false}); }); }
+  bindUnmute(tapBtn);
+  bindUnmute(document.getElementById('vslContainer'));
+  bindUnmute(v);
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ startMuted(); io.unobserve(v); } }); },{threshold:0.25});
     io.observe(v);
